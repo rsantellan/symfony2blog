@@ -14,7 +14,39 @@ my_blog_test_show:
 my_blog_admin_category_new:
     pattern: /blog/admin/categories/new
     defaults: { _controller: MyBlogBlogBundle:Admin:newCategory }        
+
+my_blog_admin_category_edit:
+    pattern: /blog/admin/categories/edit/{id}
+    defaults: { _controller: MyBlogBlogBundle:Admin:editCategory }
     
 my_blog_admin_category_list:
     pattern: /blog/admin/categories
-    defaults: { _controller: MyBlogBlogBundle:Admin:list }    
+    defaults: { _controller: MyBlogBlogBundle:Admin:list }
+    
+my_blog_crud_blog_list:    
+    pattern: /blog/admin/list
+    defaults: { _controller: MyBlogBlogBundle:Blog:index }
+    
+my_blog_crud_blog_show:    
+    pattern: /blog/admin/show/{id}
+    defaults: { _controller: MyBlogBlogBundle:Blog:show }
+    
+my_blog_crud_blog_new:    
+    pattern: /blog/admin/new
+    defaults: { _controller: MyBlogBlogBundle:Blog:new }
+    
+my_blog_crud_blog_create:    
+    pattern: /blog/admin/create
+    defaults: { _controller: MyBlogBlogBundle:Blog:create }
+
+my_blog_crud_blog_edit:    
+    pattern: /blog/admin/edit/{id}
+    defaults: { _controller: MyBlogBlogBundle:Blog:edit }
+    
+my_blog_crud_blog_delete:    
+    pattern: /blog/admin/delete/{id}
+    defaults: { _controller: MyBlogBlogBundle:Blog:delete }     
+    
+my_blog_crud_blog_update:    
+    pattern: /blog/admin/update/{id}
+    defaults: { _controller: MyBlogBlogBundle:Blog:update }         

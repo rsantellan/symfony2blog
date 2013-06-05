@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Category
  *
  * @ORM\Table(name="myBlogCategory")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MyBlog\BlogBundle\Entity\CategoryRepository")
  * @author Rodrigo Santellan
  */
 class Category
@@ -36,6 +36,13 @@ class Category
      * @ORM\OneToMany(targetEntity="Blog", mappedBy="category")
      */
     private $blogs;
+    
+    
+    public function setId($id)
+    {
+      $this->id = $id;
+      return $this;
+    }
     
     /**
      * Get id
@@ -105,5 +112,9 @@ class Category
     public function getBlogs()
     {
         return $this->blogs;
+    }
+    
+    public function __toString() {
+      return $this->getName();
     }
 }

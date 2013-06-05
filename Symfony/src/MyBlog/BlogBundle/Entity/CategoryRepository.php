@@ -11,8 +11,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository{
   
-  public function retrieveCategoryPager(){
-    
+  public function retrievePagerDqlQuery(){
+    $dql = "select c from MyBlogBlogBundle:Category c";
+    return $this->getEntityManager()->createQuery($dql);
   }
 }
 

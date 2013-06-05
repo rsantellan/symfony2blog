@@ -73,3 +73,9 @@ stof_doctrine_extensions:
         default:
             tree: false # not needed: listeners are not enabled by default
             timestampable: true
+
+knp_paginator:
+    default_options:
+        distinct: true  # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    page_range: 10 #Default page range
+    template: ~ # enables view helper and twig

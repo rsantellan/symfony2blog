@@ -5,7 +5,7 @@
 #}
 {% block body %}
 
-  <h3>Crear categoria</h3>  
+  <h3>Editar categoria</h3>
 
   {% for flashMessage in app.session.flashbag.get('notice') %}
   <div class="flash-notice">
@@ -14,6 +14,9 @@
   {% endfor %}
 
 
-  {{ include('MyBlogBlogBundle:Admin:categoryForm.html.twig', {'form': form, 'action_url': path('my_blog_admin_category_new') }) }}
+  {{ include('MyBlogBlogBundle:Admin:categoryForm.html.twig', {'form': form, 'action_url': path('my_blog_admin_category_edit', {'id': form.vars.value.id}) }) }}
 
 {% endblock %}
+
+
+
