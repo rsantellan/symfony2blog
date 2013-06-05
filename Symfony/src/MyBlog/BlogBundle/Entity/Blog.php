@@ -3,6 +3,7 @@
 namespace MyBlog\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Description of Blog
  * @ORM\Entity(repositoryClass="MyBlog\BlogBundle\Entity\BlogRepository")
@@ -46,6 +47,22 @@ class Blog {
    */
   protected $category;
 
+    /**
+     * @var datetime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @var datetime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
+    
     /**
      * Get id
      *
@@ -146,5 +163,51 @@ class Blog {
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Blog
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Blog
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

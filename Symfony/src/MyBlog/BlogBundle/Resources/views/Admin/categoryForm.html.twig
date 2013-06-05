@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+  {% block formTitle %}{% endblock %}
+
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+  <div class="flash-notice">
+    {{ flashMessage }}
+  </div>
+  {% endfor %}
+
+
+  <form action="{{ path('my_blog_admin_category') }}" method="POST" {{ form_enctype(form) }} class="category_form">
+    <div class="form_error">
+      {{ form_errors(form) }}
+    </div> 
+    <div>
+      {{ form_label(form.name)}}
+      {{ form_errors(form.name) }}
+      {{ form_widget(form.name) }}
+    </div>
+      
+    {{ form_rest(form) }}
+      
+      <input type="submit" value="Guardar" />
+  </form>
+
+{% endblock %}

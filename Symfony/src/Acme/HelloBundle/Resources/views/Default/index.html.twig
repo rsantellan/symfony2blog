@@ -3,4 +3,8 @@
 {% block body %}
 Hello {{ name }}!
 
+{{ dump(name) }}
+<a href="{{ path('acme_hello_homepage', {'name': 'my-blog-post'}) }}">
+  pepito
+</a>
 {% endblock %}

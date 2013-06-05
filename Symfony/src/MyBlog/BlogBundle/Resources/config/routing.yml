@@ -1,3 +1,20 @@
 my_blog_blog_homepage:
-    pattern:  /hello/{name}
+    pattern:  /blog/hello/{name}
     defaults: { _controller: MyBlogBlogBundle:Default:index }
+
+my_blog_test_create:
+    pattern: /blog/test/create
+    defaults: { _controller: MyBlogBlogBundle:Default:addTest }
+    
+my_blog_test_show:
+    pattern: /blog/test/show/{id}
+    defaults: { _controller: MyBlogBlogBundle:Default:showTest }    
+    
+    
+my_blog_admin_category_new:
+    pattern: /blog/admin/categories/new
+    defaults: { _controller: MyBlogBlogBundle:Admin:newCategory }        
+    
+my_blog_admin_category_list:
+    pattern: /blog/admin/categories
+    defaults: { _controller: MyBlogBlogBundle:Admin:list }    
