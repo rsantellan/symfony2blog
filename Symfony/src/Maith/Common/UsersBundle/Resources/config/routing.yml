@@ -1,0 +1,3 @@
+maith_common_users_homepage:
+    pattern:  /maith/hello/{name}
+    defaults: { _controller: MaithCommonUsersBundle:Default:index }
