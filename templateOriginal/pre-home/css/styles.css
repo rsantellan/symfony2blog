@@ -1,0 +1,73 @@
+/* CSS Document */
+
+
+/*RESET*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big,
+cite, code, del, dfn, em, font, img,
+ins, kbd, q, s, samp, small, strike,
+sub, sup, tt, var, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+center, u, b, i {
+     margin: 0;
+     padding: 0;
+     border: 0;
+     outline: 0;
+     font-weight: normal;
+     font-style: normal;
+     font-size: 100%;
+     font-family: inherit;
+     vertical-align: baseline
+}
+
+:focus {
+     outline: 0
+}
+
+ol, ul {
+     list-style: none
+}
+.float_left{
+	float:left;
+	}
+.float_right{
+	float:right;
+	}
+.clear{
+	clear:both;
+	}
+body{
+	color:#303030;
+	background:#23435a url(../images/body.jpg) center top repeat-x;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size:12px;
+	}
+#wrapper{
+	width:1000px;
+	overflow:hidden;
+	margin:25px auto 0 auto;
+	}
+/*HEADER*/
+#header{
+	width:1000px;
+	height:99px;
+	background:url(../images/header.png) left top no-repeat;
+	}
+	#header p{
+		font-family:Georgia, "Times New Roman", Times, serif;
+		color:#FFFFFF;
+		text-align:right;
+		font-size:13px;
+		padding-top:25px;
+		}
+		#header p span{
+			color:#038cc0;
+			font-weight:bold;
+			}
+/*SLIDER*/
+#slider{
+	width:1000px;
+	margin:10px 0;
+	}

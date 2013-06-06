@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Metalizadora Uruguaya</title>
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen"/>
+<link rel="stylesheet" href="css/global.css">
+<!--[if IE 6]><script type="text/javascript" src="js/unitpngfix.js"></script><link rel="stylesheet" type="text/css" href="css/styles_ie6.css" media="screen"/><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/styles_ie7.css" media="screen"/><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" type="text/css" href="css/styles_ie8.css" media="screen"/><![endif]-->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/slides.min.jquery.js"></script>
+	<script>
+		$(function(){
+			$('#slides').slides({
+				preload: true,
+				preloadImage: 'images/loading.gif',
+				play: 5000,
+				pause: 2000,
+				hoverPause: true,
+				animationStart: function(current){
+					$('.caption').animate({
+						bottom:-35
+					},100);
+					if (window.console && console.log) {
+						// example return of current slide number
+						console.log('animationStart on slide: ', current);
+					};
+				},
+				animationComplete: function(current){
+					$('.caption').animate({
+						bottom:0
+					},200);
+					if (window.console && console.log) {
+						// example return of current slide number
+						console.log('animationComplete on slide: ', current);
+					};
+				},
+				slidesLoaded: function() {
+					$('.caption').animate({
+						bottom:0
+					},200);
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+    	<div id="header">
+        	<p>Estamos construyendo un <span>nuevo sitio web</span> que estar&aacute; disponible proximamente.</p>
+        </div><!--HEADER-->
+        <div id="slider">
+            <div id="example">
+                <div id="slides">
+                    <div class="slides_container">
+                        <div class="slide">
+                            <img src="images/slide1.jpg" width="1000" height="375">
+                            <div class="caption" style="bottom:0">
+                                <p>Planta La Teja  - Preparaci&oacute;n de superficie y pintura de tanques</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/slide2.jpg" width="1000" height="375">
+                            <div class="caption">
+                                <p>Puente de Las Am&eacute;ricas - Fabricaci&oacute;n y pintura de la dovela central </p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/slide3.jpg" width="1000" height="375">
+                            <div class="caption">
+                                <p>Boyas Armada Nacional</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/slide4.jpg" width="1000" height="375">
+                            <div class="caption">
+                                <p>Edificio Torre del Sur</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/slide5.jpg" width="1000" height="375">
+                            <div class="caption">
+                                <p>Faro de Jos&eacute; Ignacio</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<a href="#" class="prev"><img src="images/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+                    <a href="#" class="next"><img src="images/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>-->
+                </div>
+            </div>
+        </div><!--SLIDER-->
+    </div><!--WRAPPER-->
+</body>
+</html>
