@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Metalizadora Uruguaya{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/loopitametalizadora/images/favicon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/loopitametalizadora/css/styles.css') }}" />
+    <script type="text/javascript" src="{{ asset('bundles/loopitametalizadora/js/dropdown.js') }}"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        {% trans %}header{% endtrans %}
+      </div><!--HEADER-->
+      <div id="menu">
+        <dl class="dropdown">
+          <dt><a href="{{ path("loopita_metalizadora_homepage")}}" class="{% block menu_inicio_class %}{% endblock %}">{% trans %}menu_inicio{% endtrans %}</a></dt>
+        </dl>
+        <dl class="dropdown">
+          <dt><a href=""  class="{% block menu_historia_class %}{% endblock %}">{% trans %}menu_historia{% endtrans %}</a></dt>
+        </dl>
+
+        <dl class="dropdown">
+          <dt id="one-ddheader" onmouseover="ddMenu('one',1)" onmouseout="ddMenu('one',-1)" class="servicios {% block menu_servicios_class %}{% endblock %}">{% trans %}menu_Servicios{% endtrans %}</dt>
+          <dd id="one-ddcontent" onmouseover="cancelHide('one')" onmouseout="ddMenu('one',-1)">
+            
+          </dd>
+        </dl>
+        <dl class="dropdown">
+          <dt><a href="" class="{% block menu_clientes_class %}{% endblock %}">{% trans %}menu_clientes{% endtrans %}</a></dt>
+        </dl>
+        <dl class="dropdown">
+          <dt><a href="" class="{% block menu_certificacion_class %}{% endblock %}">{% trans %}menu_certificacion{% endtrans %}</a></dt>
+        </dl>
+        <dl class="dropdown">
+          <dt><a href="" class="{% block menu_contacto_class %}{% endblock %}">{% trans %}menu_contacto{% endtrans %}</a></dt>
+        </dl>
+      </div><!--MENU-->
+      <div class="clear"></div>
+        {% block body %}{% endblock %}        
+      <div class="content_ext">
+        <div class="content">
+          <h1>{% trans %}destacados_titulo{% endtrans %}</h1>
+        </div><!--CONTENT-->
+        <hr />
+        <div class="content">
+          
+        </div><!--CONTENT-->
+      </div>
+      <div class="clear"></div>
+      <div id="footer">
+        <div class="logos">
+          <img src="{{ asset('bundles/loopitametalizadora/images/logo_iso.jpg') }}" />
+               <img src="{{ asset('bundles/loopitametalizadora/images/logo_fcr.jpg') }}" />
+        </div>
+        {% trans %}footer_informacion{% endtrans %}  
+      </div><!--FOOTER-->
+      <div id="firm">
+        Diseño | <a href="http://www.loopitadesign.com" target="_blank">LoopitaDesgin</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Administrador{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/maithcommonadmin/images/favicon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/960.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/template.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/colour.css') }}" />
+    {% block stylesheets %}{% endblock %}
+            
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-1.7.1.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/adminManager.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+  </head>
+  <body>
+    <div class="header_div">
+      <label>Administrador</label>
+      {% block adminlogo %}
+        <img src="{{ asset('bundles/maithcommonadmin/images/maith_logo.png') }}" height="70"/>
+      {% endblock %}
+      
+      <ul id="navigation">
+        {% block adminmenu %}
+          <li><span class="active">{% trans %}admin_menu_dashboard{% endtrans %}</span></li>
+          <li><a href="">Test</a></li>
+        {% endblock %}
+        <li style="float: right;"><a href="">{% trans %}admin_menu_logout{% endtrans %}</a></li>
+      </ul>
+    </div>
+    <div id="content" class="container_16 clearfix">
+      {% block body %}{% endblock %}   
+    </div>
+    <div id="foot">
+      <a href="#">Contact Me</a>
+      <div class="espacio"></div>
+    </div>
+  </body>
+</html>

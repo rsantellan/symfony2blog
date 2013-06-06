@@ -1,0 +1,11 @@
+{% extends 'MaithCommonAdminBundle::layout.html.twig' %}
+
+{% block adminlogo %}
+        <img src="{{ asset('bundles/loopitametalizadora/images/logo.png') }}" height="70"/>
+{% endblock %}
+        
+{% block adminmenu %}
+          <li><a href="{{ path("loopita_metalizadora_admin")}}">{% trans %}metalizadora_admin_menu_dashboard{% endtrans %}</a></li>
+          <li><a href="">{% trans %}metalizadora_admin_menu_projects{% endtrans %}</a></li>
+          <li><a href="">{% trans %}metalizadora_admin_menu_categories{% endtrans %}</a></li>
+{% endblock %}

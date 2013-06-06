@@ -1,0 +1,3 @@
+maith_admin_homepage:
+    pattern:  /admin
+    defaults: { _controller: MaithCommonAdminBundle:Default:index }
