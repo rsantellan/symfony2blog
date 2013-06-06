@@ -1,0 +1,16 @@
+<form action="{{ action_url }}" method="POST" {{ form_enctype(form) }} class="category_form">
+  <div class="form_error">
+    {{ form_errors(form) }}
+  </div> 
+  <div>
+    {{ form_label(form.name)}}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}
+  </div>
+
+  {{ form_rest(form) }}
+
+    <input type="submit" value="Guardar" />
+</form>
+
+
