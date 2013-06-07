@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Metalizadora Uruguaya{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        {% block javascripts %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('bundles/loopitametalizadora/images/favicon.ico') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/loopitametalizadora/css/styles.css') }}" />
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-1.7.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/loopitametalizadora/js/dropdown.js') }}"></script>
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}{% endblock %}
   </head>
   <body>
     <div id="wrapper">

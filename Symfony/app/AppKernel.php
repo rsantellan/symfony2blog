@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Loopita\MetalizadoraBundle\LoopitaMetalizadoraBundle(),
             new Maith\Common\AdminBundle\MaithCommonAdminBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

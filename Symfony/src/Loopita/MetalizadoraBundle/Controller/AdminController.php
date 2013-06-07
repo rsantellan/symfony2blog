@@ -64,8 +64,24 @@ class AdminController extends Controller
         $em->flush();
         $this->get("session")->getFlashBag()->add("notice", "Categoria guardada");
       }
-
-      return $this->render('LoopitaMetalizadoraBundle:Admin:editCategoryForm.html.twig', array('form' => $form->createView()));
+      $uploadForm = $this->createFormBuilder()
+            ->add('download', 'genemu_jqueryfile', array('mapped' => false))
+            ->add('multiple_download', 'genemu_jqueryfile', array(
+            'multiple' => true, 'mapped' => false))
+            ->add('auto_download', 'genemu_jqueryfile', array(
+                'mapped' => false,
+                'configs' => array(
+              'auto' => true
+              )
+            ))
+            ->add('auto_multiple_download', 'genemu_jqueryfile', array(
+              'multiple' => true,
+              'mapped' => false,
+              'configs' => array(
+              'auto' => true
+            )
+        ))->getForm();
+      return $this->render('LoopitaMetalizadoraBundle:Admin:editCategoryForm.html.twig', array('form' => $form->createView(), 'uploadForm' => $uploadForm->createView()));
     }
     
     public function deleteCategoryAction($id)

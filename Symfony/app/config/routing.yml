@@ -10,6 +10,9 @@ maith_common_users:
     resource: "@MaithCommonUsersBundle/Resources/config/routing.yml"
     prefix:   /
 
+genemu_upload:
+    resource: "@GenemuFormBundle/Resources/config/routing/upload.xml"
+    
 #my_blog_blog:
 #    resource: "@MyBlogBlogBundle/Resources/config/routing.yml"
 #    prefix:   /
