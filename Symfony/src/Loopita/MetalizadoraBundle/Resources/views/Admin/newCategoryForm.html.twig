@@ -1,27 +1,17 @@
-{% extends '::base.html.twig' %}
-{% block title %}Categories Admin{% endblock %}
+{% extends 'LoopitaMetalizadoraBundle:Admin:layout.html.twig' %}
+{% block title %}{% trans %}metalizadora_admin_categories_new{% endtrans %}{% endblock %}
 {% block body %}
-<table>
-  <tr>
-  {# sorting of properties based on query components #}
-      <th>{{ knp_pagination_sortable(pagination, 'Id', 'c.id') }}</th>
-      <th{% if pagination.isSorted('c.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'c.name') }}</th>
-      <th>Acciones</th>
-  </tr>
+  <h3>{% trans %}metalizadora_admin_categories_new_title{% endtrans %}</h3>  
 
-  {# table body #}
-  {% for category in pagination %}
-  <tr {% if loop.index is odd %}class="color"{% endif %}>
-      <td>{{ category.id }}</td>
-      <td>{{ category.name }}</td>
-      <td><a href="{{ path('my_blog_admin_category_edit', {'id': category.id}) }}">Editar</a></td>
-  </tr>
+  {% for flashMessage in app.session.flashbag.get('notice') %}
+  <div class="flash-notice">
+    {{ flashMessage }}
+  </div>
   {% endfor %}
-</table>
-{# display navigation #}
-<div class="navigation">
-    {{ knp_pagination_render(pagination) }}
+  {{ include('LoopitaMetalizadoraBundle:Admin:categoryForm.html.twig', {'form': form, 'action_url': path('loopita_metalizadora_category_new') }) }}
+  
+<div class="new_link_container">
+  <a href="{{ path("loopita_metalizadora_category") }}">{% trans %}metalizadora_admin_list{% endtrans %}</a>
 </div>
-
 
 {% endblock %}

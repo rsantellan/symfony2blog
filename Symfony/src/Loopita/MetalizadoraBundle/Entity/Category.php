@@ -4,12 +4,13 @@ namespace Loopita\MetalizadoraBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Category
  *
- * @ORM\Table(name="metalizadora_category")
- * @ORM\Entity(repositoryClass="Loopita\MetalizadoraBundle\Entity\CategoryRepository")
+ * @ORM\Table(name="metalurgica_category")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @author Rodrigo Santellan
  */
 class Category
@@ -30,6 +31,13 @@ class Category
      */
     private $name;
 
+    
+    /**
+      * @Gedmo\SortablePosition
+      * @ORM\Column(type="integer")
+      */
+     protected $orden;
+  
     /**
      * var Blog
      * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
@@ -115,4 +123,28 @@ class Category
     {
         return $this->projects;
     }
+
+    /**
+     * Set orden
+     *
+     * @param integer $orden
+     * @return Category
+     */
+    public function setOrden($orden)
+    {
+        $this->orden = $orden;
+    
+        return $this;
+    }
+
+    /**
+     * Get orden
+     *
+     * @return integer 
+     */
+    public function getOrden()
+    {
+        return $this->orden;
+    }
+    
 }

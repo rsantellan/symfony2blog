@@ -5,4 +5,20 @@ loopita_metalizadora_homepage:
     
 loopita_metalizadora_admin:
     pattern:  /admin
-    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:index }    
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:index }
+    
+loopita_metalizadora_category:
+    pattern:  /admin/categories.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:listCategories }
+    
+loopita_metalizadora_category_new:
+    pattern:  /admin/add-category.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:addCategory }    
+    
+loopita_metalizadora_category_edit:
+    pattern:  /admin/edit-category/{id}
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:editCategory }
+    
+loopita_metalizadora_category_delete:
+    pattern:  /admin/delete-category/{id}
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:deleteCategory }    

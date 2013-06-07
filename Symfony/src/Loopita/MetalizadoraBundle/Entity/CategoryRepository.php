@@ -3,6 +3,7 @@
 namespace Loopita\MetalizadoraBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+// use Gedmo\Sortable\Entity\Repository\SortableRepository;
 
 /**
  * Description of CategoryRepository
@@ -12,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository extends EntityRepository{
   
   public function retrievePagerDqlQuery(){
-    $dql = "select c from LoopitaMetalizadoraBundle:Category c";
+    $dql = "select c from LoopitaMetalizadoraBundle:Category c order by c.orden";
     return $this->getEntityManager()->createQuery($dql);
   }
 }
