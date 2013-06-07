@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Loopita\MetalizadoraBundle\Entity\Category;
 use Loopita\MetalizadoraBundle\Form\CategoryType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AdminController extends Controller
 {
@@ -19,7 +20,7 @@ class AdminController extends Controller
       $em = $this->getDoctrine()->getManager();
     
       $paginator = $this->get("knp_paginator");
-      $query = $em->createQuery("select c from LoopitaMetalizadoraBundle:Category c order by c.orden");
+      $query = $em->createQuery("select c from LoopitaMetalizadoraBundle:Category c order by c.orden desc");
       // $em->getRepository("LoopitaMetalizadoraBundle:Category")->retrievePagerDqlQuery()
       $pagination = $paginator->paginate(
               $query ,
@@ -79,5 +80,56 @@ class AdminController extends Controller
       $em->flush();
       $this->get("session")->getFlashBag()->add("notice", "Categoria eliminada");
       return $this->redirect($this->generateUrl('loopita_metalizadora_category'));
+    }
+    
+    public function orderCategoryAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery("select c from LoopitaMetalizadoraBundle:Category c order by c.orden desc");
+      $categories = $query->getResult();
+      
+      $url = $this->generateUrl("loopita_metalizadora_category_order_save");
+      return $this->render('MaithCommonAdminBundle:Sortable:layout.html.twig', array('sortableList' => $categories, 'url_sortable' => $url));
+    }
+    
+    public function saveCategoriesOrderAction(Request $request)
+    {
+      $list = array_reverse($request->get("listItem"));
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery("select c from LoopitaMetalizadoraBundle:Category c order by c.orden desc");
+      $categories = $query->getResult();
+      $counter = count($list) - 1;
+      while($counter >= 0)
+      {
+        $finish = false;
+        $index = 0;
+        $number = (int) $list[$counter];
+        while(!$finish && $index < count($categories))
+        {
+          if(!isset($categories[$index]))
+          {
+            $finish = true;
+          }
+          else
+          {
+            $category = $categories[$index];
+            if($number == $category->getId())
+            {
+              $category->setOrden($counter);
+              $em->persist($category);
+              $em->flush();
+              $finish =true;
+            }
+          }
+          $index++;
+        }
+        $counter--;
+      }
+      
+      $response = new JsonResponse();
+      $response->setData(array('output' => true));
+      return $response;
+      //die;
+      
     }
 }

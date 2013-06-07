@@ -1,7 +1,21 @@
 {% extends 'LoopitaMetalizadoraBundle:Admin:layout.html.twig' %}
 {% block title %}{% trans %}metalizadora_admin_categories_list{% endtrans %}{% endblock %}
-{% block body %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/js/fancybox/jquery.fancybox-1.3.4.css') }}" />
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/fancybox/jquery.fancybox-1.3.4.pack.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/fancybox/jquery.mousewheel-3.0.4.pack.js') }}"></script>
 
+<script type="text/javascript">
+$(document).ready(function() { 
+  adminManager.getInstance().startFancyInPage('fancy_link');
+});
+
+</script>
+{% endblock %}
+
+{% block body %}
 {% for flashMessage in app.session.flashbag.get('notice') %}
   <div class="flash-notice">
     {{ flashMessage }}
@@ -37,6 +51,9 @@
 {# display create new #}
 <div class="new_link_container">
   <a href="{{ path("loopita_metalizadora_category_new") }}">{% trans %}metalizadora_admin_new_link{% endtrans %}</a>
+  <a class="fancy_link iframe" href="{{ path("loopita_metalizadora_category_order") }}" >
+    {% trans %}metalizadora_admin_order_link{% endtrans %}
+  </a>
 </div>
 
 {% endblock %}

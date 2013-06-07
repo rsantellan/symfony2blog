@@ -74,6 +74,7 @@ stof_doctrine_extensions:
             tree: false # not needed: listeners are not enabled by default
             timestampable: true
             sortable: true
+            sluggable: true
 
 knp_paginator:
     default_options:

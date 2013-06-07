@@ -1,7 +1,10 @@
 loopita_metalizadora_homepage:
     pattern:  /
     defaults: { _controller: LoopitaMetalizadoraBundle:Default:index }
-    
+
+loopita_metalizadora_servicios:
+    pattern:  /servicio/{slug}.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Default:servicios }    
     
 loopita_metalizadora_admin:
     pattern:  /admin
@@ -21,4 +24,12 @@ loopita_metalizadora_category_edit:
     
 loopita_metalizadora_category_delete:
     pattern:  /admin/delete-category/{id}
-    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:deleteCategory }    
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:deleteCategory }
+    
+loopita_metalizadora_category_order:
+    pattern:  /admin/categories-order.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:orderCategory }
+    
+loopita_metalizadora_category_order_save:
+    pattern:  /admin/categories-order-save.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:saveCategoriesOrder }       

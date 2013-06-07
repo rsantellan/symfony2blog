@@ -38,8 +38,15 @@ class Category
       */
      protected $orden;
   
+     
     /**
-     * var Blog
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
+     
+    /**
+     * var Projects
      * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
      */
     private $projects;
@@ -147,4 +154,27 @@ class Category
         return $this->orden;
     }
     
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }
