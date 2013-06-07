@@ -1,4 +1,5 @@
 Symfony/web/bundles/
+Symfony/web/upload/*
 Symfony/app/bootstrap*
 Symfony/app/cache/*
 Symfony/app/logs/*
