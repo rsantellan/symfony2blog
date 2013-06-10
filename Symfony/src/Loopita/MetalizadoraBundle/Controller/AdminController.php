@@ -66,7 +66,7 @@ class AdminController extends Controller
       }
       $uploadForm = $this->createFormBuilder()
             ->add('download', 'genemu_jqueryfile', array('mapped' => false))
-            ->add('multiple_download', 'genemu_jqueryfile', array(
+            /*->add('multiple_download', 'genemu_jqueryfile', array(
             'multiple' => true, 'mapped' => false))
             ->add('auto_download', 'genemu_jqueryfile', array(
                 'mapped' => false,
@@ -80,7 +80,8 @@ class AdminController extends Controller
               'configs' => array(
               'auto' => true
             )
-        ))->getForm();
+        ))*/
+        ->getForm();
       return $this->render('LoopitaMetalizadoraBundle:Admin:editCategoryForm.html.twig', array('form' => $form->createView(), 'uploadForm' => $uploadForm->createView()));
     }
     
@@ -147,5 +148,10 @@ class AdminController extends Controller
       return $response;
       //die;
       
+    }
+    
+    public function saveTestUploadAction()
+    {
+        
     }
 }

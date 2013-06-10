@@ -6,3 +6,4 @@ Symfony/app/logs/*
 Symfony/vendor/
 Symfony/app/config/parameters.yml
 *.php~
+Symfony/composer.lock

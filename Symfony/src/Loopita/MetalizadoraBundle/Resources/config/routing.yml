@@ -32,4 +32,8 @@ loopita_metalizadora_category_order:
     
 loopita_metalizadora_category_order_save:
     pattern:  /admin/categories-order-save.html
-    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:saveCategoriesOrder }       
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:saveCategoriesOrder } 
+    
+loopita_metalizadora_test_upload:
+    pattern:  /admin/categories-test-upload.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:saveTestUpload }
