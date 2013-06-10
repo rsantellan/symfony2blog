@@ -1,0 +1,36 @@
+<form action="{{ action_url }}" method="POST" {{ form_enctype(form) }} class="project_form">
+  <div class="form_error">
+    {{ form_errors(form) }}
+  </div> 
+  <div>
+    {{ form_label(form.name)}}
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}
+  </div>
+  <div>
+    {{ form_label(form.cliente)}}
+    {{ form_errors(form.cliente) }}
+    {{ form_widget(form.cliente) }}
+  </div>
+  <div>
+    {{ form_label(form.tipo_de_trabajo)}}
+    {{ form_errors(form.tipo_de_trabajo) }}
+    {{ form_widget(form.tipo_de_trabajo) }}
+  </div>
+  <div>
+    {{ form_label(form.description)}}
+    {{ form_errors(form.description) }}
+    {{ form_widget(form.description) }}
+  </div>  
+  <div>
+    {{ form_label(form.category)}}
+    {{ form_errors(form.category) }}
+    {{ form_widget(form.category) }}
+  </div> 
+    
+  {{ form_rest(form) }}
+
+    <input type="submit" value="Guardar" />
+</form>
+
+

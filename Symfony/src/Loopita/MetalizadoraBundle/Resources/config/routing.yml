@@ -9,7 +9,8 @@ loopita_metalizadora_servicios:
 loopita_metalizadora_admin:
     pattern:  /admin
     defaults: { _controller: LoopitaMetalizadoraBundle:Admin:index }
-    
+
+# Admin Categories    
 loopita_metalizadora_category:
     pattern:  /admin/categories.html
     defaults: { _controller: LoopitaMetalizadoraBundle:Admin:listCategories }
@@ -37,3 +38,20 @@ loopita_metalizadora_category_order_save:
 loopita_metalizadora_test_upload:
     pattern:  /admin/categories-test-upload.html
     defaults: { _controller: LoopitaMetalizadoraBundle:Admin:saveTestUpload }
+
+#Admin project
+loopita_metalizadora_projects:
+    pattern:  /admin/projects.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:listProjects }
+    
+loopita_metalizadora_project_new:
+    pattern:  /admin/add-project.html
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:addProject }    
+    
+loopita_metalizadora_project_edit:
+    pattern:  /admin/edit-project/{id}
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:editProject }    
+    
+loopita_metalizadora_project_delete:
+    pattern:  /admin/delete-project/{id}
+    defaults: { _controller: LoopitaMetalizadoraBundle:Admin:deleteProject }    

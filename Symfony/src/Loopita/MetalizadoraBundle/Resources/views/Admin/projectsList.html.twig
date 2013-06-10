@@ -1,0 +1,65 @@
+{% extends 'LoopitaMetalizadoraBundle:Admin:layout.html.twig' %}
+{% block title %}{% trans %}metalizadora_admin_categories_list{% endtrans %}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/js/fancybox/jquery.fancybox-1.3.4.css') }}" />
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/fancybox/jquery.fancybox-1.3.4.pack.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/fancybox/jquery.mousewheel-3.0.4.pack.js') }}"></script>
+
+<script type="text/javascript">
+$(document).ready(function() { 
+  adminManager.getInstance().startFancyInPage('fancy_link');
+});
+
+</script>
+{% endblock %}
+
+{% block body %}
+{% for flashMessage in app.session.flashbag.get('notice') %}
+  <div class="flash-notice">
+    {{ flashMessage }}
+  </div>
+{% endfor %}
+
+
+<table>
+  <tr>
+  {# sorting of properties based on query components #}
+      <th>{{ knp_pagination_sortable(pagination, 'Id', 'c.id') }}</th>
+      <th{% if pagination.isSorted('c.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nombre', 'c.name') }}</th>
+      <th{% if pagination.isSorted('c.cliente') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Cliente', 'c.cliente') }}</th>
+      <th{% if pagination.isSorted('c.category') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Categoria', 'c.category') }}</th>
+      <th{% if pagination.isSorted('c.description') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Descripcion', 'c.description') }}</th>
+      <th>Acciones</th>
+  </tr>
+
+  {# table body #}
+  {% for project in pagination %}
+  <tr {% if loop.index is odd %}class="color"{% endif %}>
+      <td>{{ project.id }}</td>
+      <td>{{ project.name }}</td>
+      <td>{{ project.cliente }}</td>
+      <td>{{ project.category.name }}</td>
+      <td>{{ project.description }}</td>
+      <td>
+        <a href="{{ path('loopita_metalizadora_project_edit', {'id': project.id}) }}">{% trans %}metalizadora_admin_project_edit{% endtrans %}</a>
+        <a href="{{ path('loopita_metalizadora_project_delete', {'id': project.id}) }}">{% trans %}metalizadora_admin_project_delete{% endtrans %}</a>
+      </td>
+  </tr>
+  {% endfor %}
+</table>
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
+{# display create new #}
+<div class="new_link_container">
+  <a href="{{ path("loopita_metalizadora_project_new") }}">{% trans %}metalizadora_admin_new_link{% endtrans %}</a>
+  <a class="fancy_link iframe" href="{{ path("loopita_metalizadora_category_order") }}" >
+    {% trans %}metalizadora_admin_order_link{% endtrans %}
+  </a>
+</div>
+
+{% endblock %}

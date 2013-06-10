@@ -3,11 +3,12 @@
 namespace Loopita\MetalizadoraBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Project
  * 
- * @ORM\Entity(repositoryClass="Loopita\MetalizadoraBundle\Entity\ProjectRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\Table(name="metalurgica_project")
  * @author Rodrigo Santellan
  */
@@ -47,7 +48,7 @@ class Project {
   
   
   /**
-   *
+   * @Gedmo\SortablePosition
    * @ORM\Column(type="integer")
    */
   protected $orden;
@@ -60,7 +61,12 @@ class Project {
    * 
    */
   protected $category;
-  
+
+  /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string", unique=true)
+    */
+  protected $slug;
     /**
      * Get id
      *
@@ -207,5 +213,28 @@ class Project {
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Project
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
