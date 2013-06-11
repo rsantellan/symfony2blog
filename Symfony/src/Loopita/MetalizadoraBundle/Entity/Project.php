@@ -4,6 +4,7 @@ namespace Loopita\MetalizadoraBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project
@@ -30,19 +31,19 @@ class Project {
   
   /**
    *
-   * @ORM\Column(type="string", length=100)
+   * @ORM\Column(type="string", length=100, nullable=true)
    */
   protected $cliente;
   
   /**
    *
-   * @ORM\Column(type="text")
+   * @ORM\Column(type="text", nullable=true)
    */
   protected $tipo_de_trabajo;
   
   /**
    *
-   * @ORM\Column(type="text")
+   * @ORM\Column(type="text", nullable=true)
    */
   protected $description;
   
@@ -58,6 +59,7 @@ class Project {
    *
    * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
    * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+   * @Assert\NotBlank()
    * 
    */
   protected $category;
