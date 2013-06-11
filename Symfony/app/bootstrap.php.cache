@@ -1801,6 +1801,7 @@ class Container implements IntrospectableContainerInterface
 protected $parameterBag;
 protected $services;
 protected $methodMap;
+protected $aliases;
 protected $scopes;
 protected $scopeChildren;
 protected $scopedServices;
@@ -1866,6 +1867,9 @@ return array_key_exists($id, $this->services) || method_exists($this,'get'.strtr
 public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE)
 {
 $id = strtolower($id);
+if (isset($this->aliases[$id])) {
+$id = $this->aliases[$id];
+}
 if (array_key_exists($id, $this->services)) {
 return $this->services[$id];
 }
@@ -2095,11 +2099,11 @@ protected $name;
 protected $startTime;
 protected $classes;
 protected $loadClassCache;
-const VERSION ='2.3.0';
-const VERSION_ID ='20300';
+const VERSION ='2.3.1';
+const VERSION_ID ='20301';
 const MAJOR_VERSION ='2';
 const MINOR_VERSION ='3';
-const RELEASE_VERSION ='0';
+const RELEASE_VERSION ='1';
 const EXTRA_VERSION ='';
 public function __construct($environment, $debug)
 {
@@ -2651,7 +2655,7 @@ if ($relativePath = $file->getRelativePath()) {
 $ns .='\\'.strtr($relativePath,'/','\\');
 }
 $r = new \ReflectionClass($ns.'\\'.$file->getBasename('.php'));
-if ($r->isSubclassOf('Symfony\\Component\\Console\\Command\\Command') && !$r->isAbstract()) {
+if ($r->isSubclassOf('Symfony\\Component\\Console\\Command\\Command') && !$r->isAbstract() && !$r->getConstructor()->getNumberOfRequiredParameters()) {
 $application->add($r->newInstance());
 }
 }
