@@ -1,3 +1,1 @@
-[submodule "Symfony/vendor/bundles/Knp/Bundle/TranslatorBundle"]
-	path = Symfony/vendor/bundles/Knp/Bundle/TranslatorBundle
-	url = https://github.com/rsantellan/TranslatorBundle.git
+

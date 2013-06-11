@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Loopita\MetalizadoraBundle\LoopitaMetalizadoraBundle(),
             new Maith\Common\AdminBundle\MaithCommonAdminBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Knp\Bundle\TranslatorBundle\KnpTranslatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

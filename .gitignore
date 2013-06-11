@@ -4,7 +4,6 @@ Symfony/app/bootstrap*
 Symfony/app/cache/*
 Symfony/app/logs/*
 Symfony/vendor/*
-!Symfony/vendor/bundles/Knp/Bundle/TranslatorBundle
 Symfony/app/config/parameters.yml
 *.php~
 Symfony/composer.lock
