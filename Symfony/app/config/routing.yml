@@ -1,3 +1,7 @@
+maith_common_image:
+    resource: "@MaithCommonImageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 #maith_common_admin:
 #    resource: "@MaithCommonAdminBundle/Resources/config/routing.yml"
 #    prefix:   /
