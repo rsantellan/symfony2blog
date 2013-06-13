@@ -6,6 +6,10 @@ loopita_metalizadora:
     resource: "@LoopitaMetalizadoraBundle/Resources/config/routing.yml"
     prefix:   /
 
+maith_common_admin:
+    resource: "@MaithCommonAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
 maith_common_users:
     resource: "@MaithCommonUsersBundle/Resources/config/routing.yml"
     prefix:   /

@@ -1,3 +1,15 @@
 maith_admin_homepage:
     pattern:  /admin
     defaults: { _controller: MaithCommonAdminBundle:Default:index }
+    
+#maith_admin_media_show:
+#    pattern:  /admin/media/{id}/{objectclass}
+#    defaults: { _controller: MaithCommonAdminBundle:Albums:retrieveAlbums }    
+
+maith_admin_media_upload:
+    pattern:  /admin/media/upload/{id}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:uploadForm }
+    
+maith_admin_media_actual_upload:
+    pattern:  /admin/media/do-upload
+    defaults: { _controller: MaithCommonAdminBundle:Albums:doFormUpload }      

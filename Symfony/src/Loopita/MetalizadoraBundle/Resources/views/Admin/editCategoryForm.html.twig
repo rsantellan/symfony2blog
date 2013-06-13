@@ -1,13 +1,6 @@
 {% extends 'LoopitaMetalizadoraBundle:Admin:layout.html.twig' %}
 {% block title %}{% trans %}metalizadora_admin_categories_edit{% endtrans %}{% endblock %}
-{% block stylesheets %}
-  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/uploadify.css') }}" />
-  {{ form_stylesheet(uploadForm) }}
-{% endblock %}
-{% block javascripts %}
-  <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery.uploadify.min.js') }}"></script>
-  {{ form_javascript(uploadForm) }}
-{% endblock %}
+
 {% block body %}
   <h3>{% trans %}metalizadora_admin_categories_edit_title{% endtrans %}</h3>  
 
@@ -21,7 +14,7 @@
   
   
   
-<form action="{{ path('loopita_metalizadora_test_upload') }}" method="POST" {{ form_enctype(form) }} class="category_form">
+<form action="{{ path('loopita_metalizadora_test_upload') }}" method="POST" {{ form_enctype(uploadForm) }} class="category_form">
   {{ form_errors(uploadForm) }}
   {{ form(uploadForm) }}
    {{ form_widget(uploadForm) }}

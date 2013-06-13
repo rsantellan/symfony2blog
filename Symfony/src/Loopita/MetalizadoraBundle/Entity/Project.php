@@ -239,4 +239,9 @@ class Project {
     {
         return $this->slug;
     }
+    
+    public function getFullClassName()
+    {
+      return get_class($this);
+    }
 }

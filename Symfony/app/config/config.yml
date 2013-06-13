@@ -87,9 +87,5 @@ fos_user:
     firewall_name: main
     user_class: Maith\Common\UsersBundle\Entity\User
     
-genemu_form:
-    file:
-        enabled:    true
-        cancel_img: '/bundles/genemuform/images/cancel.png'
-        folder:     'upload'
-        swf: '/bundles/maithcommonadmin/js/uploadify.swf'    
+maith_common_admin:
+    upload_token: 'my_token'

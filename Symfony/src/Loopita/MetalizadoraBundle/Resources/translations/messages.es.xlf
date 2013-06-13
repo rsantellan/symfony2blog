@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="es" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="099fb995346f31c749f6e40db0f395e3" resname="header">
+        <source>header</source>
+        <target>__header</target>
+      </trans-unit>
+      <trans-unit id="9a999fd3922f5a2efd16b337e1ad51f7" resname="menu_inicio">
+        <source>menu_inicio</source>
+        <target>__menu_inicio</target>
+      </trans-unit>
+      <trans-unit id="c9a63d77265bcbc1a8fc38eb5b5fcb9c" resname="menu_historia">
+        <source>menu_historia</source>
+        <target>__menu_historia</target>
+      </trans-unit>
+      <trans-unit id="fbe8dc534f5ef34ecf07556a50eda7de" resname="menu_Servicios">
+        <source>menu_Servicios</source>
+        <target>__menu_Servicios</target>
+      </trans-unit>
+      <trans-unit id="537fef1d45e02a7e481295efcd2c6e59" resname="menu_clientes">
+        <source>menu_clientes</source>
+        <target>__menu_clientes</target>
+      </trans-unit>
+      <trans-unit id="1f21a63a6a441d5e864893942972a87f" resname="menu_certificacion">
+        <source>menu_certificacion</source>
+        <target>__menu_certificacion</target>
+      </trans-unit>
+      <trans-unit id="1b33d8bb7d92dfc7bc254173b3e02b43" resname="menu_contacto">
+        <source>menu_contacto</source>
+        <target>__menu_contacto</target>
+      </trans-unit>
+      <trans-unit id="391bef6f5e1a323f1bc7f41063eb6ad0" resname="destacados_titulo">
+        <source>destacados_titulo</source>
+        <target>__destacados_titulo</target>
+      </trans-unit>
+      <trans-unit id="d1e7ed680b81a82f3fb40a4cbe3babc8" resname="footer_informacion">
+        <source>footer_informacion</source>
+        <target>__footer_informacion</target>
+      </trans-unit>
+      <trans-unit id="3a4ce27eb03c265689e9f1570e494c82" resname="metalizadora_admin_categories_list">
+        <source>metalizadora_admin_categories_list</source>
+        <target>__metalizadora_admin_categories_list</target>
+      </trans-unit>
+      <trans-unit id="8f8308da29617a26c4f36134e1dbe6f7" resname="metalizadora_admin_project_edit">
+        <source>metalizadora_admin_project_edit</source>
+        <target>__metalizadora_admin_project_edit</target>
+      </trans-unit>
+      <trans-unit id="223a6a8c4be1e1aad482bbacc77f8164" resname="metalizadora_admin_project_delete">
+        <source>metalizadora_admin_project_delete</source>
+        <target>__metalizadora_admin_project_delete</target>
+      </trans-unit>
+      <trans-unit id="0dc2c305643a0fba07d407e03a40825a" resname="metalizadora_admin_new_link">
+        <source>metalizadora_admin_new_link</source>
+        <target>__metalizadora_admin_new_link</target>
+      </trans-unit>
+      <trans-unit id="648874548aa4d6d4c10076768c2543a2" resname="metalizadora_admin_order_link">
+        <source>metalizadora_admin_order_link</source>
+        <target>__metalizadora_admin_order_link</target>
+      </trans-unit>
+      <trans-unit id="c4ab55b1e4384bb6a62a9141077d4cea" resname="metalizadora_admin_projects_new">
+        <source>metalizadora_admin_projects_new</source>
+        <target>__metalizadora_admin_projects_new</target>
+      </trans-unit>
+      <trans-unit id="b1e177ea398da43a8cbc936cdb09ec6b" resname="metalizadora_admin_projects_new_title">
+        <source>metalizadora_admin_projects_new_title</source>
+        <target>__metalizadora_admin_projects_new_title</target>
+      </trans-unit>
+      <trans-unit id="0765c65750ae97fa7336d6ac521fc15e" resname="metalizadora_admin_list">
+        <source>metalizadora_admin_list</source>
+        <target>__metalizadora_admin_list</target>
+      </trans-unit>
+      <trans-unit id="f523742ff7b4e48208d809d2b630f9e7" resname="metalizadora_admin_projects_edit">
+        <source>metalizadora_admin_projects_edit</source>
+        <target>__metalizadora_admin_projects_edit</target>
+      </trans-unit>
+      <trans-unit id="369bac3c5f4137e851aecdf5830b78fb" resname="metalizadora_admin_projects_edit_title">
+        <source>metalizadora_admin_projects_edit_title</source>
+        <target>__metalizadora_admin_projects_edit_title</target>
+      </trans-unit>
+      <trans-unit id="f5dbc9c4efcad958cbc28ae2a180812e" resname="metalizadora_admin_menu_dashboard">
+        <source>metalizadora_admin_menu_dashboard</source>
+        <target>__metalizadora_admin_menu_dashboard</target>
+      </trans-unit>
+      <trans-unit id="60639ca7a2776cf1bcd3f53ede483116" resname="metalizadora_admin_menu_projects">
+        <source>metalizadora_admin_menu_projects</source>
+        <target>__metalizadora_admin_menu_projects</target>
+      </trans-unit>
+      <trans-unit id="fcec7cfd2be3bc026cae2d5ae2146f86" resname="metalizadora_admin_menu_categories">
+        <source>metalizadora_admin_menu_categories</source>
+        <target>__metalizadora_admin_menu_categories</target>
+      </trans-unit>
+      <trans-unit id="b262b264d126c5abed79508b0bcfdaba" resname="metalizadora_admin_categories_new">
+        <source>metalizadora_admin_categories_new</source>
+        <target>__metalizadora_admin_categories_new</target>
+      </trans-unit>
+      <trans-unit id="b6b3fd7d2bcdd93ce104078fcf2135a0" resname="metalizadora_admin_categories_new_title">
+        <source>metalizadora_admin_categories_new_title</source>
+        <target>__metalizadora_admin_categories_new_title</target>
+      </trans-unit>
+      <trans-unit id="bfe7123fd9867c977ffd2b9f19bb93ea" resname="metalizadora_admin_categories_edit">
+        <source>metalizadora_admin_categories_edit</source>
+        <target>__metalizadora_admin_categories_edit</target>
+      </trans-unit>
+      <trans-unit id="af71bf71745657e3fe342f966177d79c" resname="metalizadora_admin_categories_edit_title">
+        <source>metalizadora_admin_categories_edit_title</source>
+        <target>__metalizadora_admin_categories_edit_title</target>
+      </trans-unit>
+      <trans-unit id="0d1fccd50fcb823de6f48f1d3c9cd87f" resname="metalizadora_admin_categories_delete">
+        <source>metalizadora_admin_categories_delete</source>
+        <target>__metalizadora_admin_categories_delete</target>
+      </trans-unit>
+      <trans-unit id="aae687b9d7903bc2365827bc04f3cad3" resname="metalizadora_admin_dashboard">
+        <source>metalizadora_admin_dashboard</source>
+        <target>__metalizadora_admin_dashboard</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

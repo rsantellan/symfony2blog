@@ -1,0 +1,15 @@
+{% for album in albums%}
+
+
+<h3>{{ album.name }}</h3>
+<a href="{{ path('maith_admin_media_upload', {'id': album.id})}}">Subir nuevas</a>
+<h5>Datos</h5>
+<ul>
+{% for file in album.files%}
+    <li>{{ file.id }} - {{ file.name }}
+      {{ asset(file.name)}}
+        <img src="{{ asset( file.sfPath ~ '/' ~ file.name)}}" />
+    </li>
+{% endfor %}
+</ul>
+{% endfor %}

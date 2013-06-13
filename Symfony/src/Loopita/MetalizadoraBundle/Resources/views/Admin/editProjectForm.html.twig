@@ -12,7 +12,10 @@
   {{ include('LoopitaMetalizadoraBundle:Admin:projectForm.html.twig', {'form': form, 'action_url': path('loopita_metalizadora_project_edit', {'id': form.vars.value.id}) }) }}
   
   
+  {{ render(controller('MaithCommonAdminBundle:Albums:albumsData', {'id': form.vars.value.id, 'objectclass' : form.vars.value.fullClassName }))}}
   
+  {{ form.vars.value.id }}
+  {{ form.vars.value.fullClassName }}
   
   
 <div class="new_link_container">

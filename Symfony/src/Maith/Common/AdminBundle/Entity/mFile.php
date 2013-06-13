@@ -43,6 +43,14 @@ class mFile {
      */
     private $path;
     
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sf_path", type="string", length=255)
+     */
+    private $sfPath;
+    
     /**
      * @var string
      *
@@ -187,5 +195,28 @@ class mFile {
     public function getAlbum()
     {
         return $this->album;
+    }
+
+    /**
+     * Set sfPath
+     *
+     * @param string $sfPath
+     * @return mFile
+     */
+    public function setSfPath($sfPath)
+    {
+        $this->sfPath = $sfPath;
+    
+        return $this;
+    }
+
+    /**
+     * Get sfPath
+     *
+     * @return string 
+     */
+    public function getSfPath()
+    {
+        return $this->sfPath;
     }
 }

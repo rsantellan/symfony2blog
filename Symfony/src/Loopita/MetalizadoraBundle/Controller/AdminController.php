@@ -11,8 +11,34 @@ use Loopita\MetalizadoraBundle\Form\ProjectType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Maith\Common\AdminBundle\Entity\mAlbum;
 
+
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Loader\XliffFileLoader;
+use Symfony\Component\Translation\Writer\TranslationWriter;
+use Symfony\Component\Translation\Dumper\XliffFileDumper;
+use Symfony\Component\Translation\MessageCatalogue;
+
 class AdminController extends Controller
 {
+
+    public function saveTestUploadAction()
+    {
+      $translator = new Translator('es', new MessageSelector());
+      $translator->addLoader("xlf", new XliffFileLoader());
+      $file = __DIR__."/../Resources/translations/messages.es.xlf";
+      $translator->addResource('xlf', $file, 'es');
+      $writer = new TranslationWriter();
+      $writer->addDumper('xlf', new XliffFileDumper());
+      
+      $catalog = new MessageCatalogue('es');
+      //$catalog->addCatalogue()
+      var_dump($catalog);
+      var_dump($writer);
+      var_dump('saveTestUploadAction');
+      exit(0);
+    }  
+  
     public function indexAction()
     {
         return $this->render('LoopitaMetalizadoraBundle:Admin:index.html.twig');
@@ -66,25 +92,7 @@ class AdminController extends Controller
         $em->flush();
         $this->get("session")->getFlashBag()->add("notice", "Categoria guardada");
       }
-      $uploadForm = $this->createFormBuilder()
-            ->add('download', 'genemu_jqueryfile', array('mapped' => false, 'configs' => array('objectClass' => "myClase", 'objectId' => 1, 'debug'    => true)))
-            /*->add('multiple_download', 'genemu_jqueryfile', array(
-            'multiple' => true, 'mapped' => false))
-            ->add('auto_download', 'genemu_jqueryfile', array(
-                'mapped' => false,
-                'configs' => array(
-              'auto' => true
-              )
-            ))
-            ->add('auto_multiple_download', 'genemu_jqueryfile', array(
-              'multiple' => true,
-              'mapped' => false,
-              'configs' => array(
-              'auto' => true
-            )
-        ))*/
-        ->getForm();
-      return $this->render('LoopitaMetalizadoraBundle:Admin:editCategoryForm.html.twig', array('form' => $form->createView(), 'uploadForm' => $uploadForm->createView()));
+      return $this->render('LoopitaMetalizadoraBundle:Admin:editCategoryForm.html.twig', array('form' => $form->createView()));
     }
     
     public function deleteCategoryAction($id)
@@ -149,11 +157,6 @@ class AdminController extends Controller
       $response->setData(array('output' => true));
       return $response;
       //die;
-    }
-    
-    public function saveTestUploadAction()
-    {
-        
     }
     
     /**
