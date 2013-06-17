@@ -11,3 +11,6 @@ services:
         class: "Maith\Common\ImageBundle\Twig\mImageExtension"
         tags: 
             -  { name: twig.extension }
+
+    maith_common_image.image.mimage:
+        class: "Maith\Common\ImageBundle\Model\MyImageManager"

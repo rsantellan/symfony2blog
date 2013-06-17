@@ -60,7 +60,7 @@ class MyImageManager {
       //var_dump($cache_string);
       $cache_path_info = pathinfo($cache_string);
       //var_dump($cache_path_info);
-      return $this->checkDirectoryPath($cache_path_info["dirname"].DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $parameters).DIRECTORY_SEPARATOR).$cache_path_info["filename"].".png";
+      return $this->checkDirectoryPath($cache_path_info["dirname"].DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR.implode("", $parameters).DIRECTORY_SEPARATOR).$cache_path_info["filename"].".png";
     }
     throw new \Exception("No funca con cosas de afuera");
     //return $path;

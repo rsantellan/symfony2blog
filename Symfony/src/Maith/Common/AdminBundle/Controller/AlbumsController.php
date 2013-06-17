@@ -30,6 +30,8 @@ class AlbumsController extends Controller
       $em = $this->getDoctrine()->getManager();
       $query = $em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :id and a.object_class = :object_class")->setParameters(array('id' => $id, 'object_class' => $objectclass));
       $albums = $query->getResult();
+      //$imageManager = $this->get('maith_common_image.image.mimage');
+      //$imageManager->doResize();
       return $this->render('MaithCommonAdminBundle:Albums:showAlbums.html.twig', array('albums' => $albums));
     }
     
