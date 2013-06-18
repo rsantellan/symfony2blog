@@ -20,7 +20,11 @@ class DefaultController extends Controller
     
     public function serviciosAction($slug)
     {
-      var_dump($slug);
+      $em = $this->getDoctrine()->getManager();
+      $category = $em->getRepository("LoopitaMetalizadoraBundle:Category")->findOneBy(array('slug' => $slug));
+      $query = $em->createQuery("select c from LoopitaMetalizadoraBundle:Category c order by c.orden desc");
+      $categories = $query->getResult();
+      return $this->render('LoopitaMetalizadoraBundle:Default:servicios.html.twig', array('categories' => $categories, 'category' => $category));
       die('aca');
     }
 }

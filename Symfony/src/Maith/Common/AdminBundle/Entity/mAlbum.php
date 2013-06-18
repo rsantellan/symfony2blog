@@ -46,6 +46,7 @@ class mAlbum {
   /**
    * var Projects
    * @ORM\OneToMany(targetEntity="mFile", mappedBy="album")
+   * @ORM\OrderBy({"orden" = "ASC"})
    */
   private $files;  
 

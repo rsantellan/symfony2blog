@@ -1,0 +1,37 @@
+{% extends 'LoopitaMetalizadoraBundle::layout.html.twig' %}
+{% block menu_servicios_class %}current{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
+{% block body %}
+<div class="content_ext">
+    <div class="content">
+        <h1>{% trans %}servicios_titulo{% endtrans %}</h1>
+        <div class="subtitle">
+          {% for cat in categories %}
+            <a href="{{ path('loopita_metalizadora_servicios', {'slug': cat.slug })}}">
+              {{ cat.name }}
+            </a>
+            {% if not loop.last %}|{% endif %}
+          {% endfor %}
+        </div>
+    </div><!--CONTENT-->
+    <hr />
+    <div class="content">
+      <h2>{{ category.name }}</h2>
+      <p></p>
+      {% for project in category.projects %}
+        <div class="bloque {% if loop.index % 2 == 0 %}bloque_center{% endif %}">
+          <a href=""></a>
+          <img alt="{{ project.name[:45] }}" src="{{ project.id | mAvatar(project.fullClassName) | mImage(300, 165, 'rce') }}" />
+          <h3>{{ project.name[:45] }}</h3>
+        </div>
+      {% endfor %}
+   </div><!--CONTENT-->
+</div><!--CONTENT-EXT-->
+
+{% endblock %}

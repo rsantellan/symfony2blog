@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Maith\Common\AdminBundle\Model\Encrypt;
 use Maith\Common\AdminBundle\Entity\mFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AlbumsController extends Controller
 {
@@ -33,6 +34,92 @@ class AlbumsController extends Controller
       //$imageManager = $this->get('maith_common_image.image.mimage');
       //$imageManager->doResize();
       return $this->render('MaithCommonAdminBundle:Albums:showAlbums.html.twig', array('albums' => $albums));
+    }
+    
+    
+    public function refreshAlbumAction()
+    {
+      
+      $albumId = $this->getRequest()->get("id");
+      $em = $this->getDoctrine()->getManager();
+      $album = $em->getRepository("MaithCommonAdminBundle:mAlbum")->find($albumId);
+      
+      $response = new JsonResponse();
+      $response->setData(array('status'=> 'OK', 'options' => array('html' => $this->renderView('MaithCommonAdminBundle:Albums:showAlbumFiles.html.twig', array('files' => $album->getFiles())) )));
+      return $response;
+    }
+    
+    public function sortAlbumAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $album = $em->getRepository("MaithCommonAdminBundle:mAlbum")->find($id);
+      return $this->render('MaithCommonAdminBundle:Albums:fileSortable.html.twig', array('album' => $album));
+    }
+    
+    public function doSortAlbumAction()
+    {
+      $albumId = $this->getRequest()->get("album_id");
+      $items = $this->getRequest()->get("listItem");
+      $em = $this->getDoctrine()->getManager();
+      $album = $em->getRepository("MaithCommonAdminBundle:mAlbum")->find($albumId);
+      $files = $album->getFiles();
+      //var_dump(get_class($files));
+      //var_dump($files->getKeys());
+      //var_dump($files->get(0)->getId());
+      //var_dump($items);
+      //die;
+      $counter = 0;
+      //$quantity = $files->count();
+      while($counter < count($items))
+      {
+        $finish = false;
+        $index = 0;
+        $number = (int) $items[$counter];
+        while(!$finish && $index < $files->count())
+        {
+          $file = $files->get($index);
+          if(!$file)
+          {
+            $finish = true;
+          }
+          else
+          {
+            if($number == $file->getId())
+            {
+              $file->setOrden($counter);
+              $em->persist($file);
+              $em->flush();
+              $finish = true;
+            }
+          }
+          $index++;
+        }
+        $counter++;
+      }
+      
+      $response = new JsonResponse();
+      $response->setData(array('output' => true));
+      return $response;
+    }
+    
+    public function removeFileAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $file = $em->getRepository("MaithCommonAdminBundle:mFile")->find($id);
+      $response = new JsonResponse();
+      $status = "OK";
+      if (!$file) 
+      {
+        $status = "ERROR";
+      }
+      else
+      {
+        $file->removeAllFiles($this->get('kernel')->getCacheDir());
+        $em->remove($file);
+        $em->flush();
+      }
+      $response->setData(array('status' => $status));
+      return $response;
     }
     
     public function uploadFormAction($id)

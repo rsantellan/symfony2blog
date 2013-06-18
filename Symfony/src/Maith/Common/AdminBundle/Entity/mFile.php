@@ -4,6 +4,7 @@ namespace Maith\Common\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Finder\Finder;
 
 /**
  * Description of mFile
@@ -66,6 +67,13 @@ class mFile {
       */
      protected $album;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="show_name", type="string", length=255)
+     */
+    private $showName = "";
+    
     /**
      * Get id
      *
@@ -218,5 +226,44 @@ class mFile {
     public function getSfPath()
     {
         return $this->sfPath;
+    }
+    
+    public function getFullPath()
+    {
+      return $this->getPath().DIRECTORY_SEPARATOR.$this->getName();
+    }
+
+    /**
+     * Set showName
+     *
+     * @param string $showName
+     * @return mFile
+     */
+    public function setShowName($showName)
+    {
+        $this->showName = $showName;
+    
+        return $this;
+    }
+
+    /**
+     * Get showName
+     *
+     * @return string 
+     */
+    public function getShowName()
+    {
+        return $this->showName;
+    }
+    
+    public function removeAllFiles($location)
+    {
+      $finder = new Finder();
+      $finder->in($location)->files()->name($this->getName());
+      foreach($finder as $file)
+      {
+        @unlink($file->getRealpath());
+      }
+      @unlink($this->getFullPath());
     }
 }

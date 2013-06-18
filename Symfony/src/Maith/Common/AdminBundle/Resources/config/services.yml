@@ -10,3 +10,11 @@ services:
         arguments: [%maith_common_admin.upload_token%]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 200 }
+
+    maith_common_admin.twig.maith_m_avatar:
+        class: "Maith\Common\AdminBundle\Twig\mAvatarExtension"
+        arguments: 
+             - "@doctrine.orm.entity_manager"
+             - "%kernel.root_dir%"
+        tags: 
+            -  { name: twig.extension }

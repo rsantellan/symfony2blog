@@ -11,16 +11,6 @@
   {% endfor %}
   {{ include('LoopitaMetalizadoraBundle:Admin:categoryForm.html.twig', {'form': form, 'action_url': path('loopita_metalizadora_category_edit', {'id': form.vars.value.id}) }) }}
   
-  
-  
-  
-<form action="{{ path('loopita_metalizadora_test_upload') }}" method="POST" {{ form_enctype(uploadForm) }} class="category_form">
-  {{ form_errors(uploadForm) }}
-  {{ form(uploadForm) }}
-   {{ form_widget(uploadForm) }}
-  <input type="submit" />
-</form>
-  
 <div class="new_link_container">
   <a href="{{ path("loopita_metalizadora_category") }}">{% trans %}metalizadora_admin_list{% endtrans %}</a>
 </div>

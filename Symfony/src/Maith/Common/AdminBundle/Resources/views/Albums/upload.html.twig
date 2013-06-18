@@ -2,13 +2,16 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}Upload{% endblock %}</title>
+    <title>{% block title %}admin_image_upload{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('bundles/maithcommonadmin/images/favicon.ico') }}" />
     
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-1.7.1.min.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/js/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css') }}" />
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/plupload/plupload.full.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/plupload/jquery.plupload.queue/jquery.plupload.queue.js') }}"></script>
+    {% if app.request.locale != 'en' %}
+      <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/plupload/i18n/' ~ app.request.locale ~ '.js') }}"></script>
+    {% endif %}
     {#{ form_stylesheet(uploadForm) }#}
     {#{ form_javascript(uploadForm) }#}
        <script type="text/javascript">
@@ -93,6 +96,7 @@
 			StateChanged: function(up) {
 				// Called when the state of the queue is changed
 				log('[StateChanged]', up.state == plupload.STARTED ? "STARTED" : "STOPPED");
+                $(".plupload_start").removeClass("plupload_disabled");
 			},
 
 			QueueChanged: function(up) {
@@ -103,6 +107,11 @@
 			UploadProgress: function(up, file) {
 				// Called while a file is being uploaded
 				log('[UploadProgress]', 'File:', file, "Total:", up.total);
+                if (up.total.uploaded == up.files.length) {
+                    $(".plupload_buttons").css("display", "inline");
+                    $(".plupload_upload_status").css("display", "inline");
+                    $(".plupload_start").addClass("plupload_disabled");
+                }
 			},
 
 			FilesAdded: function(up, files) {
@@ -126,6 +135,18 @@
 			FileUploaded: function(up, file, info) {
 				// Called when a file has finished uploading
 				log('[FileUploaded] File:', file, "Info:", info);
+                if(parent.imagesManager != undefined && parent.imagesManager.getInstance() != undefined)
+                {
+                  parent.imagesManager.getInstance().refreshAlbums({{ albumId }});
+                }
+                /*
+                console.info(up);
+                if(up.total.queued == 0) {
+                    console.info('estoy aca');
+                    up.splice();
+                    up.refresh();
+                }
+                */
 			},
 
 			ChunkUploaded: function(up, file, info) {

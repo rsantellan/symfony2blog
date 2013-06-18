@@ -1,19 +1,15 @@
 {% for album in albums%}
+<div id="album_{{ album.id}}" class="single_album_container">
+  <h3>{{ album.name }}</h3>
+  <a class="album_uploader_link" href="{{ path('maith_admin_media_upload', {'id': album.id})}}">{% trans %}maith_images_admin_upload{% endtrans %}</a>
+  <ul class="img_thumb_ul">
+    
+    {{ include('MaithCommonAdminBundle:Albums:showAlbumFiles.html.twig', {'files': album.files}) }}
 
+  </ul>
+  <div class="clear"></div>
+  <a albumId="{{ album.id }}" class="album_sortable_link" href="{{ path('maith_admin_media_sort_album', {'id': album.id})}}">{% trans %}maith_images_admin_sort{% endtrans %}</a>
+</div>
+{% endfor %}
 
-<h3>{{ album.name }}</h3>
-<a href="{{ path('maith_admin_media_upload', {'id': album.id})}}">Subir nuevas</a>
-<h5>Datos</h5>
-<ul>
-{% for file in album.files%}
-    <li>{{ file.id }} - {{ file.name }}
-      {{ file.sfPath ~ '/' ~ file.name}}
-        <br/>
-        {{ 50 | mPrice }} 
-        <br/>
-        {{ 50 | mImage }} 
-        {# <img src="{{ asset( file.sfPath ~ '/' ~ file.name)}}" width="50" height="50" />  #}
-    </li>
-{% endfor %}
-</ul>
-{% endfor %}
+<input type="hidden" value="{{ path('maith_admin_media_refresh_album')}}" id="refreshAlbumUrl" />

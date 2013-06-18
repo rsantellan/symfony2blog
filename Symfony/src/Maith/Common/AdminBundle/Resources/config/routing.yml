@@ -12,4 +12,20 @@ maith_admin_media_upload:
     
 maith_admin_media_actual_upload:
     pattern:  /admin/media/do-upload
-    defaults: { _controller: MaithCommonAdminBundle:Albums:doFormUpload }      
+    defaults: { _controller: MaithCommonAdminBundle:Albums:doFormUpload }
+    
+maith_admin_media_refresh_album:
+    pattern:  /admin/media/refresh-album.html
+    defaults: { _controller: MaithCommonAdminBundle:Albums:refreshAlbum } 
+    
+maith_admin_media_remove:
+    pattern:  /admin/media/remove/{id}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:removeFile }
+    
+maith_admin_media_sort_album:
+    pattern:  /admin/media/sort/{id}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:sortAlbum }      
+    
+maith_admin_media_sort_action:
+    pattern:  /admin/media/do-album-sort.html
+    defaults: { _controller: MaithCommonAdminBundle:Albums:doSortAlbum }     

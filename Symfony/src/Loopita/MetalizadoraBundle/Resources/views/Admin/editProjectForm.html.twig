@@ -1,6 +1,17 @@
 {% extends 'LoopitaMetalizadoraBundle:Admin:layout.html.twig' %}
 {% block title %}{% trans %}metalizadora_admin_projects_edit{% endtrans %}{% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonimage/css/maithalbums.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/colorbox.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery.colorbox-min.js') }}"></script>    
+  <script type="text/javascript" src="{{ asset('bundles/maithcommonimage/js/imagesManager.js') }}"></script>    
+{% endblock %}
 {% block body %}
   <h3>{% trans %}metalizadora_admin_projects_edit_title{% endtrans %}</h3>  
 
