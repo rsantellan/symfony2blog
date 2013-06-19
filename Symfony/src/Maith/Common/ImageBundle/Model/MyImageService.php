@@ -55,7 +55,7 @@ class MyImageService {
     $tmp_file = $this->retrieveCachePath($image_path, 'rce', array('r', $mesures));
     if(is_file($tmp_file))
     {
-      //return $tmp_file;
+      return $tmp_file;
     }
     
     $image = $this->imageInterface->open($image_path);
@@ -64,14 +64,6 @@ class MyImageService {
     
     $width_ratio = $originalWidth / $width;
     $height_ratio = $originalHeight / $height;
-    var_dump($width_ratio);
-    echo '<hr/>';
-    var_dump($height_ratio);
-    echo '<hr/>';
-    var_dump($originalHeight);
-    echo '<hr/>';
-    var_dump($height);
-    echo '<hr/>';
     $resize_width = 0;
     $resize_height = 0;
     
@@ -81,86 +73,24 @@ class MyImageService {
     }
     else
     {
-      if(($height_ratio * $originalWidth) < $width)
+      $crop_x = 0;
+      $crop_y = 0;
+      if($height_ratio < $width_ratio)
       {
-        $resize_width = ceil($height_ratio * $width);
         $resize_height = $height;
+        $resize_width = ceil(($width * $originalHeight) / $originalWidth);
+        $crop_x = ceil(($resize_width - $width) / 2);
       }
       else
       {
-        $resize_width = $width; 
-        $resize_height = ceil($width_ratio * $height);;
+        $resize_height = ceil(($height * $originalWidth) / $originalHeight);
+        $resize_width = $width;
+        $crop_y = ceil(($resize_height - $height) / 2);
       }
-      var_dump(($height_ratio * $originalWidth) < $width);
-      echo '<hr/>';
-      var_dump(($height_ratio * $originalWidth));
-      echo '<hr/>';
-      var_dump(($width_ratio * $originalHeight));
-      echo '<hr/>';
-      var_dump($width_ratio);
-      echo '<hr/>';
-      var_dump($height_ratio);
-      echo '<hr/>aca<br/>';
-      var_dump($resize_height);
-      echo '<hr/>';
-      var_dump($resize_width);
-      echo '<hr/>';
-      var_dump($height);
-      echo '<hr/>';
-      var_dump($width);
-      echo '<hr/>';
-      var_dump($originalHeight);
-      echo '<hr/>';
-      var_dump($originalWidth);
-      echo '<hr/>';
-      die;
-      //$image->resize(new Box($resize_width, $resize_heigth));
-      //$image->save($tmp_file."aux.jpeg");
-      //$image->crop(new Point(0,0), new Box($width, $height));
-    }
-    $image->save($tmp_file);
-    return $tmp_file;
-    
-    if($width <= $originalWidth || $height <= $originalHeight)
-    {
-      // Do something
-      
-      $deltaWidth = round(($originalWidth - $width) / 2, 0, PHP_ROUND_HALF_DOWN);
-      $deltaHeight = round(($originalHeight - $height) / 2, 0, PHP_ROUND_HALF_DOWN);
-      //die;
-      $x = 0;
-      $y = 0;
-      if($originalWidth > $originalHeight)
-      {
-        $image->resize($image->getSize()->heighten($height));
-        $deltaHeight = 0;
-      }
-      else 
-      {
-        $image->resize($image->getSize()->widen( $width ));
-        $deltaWidth = 0;
-      }
-      
-      $point = new Point($deltaWidth, $deltaHeight);
-      $image->crop($point, new Box($width, $height));
-      //$image->resize(new Box($width, $height));
+      $image->resize(new Box($resize_width, $resize_height));
+      $image->crop(new Point($crop_x,$crop_y), new Box($width, $height));
       
     }
-    $image->save($tmp_file);
-    return $tmp_file;
-    /*
-    if( 1 > $image->getSize()->getWidth())
-    {
-      $image->resize($image->getSize()->widen( $width ))
-              ->crop($image->getSize()->widen( $width ));
-    }
-    else
-    {
-      $image->resize($image->getSize()->widen( $height ))
-        ->crop($image->getSize()->widen( $height ));
-    }
-    */
-    
     $image->save($tmp_file);
     return $tmp_file;
   }
