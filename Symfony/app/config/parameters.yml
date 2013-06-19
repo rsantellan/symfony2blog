@@ -10,5 +10,7 @@ parameters:
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
-    locale: en
+    locale: es
     secret: 7922b79faaa6521073c32df419bb8959f
+    translation_bundles:
+        - LoopitaMetalizadoraBundle

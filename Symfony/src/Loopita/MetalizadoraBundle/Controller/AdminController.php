@@ -24,17 +24,54 @@ class AdminController extends Controller
 
     public function saveTestUploadAction()
     {
-      $translator = new Translator('es', new MessageSelector());
-      $translator->addLoader("xlf", new XliffFileLoader());
+      //$translator = new Translator('es', new MessageSelector());
+      //$translator->addLoader("xlf", new XliffFileLoader());
+      var_dump($this->container->getParameter('translation_bundles'));
+      var_dump($this->container->getParameter('admin_translation_bundles'));
+      $path = $this->get('kernel')->getBundle('LoopitaMetalizadoraBundle')->getPath();
+      var_dump($path);die;
       $file = __DIR__."/../Resources/translations/messages.es.xlf";
-      $translator->addResource('xlf', $file, 'es');
-      $writer = new TranslationWriter();
-      $writer->addDumper('xlf', new XliffFileDumper());
-      
+      $file = __DIR__."/../Resources/translations";
+      //$translator->addResource('xlf', $file, 'es');
+      //$writer = new TranslationWriter();
+      //$writer->addDumper('xlf', new XliffFileDumper());
+      $loader = $this->get('translation.loader');
       $catalog = new MessageCatalogue('es');
+      $loader->loadMessages($file, $catalog);
       //$catalog->addCatalogue()
       var_dump($catalog);
-      var_dump($writer);
+      //var_dump($writer);
+      echo '<hr/>';
+      var_dump($catalog->has('menu_inicio'));
+      echo '<hr/>';
+      var_dump($catalog->getDomains());
+      echo '<hr/>';
+      var_dump($catalog->getMetadata());
+      echo '<hr/>';
+      var_dump($catalog->all());
+      echo '<hr/>getting and setting';
+      $message_list = $catalog->all("messages");
+      $message_list['menu_inicio'] = "Inicio";
+      echo '<hr/> adding test';
+      $catalog->add($message_list);
+      echo '<hr/>';
+      //var_dump($catalog);
+      //echo '<hr/>';
+      var_dump($catalog->all());
+      echo '<hr/>';
+      $catalog->replace($message_list, 'messages');
+      echo '<hr/>';
+      var_dump($catalog->all());
+      echo '<hr/>';
+      echo '<hr/>';
+      echo '<hr/>';
+      echo '<hr/>';
+      $writer = $this->get('translation.writer');
+      var_dump(get_class($writer));
+      //die;
+      var_dump($writer->getFormats());
+      // xlf
+      $writer->writeTranslations($catalog, 'xlf', array('path' => $file));
       var_dump('saveTestUploadAction');
       exit(0);
     }  

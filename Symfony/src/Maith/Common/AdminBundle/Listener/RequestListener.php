@@ -28,7 +28,7 @@ class RequestListener {
     
     $request = $event->getRequest();
     
-    $logger = $GLOBALS['kernel']->getContainer()->get('logger');
+    //$logger = $GLOBALS['kernel']->getContainer()->get('logger');
     //$logger->info("Estoy en 'RequestListener' service ");
     //$logger->info("Estoy en 'RequestListener' service ".$request);
     //$logger->info("Estoy en 'RequestListener' service attributes ".implode(" | ", $request->attributes->keys()));
@@ -46,7 +46,7 @@ class RequestListener {
     //$logger->info("Estoy en 'RequestListener' service: ---->  ".$request->request->get('_myUploader'));
     //$logger->info("Estoy en 'RequestListener' service: ---->  ".$request->getQueryString());
     if ($request->request->get('data-session') && $request->request->get('_myUploader')) {
-      $logger->info("Estoy en 'RequestListener' service (Injecting session): ---->  ".$request->request->get('data-session'));
+      //$logger->info("Estoy en 'RequestListener' service (Injecting session): ---->  ".$request->request->get('data-session'));
       $request->cookies->set(session_name(), 1);
       session_id($this->decrypt($request->request->get('data-session')));
     }

@@ -8,7 +8,7 @@
       </trans-unit>
       <trans-unit id="9a999fd3922f5a2efd16b337e1ad51f7" resname="menu_inicio">
         <source>menu_inicio</source>
-        <target>Inicio</target>
+        <target>Hola gente, como andan?</target>
       </trans-unit>
       <trans-unit id="c9a63d77265bcbc1a8fc38eb5b5fcb9c" resname="menu_historia">
         <source>menu_historia</source>
