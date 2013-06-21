@@ -2,6 +2,7 @@ parameters:
     admin_translation_bundles:
         - MaithCommonTranslatorBundle
         - MaithCommonAdminBundle
+        - MaithCommonImageBundle
 #    maith_common_translator.example.class: Maith\Common\TranslatorBundle\Example
 
 services:

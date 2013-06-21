@@ -1,1 +1,9 @@
-Hello {{ name }}!
+{% extends 'MaithCommonAdminBundle::layout.html.twig' %}
+{% block adminmenu %}
+          <li><a href="{{ path("loopita_metalizadora_admin")}}">{% trans %}metalizadora_admin_menu_dashboard{% endtrans %}</a></li>
+          <li><a href="{{ path("maith_common_translator_homepage")}}">{% trans %}admin_menu_translator{% endtrans %}</a></li>
+{% endblock %}
+{% block body %}
+  Hello {{ name }}!
+{% endblock %}
+

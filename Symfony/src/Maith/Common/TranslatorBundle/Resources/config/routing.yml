@@ -1,3 +1,3 @@
-#maith_common_translator_homepage:
-#    pattern:  /hello/{name}
-#    defaults: { _controller: MaithCommonTranslatorBundle:Default:index }
+maith_common_translator_homepage:
+    pattern:  /admin/translator.html
+    defaults: { _controller: MaithCommonTranslatorBundle:Default:index }
