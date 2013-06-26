@@ -14,3 +14,6 @@ parameters:
     secret: 7922b79faaa6521073c32df419bb8959f
     translation_bundles:
         - LoopitaMetalizadoraBundle
+    translation_languages:
+        - es
+        - en

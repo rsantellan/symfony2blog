@@ -1,9 +1,30 @@
-{% extends 'MaithCommonAdminBundle::layout.html.twig' %}
-{% block adminmenu %}
-          <li><a href="{{ path("loopita_metalizadora_admin")}}">{% trans %}metalizadora_admin_menu_dashboard{% endtrans %}</a></li>
-          <li><a href="{{ path("maith_common_translator_homepage")}}">{% trans %}admin_menu_translator{% endtrans %}</a></li>
-{% endblock %}
-{% block body %}
-  Hello {{ name }}!
-{% endblock %}
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Administradr de textos</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('bundles/maithcommonadmin/images/favicon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/colour.css') }}" />
+            
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-1.7.1.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ asset('bundles/maithcommontranslator/js/translatorManager.js') }}"></script>
+  </head>
+  <body>
+	<div class="bundles_container">
+    <form action="{{ path("maith_common_translator_get_tranlations")}}" method="get" onsubmit="return translatorManager.getInstance().sendGetTranslations(this);">
+		  <select id="bundles" name="bundle">
+		  {% for bundle in bundles %}
+			  <option value="{{ bundle }}">{{bundle}}</option>
+		  {% endfor %}
+		  </select>
+      <div class="clear"></div>
+		  <select id="langs" name="lang">
+		  {% for lang in langs %}
+			  <option value="{{ lang }}">{{lang}}</option>
+		  {% endfor %}
+		  </select>
+      <input type="submit" value="{% trans %}admin_translator_search{% endtrans %}" />
+    </form>
+	</div>
+  </body>
+</html>

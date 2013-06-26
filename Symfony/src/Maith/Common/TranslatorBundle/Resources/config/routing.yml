@@ -1,3 +1,7 @@
 maith_common_translator_homepage:
     pattern:  /admin/translator.html
     defaults: { _controller: MaithCommonTranslatorBundle:Default:index }
+    
+maith_common_translator_get_tranlations:
+    pattern:  /admin/get-translation.html
+    defaults: { _controller: MaithCommonTranslatorBundle:Default:getTranslation }    
