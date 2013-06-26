@@ -4,6 +4,9 @@ namespace Maith\Common\TranslatorBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Translation\MessageCatalogue;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Finder\Finder;
 
 class DefaultController extends Controller
 {
@@ -28,8 +31,57 @@ class DefaultController extends Controller
         $path = $this->get('kernel')->getBundle($bundle)->getPath()."/Resources/translations";
         $loader = $this->get('translation.loader');
         $catalog = new MessageCatalogue($lang);
+        $response = new JsonResponse();
+        try
+        {
+          $loader->loadMessages($path, $catalog);
+          $response->setData(array('status'=> 'OK', 'options' => array('html' => $this->renderView("MaithCommonTranslatorBundle:Default:showLangKeysValues.html.twig", array('bundle' => $bundle, 'lang' => $lang, 'translations' => $catalog->all("messages"))) )));
+        }
+        catch(\Exception $e)
+        {
+          $response->setData(array('status' => 'ERROR', 'options' => array('message' => $e->getMessage(), 'code' => $e->getCode())));
+        }
+        return $response;
+    }
+    
+
+    public function setTranslationAction(){
+        
+        $bundle = $this->getRequest()->get("bundle");
+        $lang = $this->getRequest()->get("lang");
+        $key = $this->getRequest()->get("key");
+        $value = $this->getRequest()->get("value");
+        $path = $this->get('kernel')->getBundle($bundle)->getPath()."/Resources/translations";
+        $loader = $this->get('translation.loader');
+        $catalog = new MessageCatalogue($lang);
         $loader->loadMessages($path, $catalog);
-        var_dump($catalog->all("messages"));
-        die('aca');
+        $response = new JsonResponse();
+        $messages_list = $catalog->all("messages");
+        if(!isset($messages_list[$key]))
+        {
+          throw new NotFoundHttpException("Key not found");
+        }
+        $messages_list[$key] = $value;
+        
+        $catalog->replace($messages_list, 'messages');
+        $writer = $this->get('translation.writer');
+        $writer->writeTranslations($catalog, 'xlf', array('path' => $path));
+        
+        $response->setData(array('status' => 'OK'));
+        return $response;
+    }
+    
+    public function clearTranslationCacheAction(){
+      
+      $cacheDir = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR."cache";
+      $finder = new Finder();
+      $finder->files()->in($cacheDir)->name("catalogue*");
+      foreach($finder as $file)
+      {
+         @unlink($file->getRealpath());
+      }
+      $response = new JsonResponse();
+      $response->setData(array('status' => 'OK'));
+      return $response;
     }
 }

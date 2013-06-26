@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="es" datatype="plaintext" original="file.ext">
+  <file source-language="en" datatype="plaintext" original="file.ext">
     <body>
       <trans-unit id="099fb995346f31c749f6e40db0f395e3" resname="header">
         <source>header</source>
-        <target>Esto es el header</target>
+        <target>__header</target>
       </trans-unit>
       <trans-unit id="9a999fd3922f5a2efd16b337e1ad51f7" resname="menu_inicio">
         <source>menu_inicio</source>
-        <target>Inicio</target>
+        <target>__menu_inicio</target>
       </trans-unit>
       <trans-unit id="c9a63d77265bcbc1a8fc38eb5b5fcb9c" resname="menu_historia">
         <source>menu_historia</source>
-        <target>Historia</target>
+        <target>__menu_historia</target>
       </trans-unit>
       <trans-unit id="fbe8dc534f5ef34ecf07556a50eda7de" resname="menu_Servicios">
         <source>menu_Servicios</source>
-        <target>Servicios</target>
+        <target>__menu_Servicios</target>
       </trans-unit>
       <trans-unit id="537fef1d45e02a7e481295efcd2c6e59" resname="menu_clientes">
         <source>menu_clientes</source>
-        <target>Clientes</target>
+        <target>__menu_clientes</target>
       </trans-unit>
       <trans-unit id="1f21a63a6a441d5e864893942972a87f" resname="menu_certificacion">
         <source>menu_certificacion</source>
@@ -113,10 +113,6 @@
       <trans-unit id="aae687b9d7903bc2365827bc04f3cad3" resname="metalizadora_admin_dashboard">
         <source>metalizadora_admin_dashboard</source>
         <target>__metalizadora_admin_dashboard</target>
-      </trans-unit>
-      <trans-unit id="548ce211fe6ca121146af8766008ac12" resname="servicios_titulo">
-        <source>servicios_titulo</source>
-        <target>__servicios_titulo</target>
       </trans-unit>
     </body>
   </file>

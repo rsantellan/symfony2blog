@@ -1,0 +1,15 @@
+sudo chmod 777 src/Maith/Common/TranslatorBundle/Resources/translations -R
+php app/console translation:update --output-format='xlf' es MaithCommonTranslatorBundle --force
+php app/console translation:update --output-format='xlf' en MaithCommonTranslatorBundle --force
+
+sudo chmod 777 src/Loopita/MetalizadoraBundle/Resources/translations -R
+php app/console translation:update --output-format='xlf' es LoopitaMetalizadoraBundle --force
+php app/console translation:update --output-format='xlf' en LoopitaMetalizadoraBundle --force
+
+sudo chmod 777 src/Maith/Common/AdminBundle/Resources/translations -R
+php app/console translation:update --output-format='xlf' es MaithCommonAdminBundle --force
+php app/console translation:update --output-format='xlf' en MaithCommonAdminBundle --force
+
+sudo chmod 777 src/Maith/Common/ImageBundle/Resources/translations -R
+php app/console translation:update --output-format='xlf' es MaithCommonImageBundle --force
+php app/console translation:update --output-format='xlf' en MaithCommonImageBundle --force

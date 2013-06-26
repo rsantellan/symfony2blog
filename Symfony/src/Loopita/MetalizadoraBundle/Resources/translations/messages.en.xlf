@@ -114,6 +114,10 @@
         <source>metalizadora_admin_dashboard</source>
         <target>__metalizadora_admin_dashboard</target>
       </trans-unit>
+      <trans-unit id="548ce211fe6ca121146af8766008ac12" resname="servicios_titulo">
+        <source>servicios_titulo</source>
+        <target>__servicios_titulo</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
