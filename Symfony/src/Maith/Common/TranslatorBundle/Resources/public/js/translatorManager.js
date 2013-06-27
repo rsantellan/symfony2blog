@@ -13,11 +13,14 @@ translatorManager.getInstance = function (){
 
 translatorManager.prototype = {
     _initialize: function(){
-        
+        this._toggle = false;
+        this._selected_key = null;
     },
     
     sendGetTranslations: function(form)
     {
+        var self = this;
+        self.removeEditorOpenInstances();
         var my_waiting_noty = callNoty("Procesando", "information");
         $.ajax({
           url: $(form).attr('action'),
@@ -91,6 +94,57 @@ translatorManager.prototype = {
               
         });
         return false;
+    },
+    
+    removeEditorOpenInstances: function()
+    {
+      var self = this;
+      if(self._selected_key != null)
+      {
+        //console.info('removing old instance of tinymce');
+        $('#'+self._selected_key+'_translation textarea').tinymce().remove();
+      }
+    },
+    
+    doShowHide: function (key)
+    {
+      
+      $('#'+key+'_translation').toggle();
+      var self = this;
+      self.removeEditorOpenInstances();      
+      self._selected_key = key;
+      $(".translation_container_data").each(function(index, data){
+          if(data.id != "tranlation_container_data_"+key)
+          {
+            if(!self._toggle)
+            {
+              $(data).hide();
+            }
+            else
+            {
+              $(data).show();
+            }
+            
+          }
+      });
+      self._toggle = ! self._toggle;
+      //console.info($('#'+key+'_translation textarea'));
+      
+      var tinyOptions = {
+          force_p_newlines: false,
+          force_br_newlines : false,
+          forced_root_block : '',
+          plugins: [
+              "advlist autolink lists link image charmap print preview anchor",
+              "searchreplace visualblocks code fullscreen",
+              "insertdatetime media table contextmenu paste"
+          ],
+          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+      };
+      //console.info(tinyOptions);
+      $('#'+key+'_translation textarea').tinymce(tinyOptions);
+      
+      
     }
 }
 

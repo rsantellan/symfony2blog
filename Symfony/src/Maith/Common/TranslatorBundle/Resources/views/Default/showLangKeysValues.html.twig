@@ -1,7 +1,7 @@
 <div class="translation_container">
   {% for key, value in translations %}
-    <div class="translation_container_data">
-      <a href="javascript:void(0)" onclick="$('#{{ key }}_translation').toggle()">
+    <div class="translation_container_data" id="tranlation_container_data_{{ key }}">
+      <a href="javascript:void(0)" onclick="translatorManager.getInstance().doShowHide('{{ key }}');">
         {{ key }}
       </a>
       <div class="single_translation" id="{{ key }}_translation" style="display:none">
@@ -10,7 +10,7 @@
            <input type="hidden" value="{{ bundle }}" name="bundle" />
            <input type="hidden" value="{{ lang }}" name="lang" />
            <div class="clear"></div>
-           <textarea name="value" rows="4" cols="50">{{ value }}</textarea>
+           <textarea name="value" rows="4" cols="200">{{ value }}</textarea>
            <div class="clear"></div>
            <input type="submit" value="{% trans %}admin_translator_change{% endtrans %}" />              
         </form>

@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Administradr de textos</title>
+    <title>{% trans %}admin_translator_page_title{% endtrans %}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('bundles/maithcommonadmin/images/favicon.ico') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/colour.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommontranslator/css/translations.css') }}" />
@@ -10,6 +10,18 @@
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-1.10.1.min.js') }}"></script>    
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-migrate-1.2.1.js') }}"></script>
     
+    {# Incluiding tinymce #}
+    
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/tinymce/jquery.tinymce.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/tinymce/tinymce.min.js') }}"></script>
+    
+    {# Incluiding Cleditor #}
+    {#
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/CLEditor/jquery.cleditor.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/CLEditor/jquery.cleditor.table.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/CLEditor/jquery.cleditor.xhtml.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/js/CLEditor/jquery.cleditor.css') }}" />
+    #}
     {# Incluiding noty #}
     
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/noty/jquery.noty.js') }}"></script>
