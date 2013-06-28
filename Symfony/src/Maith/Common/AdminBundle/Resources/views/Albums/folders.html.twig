@@ -1,0 +1,19 @@
+{% extends 'MaithCommonAdminBundle::layout.html.twig' %}
+{% block body %}
+
+{% for gallery, files in galleries %}
+<div class="gallery_container">
+  <div class="gallery_title">
+	<h4>{{ gallery }}</h4>
+  </div>
+	
+  <div class="gallery_files">
+	{% for file in files %}
+	  <img alt="{{ file }}" src="{{ file | mImage(100, 100, 'ot') }}" />
+	{% endfor %}
+  </div>
+</div>
+<div class="clear"></div>
+{% endfor %}
+
+{% endblock %}

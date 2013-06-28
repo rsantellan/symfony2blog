@@ -28,6 +28,14 @@ class DefaultController extends Controller
       {
         $image = $root_dir.$image;
       }
+	  else
+	  {
+		if($in_root == 2)
+		{
+		  $aux_path = dirname($root_dir);
+		  $image = $aux_path.$image;
+		}
+	  }
       $return = "";
       switch ($type) {
         case "t":

@@ -149,8 +149,32 @@ class MyImageService {
       $cache_file_name =  $cache_path_info["filename"].".".$cache_path_info["extension"];
       return $this->checkDirectoryPath($cache_path_info["dirname"].DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR.implode("", $parameters).DIRECTORY_SEPARATOR). $cache_file_name;
     }
+	else
+	{
+	  $aux_root_dir = dirname($this->root_dir);
+	  if(strpos($path, $aux_root_dir) !== FALSE)
+	  {
+		return $this->actualRetriveCachePath($path, $aux_root_dir, $this->cache_dir, $type, $parameters);
+	  }
+	}
     throw new \Exception("No funca con cosas de afuera (por lo menos por ahora....)");
     //return $path;
+  }
+  
+  private function actualRetriveCachePath($path, $base_path, $cache_dir, $type, $parameters)
+  {
+      $cache_string = str_replace($base_path, $cache_dir, $path);
+      //var_dump($cache_string);
+      $cache_path_info = pathinfo($cache_string);
+      //var_dump($cache_path_info);
+      //$cache_path_info["extension"];
+      $file_extension = "png";
+      if($this->validateFileExtension($cache_path_info["extension"]))
+      {
+        $file_extension = $cache_path_info["extension"];
+      }
+      $cache_file_name =  $cache_path_info["filename"].".".$cache_path_info["extension"];
+      return $this->checkDirectoryPath($cache_path_info["dirname"].DIRECTORY_SEPARATOR.$type.DIRECTORY_SEPARATOR.implode("", $parameters).DIRECTORY_SEPARATOR). $cache_file_name;	
   }
   
   private function validateFileExtension($file_extension)

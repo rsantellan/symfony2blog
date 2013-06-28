@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Maith\Common\AdminBundle\Model\Encrypt;
 use Maith\Common\AdminBundle\Entity\mFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Finder\Finder;
 
 class AlbumsController extends Controller
 {
@@ -17,11 +18,6 @@ class AlbumsController extends Controller
     
     public function retrieveAlbumsDataAction()
     {
-        /*
-        $uploadForm = $this->createFormBuilder()
-            ->add('download', 'genemu_jqueryfile', array('mapped' => false, 'configs' => array('script' => 'loopita_metalizadora_test_upload' ,'objectClass' => "myClase", 'objectId' => 1, 'debug'    => true)))
-        ->getForm();
-        */
         return $this->render('MaithCommonAdminBundle:Albums:showAlbums.html.twig');
         exit(0);
     }
@@ -63,13 +59,7 @@ class AlbumsController extends Controller
       $em = $this->getDoctrine()->getManager();
       $album = $em->getRepository("MaithCommonAdminBundle:mAlbum")->find($albumId);
       $files = $album->getFiles();
-      //var_dump(get_class($files));
-      //var_dump($files->getKeys());
-      //var_dump($files->get(0)->getId());
-      //var_dump($items);
-      //die;
       $counter = 0;
-      //$quantity = $files->count();
       while($counter < count($items))
       {
         $finish = false;
@@ -144,8 +134,6 @@ class AlbumsController extends Controller
       $fileUploaded = $this->container->get('request')->files->get('file');
       $name = uniqid() . '.' . $fileUploaded->guessExtension();
       $movedFile = $fileUploaded->move($targetDir, $name);
-      //var_dump($fileUploaded->isValid());
-      //var_dump($fileUploaded->getError());
       if ($movedFile) 
       {
         $em = $this->getDoctrine()->getManager();
@@ -164,6 +152,26 @@ class AlbumsController extends Controller
         return new Response(json_encode(array("jsonrpc" => '2.0', 'error' => array('code' => 100, 'message' => "Failed to open temp directory."), 'id' => $albumId)));
       }
       die;
+    }
+	
+	public function showGalleriesAction()
+    {
+	  $sf_targetDir = "upload". DIRECTORY_SEPARATOR."galleries";
+      $targetDir = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'web'. DIRECTORY_SEPARATOR.$sf_targetDir;
+	  $finder = new Finder();
+	  $galleries = array();
+	  foreach($finder->in($targetDir)->directories()->sortByName() as $dir)
+	  {
+		$galleries[$dir->getFilename()] = array();
+		$file_finder = new Finder();
+		foreach($file_finder->in($dir->getRealpath())->files() as $file)
+		{
+		  $galleries[$dir->getFilename()][] = $file->getRealpath();
+		  
+		}
+	  }
+	  //var_dump($galleries);
+      return $this->render('MaithCommonAdminBundle:Albums:folders.html.twig', array('galleries' => $galleries));
     }
     
 }

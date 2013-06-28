@@ -36,7 +36,17 @@ class mImageExtension extends \Twig_Extension
       $image = str_replace($this->root_dir, "", $image);
       $in_root = 1;
     }
+	else
+	{
+	  $aux_path = dirname($this->root_dir);
+	  if(strpos($image, $aux_path) !== FALSE)
+	  {
+		$image = str_replace($aux_path, "", $image);
+		$in_root = 2;
+	  }
+	}
     $url_data = array("p" => $image, "w"=>$width, "h" => $height, "t" => $type, 'r' => $in_root);
+	//var_dump($url_data);
     $url = base64_encode(serialize($url_data));
     return $this->router->generate("maith_common_image_show", array('url' => $url));
     

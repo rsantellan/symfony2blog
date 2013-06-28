@@ -28,4 +28,8 @@ maith_admin_media_sort_album:
     
 maith_admin_media_sort_action:
     pattern:  /admin/media/do-album-sort.html
-    defaults: { _controller: MaithCommonAdminBundle:Albums:doSortAlbum }     
+    defaults: { _controller: MaithCommonAdminBundle:Albums:doSortAlbum }
+    
+maith_admin_media_show_galleries:
+    pattern:  /admin/media/galleries.html
+    defaults: { _controller: MaithCommonAdminBundle:Albums:showGalleries }         

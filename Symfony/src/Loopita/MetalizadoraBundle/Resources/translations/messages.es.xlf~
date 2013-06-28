@@ -40,7 +40,7 @@
       </trans-unit>
       <trans-unit id="3a4ce27eb03c265689e9f1570e494c82" resname="metalizadora_admin_categories_list">
         <source>metalizadora_admin_categories_list</source>
-        <target>__metalizadora_admin_categories_list</target>
+        <target>Categorias</target>
       </trans-unit>
       <trans-unit id="8f8308da29617a26c4f36134e1dbe6f7" resname="metalizadora_admin_project_edit">
         <source>metalizadora_admin_project_edit</source>
@@ -80,11 +80,11 @@
       </trans-unit>
       <trans-unit id="f5dbc9c4efcad958cbc28ae2a180812e" resname="metalizadora_admin_menu_dashboard">
         <source>metalizadora_admin_menu_dashboard</source>
-        <target>__metalizadora_admin_menu_dashboard</target>
+        <target>Dashboard</target>
       </trans-unit>
       <trans-unit id="60639ca7a2776cf1bcd3f53ede483116" resname="metalizadora_admin_menu_projects">
         <source>metalizadora_admin_menu_projects</source>
-        <target>__metalizadora_admin_menu_projects</target>
+        <target>Projectos</target>
       </trans-unit>
       <trans-unit id="fcec7cfd2be3bc026cae2d5ae2146f86" resname="metalizadora_admin_menu_categories">
         <source>metalizadora_admin_menu_categories</source>
