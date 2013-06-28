@@ -33,3 +33,15 @@ maith_admin_media_sort_action:
 maith_admin_media_show_galleries:
     pattern:  /admin/media/galleries.html
     defaults: { _controller: MaithCommonAdminBundle:Albums:showGalleries }         
+
+maith_admin_media_gallery_upload:
+    pattern:  /admin/media/gallery/upload/{gallery}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:uploadGalleryForm }
+
+maith_admin_media_gallery_actual_upload:
+    pattern:  /admin/media/gallery/do-upload
+    defaults: { _controller: MaithCommonAdminBundle:Albums:doGalleryFormUpload }
+
+maith_admin_media_gallery_remove:
+    pattern:  /admin/media/remove/{gallery}/{file}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:removeGalleryFile }

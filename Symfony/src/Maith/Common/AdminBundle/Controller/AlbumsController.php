@@ -5,9 +5,11 @@ namespace Maith\Common\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Maith\Common\AdminBundle\Model\Encrypt;
+use Maith\Common\AdminBundle\Model\GalleryFile;
 use Maith\Common\AdminBundle\Entity\mFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Finder\Finder;
+
 
 class AlbumsController extends Controller
 {
@@ -153,6 +155,13 @@ class AlbumsController extends Controller
       }
       die;
     }
+    
+    
+    /***
+     * 
+     * Galleries
+     * 
+     ***/
 	
 	public function showGalleriesAction()
     {
@@ -164,14 +173,76 @@ class AlbumsController extends Controller
 	  {
 		$galleries[$dir->getFilename()] = array();
 		$file_finder = new Finder();
-		foreach($file_finder->in($dir->getRealpath())->files() as $file)
+		foreach($file_finder->in($dir->getRealpath())->files()->sortByModifiedTime() as $file)
 		{
-		  $galleries[$dir->getFilename()][] = $file->getRealpath();
+          $obj = new GalleryFile();
+          $obj->setFilename($file->getFilename());
+          $obj->setFullpath($file->getRealpath());
+          //$obj->fullPath = $file->getRealpath();
+          //$obj->fileName = $file->getFilename();
+		  $galleries[$dir->getFilename()][] = $obj;//$file->getRealpath();
 		  
 		}
 	  }
 	  //var_dump($galleries);
       return $this->render('MaithCommonAdminBundle:Albums:folders.html.twig', array('galleries' => $galleries));
+    }
+    
+    public function uploadGalleryFormAction($gallery)
+    {
+      $token = $this->container->getParameter('maith_common_admin.upload_token');
+      $encrypt = new Encrypt($token);
+      
+      return $this->render('MaithCommonAdminBundle:Albums:uploadGallery.html.twig', array('gallery' => $gallery, 'dataSession' => urldecode($encrypt->encrypt(session_id()))));
+    }
+    
+    public function doGalleryFormUploadAction()
+    {
+      
+      $gallery = $this->getRequest()->get('gallery');
+      $fileName = $this->getRequest()->get('name', 0);
+      $fileName = preg_replace('/[^\w\._]+/', '_', $fileName);
+      $sf_targetDir = "upload". DIRECTORY_SEPARATOR."galleries".DIRECTORY_SEPARATOR.$gallery;
+      $targetDir = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'web'. DIRECTORY_SEPARATOR.$sf_targetDir;
+      if (!file_exists($targetDir))
+      {
+        return new Response(json_encode(array("jsonrpc" => '2.0', 'error' => array('code' => 100, 'message' => "Failed to open temp directory."), 'id' => $gallery)));
+      }
+        
+      $fileUploaded = $this->container->get('request')->files->get('file');
+      //$name = uniqid() . '.' . $fileUploaded->guessExtension();
+      $movedFile = $fileUploaded->move($targetDir, $fileName);
+      if ($movedFile) 
+      {
+        return new Response(json_encode(array("jsonrpc" => '2.0', 'result' => null, 'id' => $gallery)));
+      }
+      else
+      {
+        return new Response(json_encode(array("jsonrpc" => '2.0', 'error' => array('code' => 100, 'message' => "Failed to open temp directory."), 'id' => $albumId)));
+      }
+      die;
+    }
+    
+    public function removeGalleryFileAction($gallery, $file)
+    {
+      //$fileName = preg_replace('/[^\w\._]+/', '_', $file);
+      $sf_targetDir = "upload". DIRECTORY_SEPARATOR."galleries".DIRECTORY_SEPARATOR.$gallery.DIRECTORY_SEPARATOR.$file;
+      $targetDir = $this->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'web'. DIRECTORY_SEPARATOR.$sf_targetDir;
+      $response = new JsonResponse();
+      $status = "OK";
+      if(file_exists($targetDir))
+      {
+        $cache_dir = $this->get('kernel')->getCacheDir().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR;
+        GalleryFile::removeAllCacheOfFile($cache_dir, $gallery, $file);
+        @unlink($targetDir);
+      }
+      else
+      {
+        $status = "ERROR";
+      }
+      $response->setData(array('status' => $status));
+      return $response;
+      die;
     }
     
 }
