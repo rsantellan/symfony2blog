@@ -27,7 +27,7 @@
           <li><span class="active">{% trans %}admin_menu_dashboard{% endtrans %}</span></li>
           <li><a href="">Test</a></li>
         {% endblock %}
-        <li style="float: right;"><a href="">{% trans %}admin_menu_logout{% endtrans %}</a></li>
+        <li style="float: right;"><a href="{{ path('fos_user_security_logout')}}">{% trans %}admin_menu_logout{% endtrans %}</a></li>
       </ul>
     </div>
     <div id="content" class="container_16 clearfix">
