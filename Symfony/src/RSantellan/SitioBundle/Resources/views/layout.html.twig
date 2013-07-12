@@ -42,7 +42,10 @@
     
     {{ include('RSantellanSitioBundle:Default:menu.html.twig') }}
 
-    
+    <ul class="lang-menu">
+      <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">Spanish</a></li>
+      <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
+    </ul>
     {% block body %}
 
     {% endblock %}
