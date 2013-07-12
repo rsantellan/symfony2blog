@@ -1,3 +1,7 @@
+r_santellan_sitio:
+    resource: "@RSantellanSitioBundle/Resources/config/routing.yml"
+    prefix:   /
+
 maith_common_translator:
     resource: "@MaithCommonTranslatorBundle/Resources/config/routing.yml"
     prefix:   /
@@ -10,9 +14,9 @@ maith_common_image:
 #    resource: "@MaithCommonAdminBundle/Resources/config/routing.yml"
 #    prefix:   /
 
-loopita_metalizadora:
-    resource: "@LoopitaMetalizadoraBundle/Resources/config/routing.yml"
-    prefix:   /
+#loopita_metalizadora:
+#    resource: "@LoopitaMetalizadoraBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 maith_common_admin:
     resource: "@MaithCommonAdminBundle/Resources/config/routing.yml"

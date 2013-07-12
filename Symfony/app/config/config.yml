@@ -75,6 +75,7 @@ stof_doctrine_extensions:
             timestampable: true
             sortable: true
             sluggable: true
+            translatable: true
 
 knp_paginator:
     default_options:

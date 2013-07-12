@@ -1,0 +1,44 @@
+rsproject:
+    pattern:  /{_locale}/
+    defaults: { _controller: "RSantellanSitioBundle:Project:index" }
+    requirements:
+        _locale: en|es
+
+rsproject_show:
+    pattern:  /{_locale}/{id}/show
+    defaults: { _controller: "RSantellanSitioBundle:Project:show" }
+    requirements:
+        _locale: en|es
+        
+rsproject_new:
+    pattern:  /{_locale}/new
+    defaults: { _controller: "RSantellanSitioBundle:Project:new" }
+    requirements:
+        _locale: en|es
+        
+rsproject_create:
+    pattern:  /{_locale}/create
+    defaults: { _controller: "RSantellanSitioBundle:Project:create" }
+    requirements: 
+        _method: post
+        _locale: en|es
+
+rsproject_edit:
+    pattern:  /{_locale}/{id}/edit
+    defaults: { _controller: "RSantellanSitioBundle:Project:edit" }
+    requirements:
+        _locale: en|es
+        
+rsproject_update:
+    pattern:  /{_locale}/{id}/update
+    defaults: { _controller: "RSantellanSitioBundle:Project:update" }
+    requirements: 
+        _method: post|put 
+        _locale: en|es
+
+rsproject_delete:
+    pattern:  /{_locale}/{id}/delete
+    defaults: { _controller: "RSantellanSitioBundle:Project:delete" }
+    requirements: 
+        _method: post|delete 
+        _locale: en|es    

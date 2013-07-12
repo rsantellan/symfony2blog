@@ -1,0 +1,44 @@
+category:
+    pattern:  /{_locale}/
+    defaults: { _controller: "RSantellanSitioBundle:Category:index" }
+    requirements:
+        _locale: en|es
+
+category_show:
+    pattern:  /{_locale}/{id}/show
+    defaults: { _controller: "RSantellanSitioBundle:Category:show" }
+    requirements:
+        _locale: en|es
+        
+category_new:
+    pattern:  /{_locale}/new
+    defaults: { _controller: "RSantellanSitioBundle:Category:new" }
+    requirements:
+        _locale: en|es
+        
+category_create:
+    pattern:  /{_locale}/create
+    defaults: { _controller: "RSantellanSitioBundle:Category:create" }
+    requirements: 
+        _method: post
+        _locale: en|es
+
+category_edit:
+    pattern:  /{_locale}/{id}/edit
+    defaults: { _controller: "RSantellanSitioBundle:Category:edit" }
+    requirements:
+        _locale: en|es
+        
+category_update:
+    pattern:  /{_locale}/{id}/update
+    defaults: { _controller: "RSantellanSitioBundle:Category:update" }
+    requirements: 
+        _method: post|put 
+        _locale: en|es
+
+category_delete:
+    pattern:  /{_locale}/{id}/delete
+    defaults: { _controller: "RSantellanSitioBundle:Category:delete" }
+    requirements: 
+        _method: post|delete 
+        _locale: en|es    

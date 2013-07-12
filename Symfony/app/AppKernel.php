@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Maith\Common\ImageBundle\MaithCommonImageBundle(),
             new Maith\Common\TranslatorBundle\MaithCommonTranslatorBundle(),
+            new RSantellan\SitioBundle\RSantellanSitioBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

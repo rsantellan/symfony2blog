@@ -1,0 +1,7 @@
+parameters:
+#    r_santellan_sitio.example.class: RSantellan\SitioBundle\Example
+
+services:
+#    r_santellan_sitio.example:
+#        class: %r_santellan_sitio.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,51 @@
+{% extends 'RSantellanSitioBundle::layout.html.twig' %}
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/menu.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+  <!-- START SLIDER WRAPPER -->
+  <div id="slider-wrapper">
+      <div class="btop-1px"></div>
+      <div class="container">
+          <div class="sixteen columns" id="cta-block">
+              <h5>Rodrigo Santellán - Analista en Tecnologias de la información</h5>
+          </div><!-- #cta-block -->
+
+          <!-- start slider -->
+          <div class="sixteen columns camera_wrap camera_burgundy_skin clearfix" id="camera_wrap_1">
+              <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/terminal-banner.png') }}">
+                  <div class="camera_caption fadeFromBottom">
+                      Manejo y mantenimiento de servidores <em>Scripting en bash</em>
+                  </div>
+              </div>
+              <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/php-banner.png') }}">
+                  <div class="camera_caption fadeFromBottom">
+                      Manejo de distintos frameworks PHP <em>CodeIgniter, Symfony, Symfony 2, Zend</em>
+                  </div>
+              </div>
+              <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/python-banner.png') }}">
+                  <div class="camera_caption fadeFromBottom">
+                      Python <em>Scripting para servidores, manejo remoto y web crawling</em>
+                  </div>
+              </div>
+              <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/wordpress-banner.png') }}">
+                  <div class="camera_caption fadeFromBottom">
+                      <em>Manejo e instalación de sitios</em>
+                  </div>
+              </div>
+              <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/database-banner.png') }}">
+                  <div class="camera_caption fadeFromBottom">
+                      <em>Optimización y Manejo de base de datos. Migraciones y escabilidades.</em>
+                  </div>
+              </div>
+          </div><!-- #camera_wrap_1 -->
+          <!-- end slider -->
+
+      </div><!-- .container -->
+      <div class="bbottom-1px"></div>
+  </div><!-- #slider-wraper -->
+  <!-- END SLIDER WRAPPER -->	
+
+{% endblock %}
