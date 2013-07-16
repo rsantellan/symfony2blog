@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Maith\Common\AdminBundle\Model\Encrypt;
 use Maith\Common\AdminBundle\Model\GalleryFile;
 use Maith\Common\AdminBundle\Entity\mFile;
+use Maith\Common\AdminBundle\Entity\mAlbum;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Finder\Finder;
 
@@ -29,6 +30,26 @@ class AlbumsController extends Controller
       $em = $this->getDoctrine()->getManager();
       $query = $em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :id and a.object_class = :object_class")->setParameters(array('id' => $id, 'object_class' => $objectclass));
       $albums = $query->getResult();
+      if(count($albums) == 0)
+      {
+        $obj = new $objectclass;
+        if(method_exists($obj, 'retrieveAlbums'))
+        {
+          // var_dump('estoy aca');
+          foreach($obj->retrieveAlbums() as $name)
+          {
+            $album = new mAlbum();
+            $album->setObjectId($id);
+            $album->setObjectClass($objectclass);
+            $album->setName($name);
+            $em->persist($album);       
+          }
+          $em->flush();
+          $query = $em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :id and a.object_class = :object_class")->setParameters(array('id' => $id, 'object_class' => $objectclass));
+          $albums = $query->getResult();
+        }
+      }
+      //var_dump($albums);
       //$imageManager = $this->get('maith_common_image.image.mimage');
       //$imageManager->doResize();
       return $this->render('MaithCommonAdminBundle:Albums:showAlbums.html.twig', array('albums' => $albums));

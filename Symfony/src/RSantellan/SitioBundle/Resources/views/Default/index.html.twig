@@ -1,6 +1,8 @@
 {% extends 'RSantellanSitioBundle::layout.html.twig' %}
 {% block javascripts %}
-<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/menu.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/camera.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/index.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/jcarousel.min.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -47,5 +49,27 @@
       <div class="bbottom-1px"></div>
   </div><!-- #slider-wraper -->
   <!-- END SLIDER WRAPPER -->	
+  
+  <!-- LATEST PROJECTS -->
+	<div class="container header-block">
+		<!-- start header -->
+		<div class="sixteen columns lp-header">
+			<h6>Latest Projects</h6>
+			<div class="nav-projects">
+				<a href="{{ path('rsantellan_sitio_projects')}}" class="button viewall">View all</a>
+			</div><!-- .nav-projects -->
+		</div><!-- .sixteen  -->
+		<!-- end header -->
+	</div><!-- .container -->
+
+	<div id="latest-projects" class="container">
+        <!-- start carousel -->
+		<ul id="projects-carousel" class="jcarousel-skin-tango" >
+            {% for project in projects %}
+              {{ include("RSantellanSitioBundle:Default:indexProject.html.twig", {'project' : project }) }}
+            {% endfor %}
+		</ul><!-- #projects-carousel -->
+	</div><!-- .container -->
+	<!-- END LATEST PROJECTS -->
 
 {% endblock %}

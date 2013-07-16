@@ -1,0 +1,102 @@
+{% extends 'RSantellanSitioBundle::layout.html.twig' %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/jquery.isotope.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/jquery.colorbox-min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/projectsColumns.js') }}"></script>
+{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/rsantellansitio/css/colorbox.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/rsantellansitio/css/jquery-ui.css') }}" />
+{% endblock %}
+{% block body %}
+
+<!-- START SEPARATOR  -->
+<div id="separator">
+  <div class="btop-1px"></div>
+  <div class="container">
+    <!-- start separator -->
+    <div class="sixteen columns">
+      <h4 class="page-title">
+      {% if (page_title is defined) %}
+        Categoria: {{ page_title }}
+      {% else %}
+          Proyectos
+      {% endif %}
+      </h4>
+    </div><!-- sixteen columns -->
+  </div><!-- .container -->
+  <div class="bbottom-1px"></div>
+</div><!-- #separator -->
+<!-- END SEPARATOR -->	
+
+<!-- START PORTFOLIO WRAPPER -->
+<div class="container main-wrapper">
+  <div id="main-content">
+
+
+    <div id="filterby"></div>
+
+    <!-- start filter -->
+    <ul id="filters" class="clearfix">
+      <li><a href="#" data-filter="*" class="selected">All</a></li>
+      {% for category in categories %}
+        <li><a href="#" data-filter=".{{ category.id }}">{{ category.name }}</a></li>
+      {% endfor %}
+    </ul>
+    <!-- end filter -->
+
+    <div id="container-portfolio" class="portfolio-3">
+      {% for project in projects %}
+      <!-- Item #1 -->
+      <div class="item-block one-third column {{ project.category.id }}">
+        <!-- start item block -->
+        <div class="stack">
+          <div class="title"><a href="{{ path('rsantellan_sitio_projects_show', {'slug': project.slug})}}">{{ project.name }}</a></div>
+          <div class="cta-arrow">
+            <a class="bg-arrow" href="{{ path('rsantellan_sitio_projects_show', {'slug': project.slug})}}">
+              <img src="{{ asset('bundles/rsantellansitio/images/icons/pixel-arrow-right.png') }}" alt="" />
+            </a>
+            <span class="rd-arrow"></span>
+          </div><!-- .cta-arrow -->
+        </div><!-- stack -->
+        <div class="block">
+          <img alt="{{ project.name[:45] }}" src="{{ project.id | mAvatar(project.fullClassName, 'main') | mImage(283, 262, 'rce') }}" />
+          <div class="mask">
+            <a href="#img_colorbox_{{project.id}}" data-rel="zoom-img" class="zoom-icon inline"></a>
+            <a href="{{ path('rsantellan_sitio_projects_show', {'slug': project.slug})}}" class="link-icon"></a>
+          </div>
+          <div style='display:none'>
+            <div id="img_colorbox_{{project.id}}">
+              <img alt="{{ project.name[:45] }}" src="{{ project.id | mAvatar(project.fullClassName, 'main') | mImage(566, 524, 'rce') }}" />
+            </div>
+          </div>
+        </div><!-- block -->  
+      </div><!-- item-block -->
+      {% endfor %}
+    </div><!-- #container-portfolio -->
+
+    <!-- START PAGINATION-->
+    <div id="nav-pagination" class="sixteen columns">
+      {#
+      <ul class="nav-pagination clearfix">
+        <li class="first"><a href="#"></a></li>
+        <li><a href="#">1</a></li>
+        <li class="current"><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">6</a></li>
+        <li><a href="#">7</a></li>
+        <li class="last"><a href="#"></a></li>
+      </ul>
+      #}  
+    </div><!-- #nav-pagination -->
+
+  </div><!-- main-content -->
+
+</div><!-- .container -->
+
+
+<!-- END PORTFOLIO WRAPPER -->
+{% endblock %}

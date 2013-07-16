@@ -1,4 +1,4 @@
-{% extends 'RSantellanSitioBundle::layout.html.twig' %}
+{% extends 'RSantellanSitioBundle:Admin:layout.html.twig' %}
 
 {% block body -%}
     <h1>Project list</h1>
@@ -28,9 +28,6 @@
                 <td>{{ entity.slug }}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('rsproject_show', { 'id': entity.id }) }}">show</a>
-                    </li>
                     <li>
                         <a href="{{ path('rsproject_edit', { 'id': entity.id }) }}">edit</a>
                     </li>

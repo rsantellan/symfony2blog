@@ -62,11 +62,18 @@ class MyImageService {
     $originalWidth = $image->getSize()->getWidth();
     $originalHeight = $image->getSize()->getHeight();
     
-    $width_ratio = $originalWidth / $width;
-    $height_ratio = $originalHeight / $height;
+    $width_ratio = $originalWidth / (float)$width;
+    $height_ratio = $originalHeight / (float)$height;
     $resize_width = 0;
     $resize_height = 0;
-    
+    /*
+    var_dump("wr:".$width_ratio);
+    var_dump("hr:".$height_ratio);
+    var_dump("ow:".$originalWidth);
+    var_dump("oh:".$originalHeight);
+    var_dump("w:".$width);
+    var_dump("h:".$height);
+    */
     if(($originalWidth <= $width) && ($originalHeight <= $height))
     {
       //Dont do nothing
@@ -78,19 +85,29 @@ class MyImageService {
       if($height_ratio < $width_ratio)
       {
         $resize_height = $height;
-        $resize_width = ceil(($width * $originalHeight) / $originalWidth);
-        $crop_x = ceil(($resize_width - $width) / 2);
+        //$resize_width = ceil(($width * $originalHeight) / $originalWidth);
+        $resize_width = ceil(($height * $originalWidth) / $originalHeight);
+        $crop_x = abs(ceil(($resize_width - $width) / 2));
       }
       else
       {
-        $resize_height = ceil(($height * $originalWidth) / $originalHeight);
+        //
+        //$resize_height = ceil(($height * $originalWidth) / $originalHeight);
+        $resize_height = ceil(($width * $originalHeight) / $originalWidth);
         $resize_width = $width;
-        $crop_y = ceil(($resize_height - $height) / 2);
+        $crop_y = abs(ceil(($resize_height - $height) / 2));
       }
+      /*var_dump("crop x:".ceil(($resize_width - $width) / 2));
+      var_dump("crop y:".ceil(($resize_height - $height) / 2));
+      var_dump("final crop x:".$crop_x);
+      var_dump("final crop y:".$crop_y);
+      var_dump("rw:".$resize_width);
+      var_dump("rh:".$resize_height);*/
       $image->resize(new Box($resize_width, $resize_height));
       $image->crop(new Point($crop_x,$crop_y), new Box($width, $height));
       
     }
+    //die;
     $image->save($tmp_file);
     return $tmp_file;
   }

@@ -71,7 +71,7 @@ class Project{
    *
    * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
    * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-   * 
+   * @Gedmo\SortableGroup
    * 
    */
   protected $category;
@@ -261,5 +261,10 @@ class Project{
     public function setTranslatableLocale($locale)
     {
         $this->locale = $locale;
-    }    
+    }
+    
+    public function retrieveAlbums()
+    {
+      return array("main", "images");
+    }
 }

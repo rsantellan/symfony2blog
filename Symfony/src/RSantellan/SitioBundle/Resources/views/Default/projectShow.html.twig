@@ -1,0 +1,75 @@
+{% extends 'RSantellanSitioBundle::layout.html.twig' %}
+{% block body %}
+<!-- START SEPARATOR  -->
+<div id="separator">
+    <div class="btop-1px"></div>
+    <div class="container">
+        <!-- start separator -->
+        <div class="sixteen columns">
+            <h4 class="page-title">{{ project.name}}</h4>
+        </div><!-- sixteen columns -->
+    </div><!-- .container -->
+    <div class="bbottom-1px"></div>
+</div><!-- #separator -->
+<!-- END SEPARATOR -->	
+
+
+
+<!-- START PORTFOLIO ITEM WRAPPER -->
+<div class="container main-wrapper">
+    <div id="main-content" class="twelve columns clearfix">
+
+
+        <!-- ITEM SLIDESHOW -->
+        <div class="entry-item format-gallery">
+            <div class="image-item">
+                <!-- Slideshow -->
+                <div id="slidesjs-container">
+                    <div id="slides-item">
+                        <div class="slides_container">
+                            
+                            <img src="images/blog/img01.jpg" alt="Slide 1">
+                            <img src="images/blog/img05.jpg" alt="Slide 2">
+                            <img src="images/blog/img04.jpg" alt="Slide 3">
+                            <img src="images/blog/img03.jpg" alt="Slide 4">
+                        </div><!-- .slides_container -->
+                    </div><!-- slides-item -->
+                </div><!-- #container -->
+            </div><!-- image-item -->
+            <div class="text-item clearfix">
+                    <div class="title-item">
+                    <h6>Charts and Graphs of Sales</h6>	
+                    </div>
+                <p>SlidesJS is a simple slideshow plugin for jQuery. Packed with a useful set of features to help novice and advanced developers alike create elegant and user-friendly slideshows.</p>
+                <p>SlidesJS is compatible with all modern web browsers and jQuery versions 1.4.4+.</p>
+            </div><!-- text-item -->				
+        </div><!-- entry-item -->
+
+
+    </div><!-- main-content -->
+
+
+    <!-- START SIDEBAR -->
+    <div id="sidebar" class="four columns">
+        <div class="nav-items">
+            <a href="#" class="prev"></a>
+            <a href="#" class="next"></a>
+            <span class="items-info">Item 3 of 9</span>
+        </div><!-- nav-items -->
+        <p>SlidesJS is a simple slideshow plugin for jQuery. Packed with a useful set of features to help novice and advanced developers alike create elegant and user-friendly slideshows.</p>
+        <p>SlidesJS is compatible with all modern web browsers and jQuery versions 1.4.4+.</p>
+        <p>Examples:
+        <ul class="arrow">
+            <li><a href="#">Images with captions</a></li>
+            <li><a href="#">Linking</a></li>
+            <li><a href="#">Product</a></li>
+            <li><a href="#">Multiple slideshows</a></li>
+            <li><a href="#">Simple (unstyled)</a></li>
+            <li><a href="#">Standard</a></li>
+        </ul>
+    </div><!-- sidebar -->
+    
+    <div class="sixteen columns divider-item-1px"></div>			
+</div><!-- .container -->
+
+{% endblock %}

@@ -1,10 +1,22 @@
 RSantellanSitioBundle_rsproject:
     resource: "@RSantellanSitioBundle/Resources/config/routing/project.yml"
-    prefix:   /rsproject
+    prefix:   /admin/rsproject
 
 RSantellanSitioBundle_category:
     resource: "@RSantellanSitioBundle/Resources/config/routing/category.yml"
-    prefix:   /rscategory
+    prefix:   /admin/rscategory
+
+rsantellan_sitio_projects_show:
+    pattern:  /{_locale}/project-{slug}.html
+    defaults: { _controller: RSantellanSitioBundle:Default:projectsShow}
+
+rsantellan_sitio_projects_category:
+    pattern:  /{_locale}/projects/{slug}.html
+    defaults: { _controller: RSantellanSitioBundle:Default:projectsCategory}
+
+rsantellan_sitio_projects:
+    pattern:  /{_locale}/projects.html
+    defaults: { _controller: RSantellanSitioBundle:Default:projects}  
 
 r_santellan_sitio_homepage:
     pattern:  /

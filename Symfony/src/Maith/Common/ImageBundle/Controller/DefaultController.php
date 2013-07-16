@@ -16,7 +16,9 @@ class DefaultController extends Controller
     
     public function showImageAction($url)
     {
+      $logger = $this->get('logger');
       $data = unserialize(base64_decode($url));
+      $logger->debug('Show Image Action, data string is -------->>'.implode("|", $data));
       $image = $data['p'];
       $width = $data['w'];
       $height = $data['h'];
@@ -36,6 +38,8 @@ class DefaultController extends Controller
 		  $image = $aux_path.$image;
 		}
 	  }
+      
+      $logger->debug('Show Image Action, image path is -------->>'.$image);
       $return = "";
       switch ($type) {
         case "t":

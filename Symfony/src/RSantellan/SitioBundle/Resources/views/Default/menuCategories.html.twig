@@ -1,0 +1,6 @@
+<ul>
+  <li><a href="{{ path('rsantellan_sitio_projects')}}">Todos</a></li>
+  {% for category in categories %}
+    <li><a href="{{ path('rsantellan_sitio_projects_category', {'slug': category.slug}) }}">{{ category.name }}</a></li>  
+  {% endfor %}
+</ul>

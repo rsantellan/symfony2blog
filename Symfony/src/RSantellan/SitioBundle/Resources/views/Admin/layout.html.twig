@@ -1,0 +1,13 @@
+{% extends 'MaithCommonAdminBundle::layout.html.twig' %}
+
+{% block adminlogo %}
+        <img src="{{ asset('bundles/rsantellansitio/images/logo.png') }}" height="70"/>
+{% endblock %}
+        
+{% block adminmenu %}
+          <li><a href="">{% trans %}rsantellan_admin_menu_dashboard{% endtrans %}</a></li>
+          <li><a href="{{ path("rsproject")}}">{% trans %}rsantellan_admin_menu_projects{% endtrans %}</a></li>
+          <li><a href="{{ path("category")}}">{% trans %}rsantellan_admin_menu_categories{% endtrans %}</a></li>
+          <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">Spanish</a></li>
+          <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
+{% endblock %}

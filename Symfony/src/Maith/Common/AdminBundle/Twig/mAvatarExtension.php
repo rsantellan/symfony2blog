@@ -33,17 +33,19 @@ class mAvatarExtension extends \Twig_Extension
   {
     $query = $this->em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :id and a.object_class = :object_class and a.name = :name ")->setParameters(array('id' => $objectId, 'object_class' => $objectClass, 'name' => $albumName));
     $album = $query->getOneOrNullResult();
-    $files = $album->getFiles();
-    $file = null;
-    if($files->count() > 0)
+    if(!is_null($album))
     {
-      $file = $files->get(0);
-      return $file->getFullPath();
+      $files = $album->getFiles();
+      $file = null;
+      if($files->count() > 0)
+      {
+        $file = $files->get(0);
+        return $file->getFullPath();
+      }
     }
-    else
-    {
-      return $this->rootDir."/../web/bundles/maithcommonimage/images/noimage.png";
-    }
+    
+    return $this->rootDir."/../web/bundles/maithcommonimage/images/noimage.png";
+    
   }
 
   public function getName() {

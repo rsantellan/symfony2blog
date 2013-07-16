@@ -14,12 +14,9 @@
           <li class="{% if (activemenu is defined) and activemenu == 'home' %}active{% endif %}">
             <a href="{{ path('r_santellan_sitio_homepage')}}">Home</a>
           </li>
-          <li><a href="blog.html">Blog</a>
-            <ul>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="blog-post.html">Blog Post</a></li>
-              <li><a href="blog-post-video.html">Blog Post + Video</a></li>
-            </ul>
+          <li class="{% if (activemenu is defined) and activemenu == 'projects' %}active{% endif %}">
+            <a href="javascript:void(0)">Projects</a>
+            {{ render(controller('RSantellanSitioBundle:Default:menuCategories')) }}
           </li>
           <li> <a href="#">Portfolio</a>
             <ul>
@@ -47,6 +44,12 @@
             </ul>
           </li>
           <li><a href="contacts.html">Contacts</a></li>
+          <li><a href="#">Idiomas</a>
+            <ul>
+              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">Spanish</a></li>
+              <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
+            </ul>
+          </li>
         </ul>  <!-- end #nav  -->
       </div>	<!-- end #menu  -->	
     </div><!-- .twelve columns -->
