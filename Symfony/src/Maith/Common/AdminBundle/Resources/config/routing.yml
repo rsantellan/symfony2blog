@@ -6,6 +6,20 @@ maith_admin_homepage:
 #    pattern:  /admin/media/{id}/{objectclass}
 #    defaults: { _controller: MaithCommonAdminBundle:Albums:retrieveAlbums }    
 
+#
+
+maith_admin_media_download_file:
+    pattern:  /admin/media/download-file/{id}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:downloadOriginalFile }
+
+maith_admin_media_update_file_name:
+    pattern:  /admin/media/edit-file/{id}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:editFileEdition }
+    
+maith_admin_media_show_file:
+    pattern:  /admin/media/show-file/{id}
+    defaults: { _controller: MaithCommonAdminBundle:Albums:showFileEdition }
+    
 maith_admin_media_upload:
     pattern:  /admin/media/upload/{id}
     defaults: { _controller: MaithCommonAdminBundle:Albums:uploadForm }

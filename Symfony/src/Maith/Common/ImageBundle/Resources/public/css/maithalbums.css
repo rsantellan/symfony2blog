@@ -59,3 +59,21 @@ div.avatar{
   border-style: solid;
   border-width: 3px;
 }
+
+div.edit_media_container {
+    padding: 10px;
+    width: 580px;
+}
+div.edit_media_container img.edit_media_img {
+    float: left;
+    margin-right: 20px;
+}
+
+div.edit_media_container input.edit_media_input {
+    width: 300px;
+    border: 1px solid #B2B2B2;
+}
+
+div.edit_media_container div.saving_image_admin_file_container{
+  display: none;
+}

@@ -880,6 +880,7 @@ margin-bottom: 50px;
 .format-gallery .image-post { height: 337px; }
 .format-gallery img { width:674px; }
 
+.special-format-gallery .slides_container img{ width:674px; }
 .format-quote .image-post { height: 140px; }
 .format-quote .stack { height: 123px; top: 40px; }
 .format-quote .quote-text { margin: 15px; height: 100px; }

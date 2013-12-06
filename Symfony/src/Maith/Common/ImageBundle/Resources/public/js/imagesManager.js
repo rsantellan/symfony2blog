@@ -61,6 +61,7 @@ imagesManager.prototype = {
               {
                 $("#album_" + albumId + " .img_thumb_ul").html(json.options.html);
                 imagesManager.getInstance().hoverImages();
+                imagesManager.getInstance().createColorboxMiniatureFrames();
               }
           }
       });
@@ -86,6 +87,43 @@ imagesManager.prototype = {
         });
       }
       
+    },
+    
+    createColorboxMiniatureFrames: function()
+    {
+      //$.colorbox.remove();
+      $('.img_edit a').colorbox();
+    },
+    
+    saveFileEditForm: function(form)
+    {
+      $("#saving_image_admin_file").show();
+      $(".admin_file_action_button").hide();
+      $.ajax({
+          url: $(form).attr('action'),
+          data: $(form).serialize(),
+          type: 'post',
+          dataType: 'json',
+          success: function(json){
+              if(json.result == "false" || json.result == false)
+              {
+                $("#form_errors_admin_file").html(json.errors);
+                console.log(json.errors);
+              }
+              else
+              {
+                $("#form_errors_admin_file").html(" ");
+              }
+          }
+          , 
+          complete: function()
+          {
+            $.colorbox.resize();
+            $("#saving_image_admin_file").hide();
+            $(".admin_file_action_button").show();
+          }
+      });
+      return false; 
     }
 
 }
@@ -94,4 +132,5 @@ $( document ).ready(function() {
     imagesManager.getInstance().hoverImages();
     imagesManager.getInstance().initializeAlbumUploaderBox();
     imagesManager.getInstance().initializeAlbumSortableBox();
+    imagesManager.getInstance().createColorboxMiniatureFrames();
 });

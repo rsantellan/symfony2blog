@@ -39,15 +39,23 @@ class DefaultController extends Controller
       $em = $this->getDoctrine()->getManager();
       $project = $em->getRepository("RSantellanSitioBundle:Project")->findOneBySlug($slug);
       
-      $album = $em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :object_id and a.object_class = :object_class and a.name = :name")->setParameters(array('name' => 'images', 'object_id'=>$project->getId(), 'object_class' => $project->getFullClassName()))->getResult();
-
+      $imagesAlbum = $em->getRepository("MaithCommonAdminBundle:mAlbum")->findOneBy(array('object_id' => $project->getId(), 'object_class' => $project->getFullClassName(), 'name' => 'images'));
+      $mainAlbum = $em->getRepository("MaithCommonAdminBundle:mAlbum")->findOneBy(array('object_id' => $project->getId(), 'object_class' => $project->getFullClassName(), 'name' => 'main'));
+      
+      //$album = $em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :object_id and a.object_class = :object_class and a.name = :name")->setParameters(array('name' => 'images', 'object_id'=>$project->getId(), 'object_class' => $project->getFullClassName()))->getResult();
+      //$albums = $em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :object_id and a.object_class = :object_class")->setParameters(array('object_id'=>$project->getId(), 'object_class' => $project->getFullClassName()))->getResult();
+      //var_dump($albums);die;
+      /*
       if(count($album) > 0)
       {
         $album = $album[0];
       }
-      
-      
-      return $this->render('RSantellanSitioBundle:Default:projectShow.html.twig', array('activemenu' => 'projects', 'project' => $project));
+      $albumsData = array();
+      foreach($albums as $albumKey => $albumValue){
+        $albumsData[$albumValue->getName()] = $albumValue;
+      }
+      */
+      return $this->render('RSantellanSitioBundle:Default:projectShow.html.twig', array('activemenu' => 'projects', 'project' => $project, 'imagesAlbum' => $imagesAlbum, 'mainAlbums' => $mainAlbum));
       die($project->getId());
       
     }

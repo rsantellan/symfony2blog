@@ -51,6 +51,12 @@ class DefaultController extends Controller
         case "rce":
           $return = $imageService->doResizeCropExact($image, $width, $height);
           break;
+        case "mpr":
+          $return = $imageService->doMaximunPosibleResize($image, $width, $height);
+          break;        
+        case "rcce":
+          $return = $imageService->doResizeCenterCropExact($image, $width, $height);
+          break;
         default:
           $return = $imageService->doThumbnail($image, $width, $height);
           break;

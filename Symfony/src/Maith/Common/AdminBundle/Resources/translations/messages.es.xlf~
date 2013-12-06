@@ -66,10 +66,6 @@
         <source>maith_images_admin_cancel_form</source>
         <target>Cancelar</target>
       </trans-unit>
-      <trans-unit id="6a6442b5797804a3c26503d9a2f74569" resname="maith_images_admin_show_name">
-        <source>maith_images_admin_show_name</source>
-        <target>Nombre a mostrar</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

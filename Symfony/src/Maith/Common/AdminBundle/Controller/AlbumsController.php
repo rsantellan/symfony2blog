@@ -4,10 +4,12 @@ namespace Maith\Common\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Maith\Common\AdminBundle\Model\Encrypt;
 use Maith\Common\AdminBundle\Model\GalleryFile;
 use Maith\Common\AdminBundle\Entity\mFile;
 use Maith\Common\AdminBundle\Entity\mAlbum;
+use Maith\Common\AdminBundle\Form\mFileType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Finder\Finder;
 
@@ -177,6 +179,76 @@ class AlbumsController extends Controller
       die;
     }
     
+    
+    public function showFileEditionAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $file = $em->getRepository("MaithCommonAdminBundle:mFile")->find($id);
+      
+      $form   = $this->createForm(new mFileType(), $file);
+      return $this->render('MaithCommonAdminBundle:Albums:fileForm.html.twig', array('file' => $file, 'form'   => $form->createView()));
+    }
+    
+    public function editFileEditionAction(Request $request, $id)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $entity = $em->getRepository('MaithCommonAdminBundle:mFile')->find($id);
+
+      if (!$entity) {
+          throw $this->createNotFoundException('Unable to find mFile entity.');
+      }
+       $form   = $this->createForm(new mFileType(), $entity);
+       $form->bind($request);
+       $valid = false;
+       if($form->isValid())
+       {
+         $valid = true;
+         $em->persist($entity);
+         $em->flush();
+       }
+       return new Response(json_encode(array("result" => $valid, 'errors' => $form->getErrorsAsString())));
+    }
+    
+    public function downloadOriginalFileAction($id)
+    {
+      $em = $this->getDoctrine()->getManager();
+      $file = $em->getRepository("MaithCommonAdminBundle:mFile")->find($id);
+      $content = file_get_contents($file->getFullPath());
+      $response = new Response();
+
+      /* Figure out the MIME type (if not specified) */
+      $known_mime_types = array(
+          "pdf" => "application/pdf",
+          "txt" => "text/plain",
+          "html" => "text/html",
+          "htm" => "text/html",
+          "exe" => "application/octet-stream",
+          "zip" => "application/zip",
+          "doc" => "application/msword",
+          "xls" => "application/vnd.ms-excel",
+          "ppt" => "application/vnd.ms-powerpoint",
+          "gif" => "image/gif",
+          "png" => "image/png",
+          "jpeg" => "image/jpeg",
+          "jpg" => "image/jpg",
+          "php" => "text/plain"
+      );
+      $mime_type = $file->getType();
+      if(!in_array($file->getType(), $known_mime_types))
+      {
+        $file_extension = strtolower(substr(strrchr($file->getName(), "."), 1));
+        if (array_key_exists($file_extension, $known_mime_types)) {
+          $mime_type = $known_mime_types[$file_extension];
+        }
+      }
+      
+      $response->headers->set('Content-Type', $mime_type);
+      $response->headers->set('Content-Disposition', 'attachment;filename="'.$file->getName());
+
+      $response->setContent($content);
+      return $response;
+    }
     
     /***
      * 

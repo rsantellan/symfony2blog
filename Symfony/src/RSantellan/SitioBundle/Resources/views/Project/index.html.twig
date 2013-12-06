@@ -6,7 +6,7 @@
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
+                <th></th>
                 <th>Name</th>
                 <th>Cliente</th>
                 <th>Tipo_de_trabajo</th>
@@ -19,7 +19,11 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('rsproject_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>
+                  <a href="{{ path('rsproject_show', { 'id': entity.id }) }}">
+                    <img alt="{{ entity.name[:45] }}" src="{{ entity.id | mAvatar(entity.fullClassName, 'main') | mImage(60, 60, 'rce') }}" />
+                  </a>
+                </td>
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.cliente }}</td>
                 <td>{{ entity.tipodetrabajo }}</td>

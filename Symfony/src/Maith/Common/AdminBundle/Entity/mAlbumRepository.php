@@ -17,5 +17,10 @@ class mAlbumRepository extends EntityRepository{
     return $this->getEntityManager()->createQuery($dql)->setParameters(array('object_id' => $object_id, 'object_class' => $object_class))->getResult();
   }
   
+  public function retrieveByObjectIdClassAndAlbumName($object_id, $object_class, $name, $onlyone = true)
+  {
+    
+  }
+  
 }
 

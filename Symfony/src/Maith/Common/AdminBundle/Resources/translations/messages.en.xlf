@@ -42,6 +42,34 @@
         <source>maith_images_admin_sort</source>
         <target>__maith_images_admin_sort</target>
       </trans-unit>
+      <trans-unit id="c5f14d7a0db524a4282718f8d28a67cf" resname="admin_link_traducir">
+        <source>admin_link_traducir</source>
+        <target>__admin_link_traducir</target>
+      </trans-unit>
+      <trans-unit id="635ad6b83ea9c3ec507f54ba36c3e465" resname="maith_images_admin_descargar">
+        <source>maith_images_admin_descargar</source>
+        <target>__maith_images_admin_descargar</target>
+      </trans-unit>
+      <trans-unit id="72edc4c5fe7f8e2dd8bc28af136a7f48" resname="maith_images_admin_file_title">
+        <source>maith_images_admin_file_title</source>
+        <target>__maith_images_admin_file_title</target>
+      </trans-unit>
+      <trans-unit id="8bebb47bb324550f9c43d20b3bbb70b0" resname="maith_images_admin_download_original">
+        <source>maith_images_admin_download_original</source>
+        <target>__maith_images_admin_download_original</target>
+      </trans-unit>
+      <trans-unit id="bf38645d1670046c43b8d40feaa308cc" resname="maith_images_admin_save_image">
+        <source>maith_images_admin_save_image</source>
+        <target>__maith_images_admin_save_image</target>
+      </trans-unit>
+      <trans-unit id="5b541b55360fc981535ae490fda829f1" resname="maith_images_admin_cancel_form">
+        <source>maith_images_admin_cancel_form</source>
+        <target>__maith_images_admin_cancel_form</target>
+      </trans-unit>
+      <trans-unit id="6a6442b5797804a3c26503d9a2f74569" resname="maith_images_admin_show_name">
+        <source>maith_images_admin_show_name</source>
+        <target>__maith_images_admin_show_name</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
