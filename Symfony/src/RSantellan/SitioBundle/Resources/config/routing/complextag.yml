@@ -1,0 +1,45 @@
+admin_blocktags:
+    pattern:  /{_locale}/
+    defaults: { _controller: "RSantellanSitioBundle:ComplexTag:index" }
+    requirements:
+        _locale: en|es    
+
+admin_blocktags_show:
+    pattern:  /{_locale}/{id}/show
+    defaults: { _controller: "RSantellanSitioBundle:ComplexTag:show" }
+    requirements:
+        _locale: en|es    
+
+admin_blocktags_new:
+    pattern:  /{_locale}/new
+    defaults: { _controller: "RSantellanSitioBundle:ComplexTag:new" }
+    requirements:
+        _locale: en|es    
+
+admin_blocktags_create:
+    pattern:  /{_locale}/create
+    defaults: { _controller: "RSantellanSitioBundle:ComplexTag:create" }
+    requirements: 
+        _method: post
+        _locale: en|es
+    
+
+admin_blocktags_edit:
+    pattern:  /{_locale}/{id}/edit
+    defaults: { _controller: "RSantellanSitioBundle:ComplexTag:edit" }
+    requirements:
+        _locale: en|es
+        
+admin_blocktags_update:
+    pattern:  /{_locale}/{id}/update
+    defaults: { _controller: "RSantellanSitioBundle:ComplexTag:update" }
+    requirements: 
+        _method: post|put
+        _locale: en|es
+
+admin_blocktags_delete:
+    pattern:  /{_locale}/{id}/delete
+    defaults: { _controller: "RSantellanSitioBundle:ComplexTag:delete" }
+    requirements: 
+        _method: post|delete
+        _locale: en|es

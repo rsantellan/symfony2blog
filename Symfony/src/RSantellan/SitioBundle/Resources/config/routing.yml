@@ -1,3 +1,7 @@
+RSantellanSitioBundle_admin_blocktags:
+    resource: "@RSantellanSitioBundle/Resources/config/routing/complextag.yml"
+    prefix:   /admin/blocktags
+        
 RSantellanSitioBundle_rsproject:
     resource: "@RSantellanSitioBundle/Resources/config/routing/project.yml"
     prefix:   /admin/rsproject

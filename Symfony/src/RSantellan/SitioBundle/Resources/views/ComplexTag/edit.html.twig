@@ -1,0 +1,31 @@
+{% extends 'RSantellanSitioBundle:Admin:layout.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonimage/css/maithalbums.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/colorbox.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery.colorbox-min.js') }}"></script>    
+  <script type="text/javascript" src="{{ asset('bundles/maithcommonimage/js/imagesManager.js') }}"></script>    
+{% endblock %}
+
+
+{% block body -%}
+    <h1>ComplexTag edit</h1>
+
+    {{ form(edit_form) }}
+
+    {{ render(controller('MaithCommonAdminBundle:Albums:albumsData', {'id': edit_form.vars.value.id, 'objectclass' : edit_form.vars.value.fullClassName }))}}
+    
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_blocktags') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
