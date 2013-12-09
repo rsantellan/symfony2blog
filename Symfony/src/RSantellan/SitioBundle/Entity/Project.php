@@ -67,20 +67,28 @@ class Project{
     
     
 
-  /**
-   *
-   * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
-   * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-   * @Gedmo\SortableGroup
-   * 
-   */
-  protected $category;
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @Gedmo\SortableGroup
+     * 
+     */
+    protected $category;
 
-  /**
+    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", unique=true)
     */
-  protected $slug;
+    protected $slug;
+
+    /**
+     *
+     * @var ComplexTag
+     * @ORM\ManyToMany(targetEntity="ComplexTag", inversedBy="projects")
+     * @ORM\JoinTable(name="rs_project_complex_tag") 
+     */
+    protected $complexTags;
     /**
      * Get id
      *
@@ -266,5 +274,45 @@ class Project{
     public function retrieveAlbums()
     {
       return array("main", "images");
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->complexTags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add complexTags
+     *
+     * @param \RSantellan\SitioBundle\Entity\ComplexTag $complexTags
+     * @return Project
+     */
+    public function addComplexTag(\RSantellan\SitioBundle\Entity\ComplexTag $complexTags)
+    {
+        $this->complexTags[] = $complexTags;
+    
+        return $this;
+    }
+
+    /**
+     * Remove complexTags
+     *
+     * @param \RSantellan\SitioBundle\Entity\ComplexTag $complexTags
+     */
+    public function removeComplexTag(\RSantellan\SitioBundle\Entity\ComplexTag $complexTags)
+    {
+        $this->complexTags->removeElement($complexTags);
+    }
+
+    /**
+     * Get complexTags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComplexTags()
+    {
+        return $this->complexTags;
     }
 }

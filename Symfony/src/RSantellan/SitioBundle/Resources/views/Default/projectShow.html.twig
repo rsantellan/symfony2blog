@@ -58,25 +58,17 @@
 
     </div><!-- main-content -->
 
-
     <!-- START SIDEBAR -->
     <div id="sidebar" class="four columns">
-        <div class="nav-items">
-            <a href="#" class="prev"></a>
-            <a href="#" class="next"></a>
-            <span class="items-info">Item 3 of 9</span>
-        </div><!-- nav-items -->
-        <p>SlidesJS is a simple slideshow plugin for jQuery. Packed with a useful set of features to help novice and advanced developers alike create elegant and user-friendly slideshows.</p>
-        <p>SlidesJS is compatible with all modern web browsers and jQuery versions 1.4.4+.</p>
-        <p>Examples:
-        <ul class="arrow">
-            <li><a href="#">Images with captions</a></li>
-            <li><a href="#">Linking</a></li>
-            <li><a href="#">Product</a></li>
-            <li><a href="#">Multiple slideshows</a></li>
-            <li><a href="#">Simple (unstyled)</a></li>
-            <li><a href="#">Standard</a></li>
-        </ul>
+        <h3>Funcionalidades utilizadas</h3>
+        {% for complexTag in project.complexTags %}
+            <h4>{{ complexTag.name }}</h4>
+            <p>
+                <img alt="{{ complexTag.name[:45] }}" src="{{ complexTag.id | mAvatar(complexTag.fullClassName, 'main') | mImage(100, 100, 'rce') }}" />
+            </p>
+            <p>{{ complexTag.description }}</p>
+            <hr/>
+        {% endfor %}
     </div><!-- sidebar -->
     
     <div class="sixteen columns divider-item-1px"></div>			

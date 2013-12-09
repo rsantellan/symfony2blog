@@ -16,6 +16,7 @@ class ProjectType extends AbstractType
             ->add('tipo_de_trabajo')
             ->add('description')
             ->add('category')
+            ->add('complexTags')
         ;
     }
 

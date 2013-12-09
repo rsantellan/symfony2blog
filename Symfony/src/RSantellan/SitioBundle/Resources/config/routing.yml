@@ -25,3 +25,8 @@ rsantellan_sitio_projects:
 r_santellan_sitio_homepage:
     pattern:  /
     defaults: { _controller: RSantellanSitioBundle:Default:index }
+    
+r_santellan_sitio_admin:
+    pattern:  /admin
+    defaults: { _controller: RSantellanSitioBundle:Default:admin }
+

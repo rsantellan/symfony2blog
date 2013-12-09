@@ -67,4 +67,9 @@ class DefaultController extends Controller
       $categories = $queryCategories->getResult();
       return $this->render('RSantellanSitioBundle:Default:menuCategories.html.twig', array('categories' => $categories));
     }
+    
+    public function adminAction()
+    {
+        return $this->render('RSantellanSitioBundle:Admin:index.html.twig');
+    }
 }

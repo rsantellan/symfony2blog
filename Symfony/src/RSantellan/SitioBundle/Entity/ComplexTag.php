@@ -50,6 +50,18 @@ class ComplexTag
      */
     private $orden;
 
+    
+    /**
+     *
+     * @var Projects
+     * @ORM\ManyToMany(targetEntity="Project", mappedBy="complexTags")
+     */
+    private $projects;
+
+    
+    function __construct() {
+      $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -139,4 +151,42 @@ class ComplexTag
     {
       return get_class($this);
     }
+
+    /**
+     * Add projects
+     *
+     * @param \RSantellan\SitioBundle\Entity\Project $projects
+     * @return ComplexTag
+     */
+    public function addProject(\RSantellan\SitioBundle\Entity\Project $projects)
+    {
+        $this->projects[] = $projects;
+    
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param \RSantellan\SitioBundle\Entity\Project $projects
+     */
+    public function removeProject(\RSantellan\SitioBundle\Entity\Project $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+    
+    public function __toString() {
+        return $this->getName();
+    }
+
 }
