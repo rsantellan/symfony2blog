@@ -21,7 +21,15 @@ class MyImageService {
   
   public function __construct() {
     $this->imageInterface = new mImagick();
-    $kernel_container = $GLOBALS['kernel']->getContainer()->get('kernel');
+    $kernel_container = null;
+    if(get_class($GLOBALS['kernel']) == "AppCache")
+    {
+        $kernel_container = $GLOBALS['kernel']->getKernel()->getContainer()->get('kernel');
+    }
+    else
+    {
+        $kernel_container = $GLOBALS['kernel']->getContainer()->get('kernel');
+    }
     $this->root_dir = $kernel_container->getRootDir() ;
     $this->cache_dir = $kernel_container->getCacheDir() ;
   }
