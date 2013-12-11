@@ -4,6 +4,7 @@ namespace RSantellan\SitioBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use RSantellan\SitioBundle\Form\ContactType;
 
 class DefaultController extends Controller
 {
@@ -71,5 +72,38 @@ class DefaultController extends Controller
     public function adminAction()
     {
         return $this->render('RSantellanSitioBundle:Admin:index.html.twig');
+    }
+    
+    public function contactAction(Request $request)
+    {
+        $form = $this->createForm(new ContactType());
+
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $message = \Swift_Message::newInstance()
+                    ->setSubject($form->get('subject')->getData())
+                    ->setFrom($form->get('email')->getData())
+                    ->setTo('rsantellan@gmail.com')
+                    ->setBody(
+                        $this->renderView(
+                            'RSantellanSitioBundle:Default:contactMessage.html.twig',
+                            array(
+                                'ip' => $request->getClientIp(),
+                                'name' => $form->get('name')->getData(),
+                                'message' => $form->get('message')->getData()
+                            )
+                        )
+                    );
+
+                $this->get('mailer')->send($message);
+
+                $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');
+
+                //return $this->redirect($this->generateUrl('rsantellan_sitio_contact'));
+            }
+        }
+        return $this->render('RSantellanSitioBundle:Default:contact.html.twig', array('form' => $form->createView()));
     }
 }

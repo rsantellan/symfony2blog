@@ -12,33 +12,37 @@
       <div class="btop-1px"></div>
       <div class="container">
           <div class="sixteen columns" id="cta-block">
-              <h5>Rodrigo Santellán - Analista en Tecnologias de la información</h5>
+              <h5>{% trans %}rsantellan_site_index_title{% endtrans %}</h5>
           </div><!-- #cta-block -->
 
           <!-- start slider -->
           <div class="sixteen columns camera_wrap camera_burgundy_skin clearfix" id="camera_wrap_1">
               <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/terminal-banner.png') }}">
                   <div class="camera_caption fadeFromBottom">
-                      Manejo y mantenimiento de servidores <em>Scripting en bash</em>
+                      {% trans %}rsantellan_site_index_banner_1{% endtrans %}
                   </div>
               </div>
               <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/php-banner.png') }}">
                   <div class="camera_caption fadeFromBottom">
+                      {% trans %}rsantellan_site_index_banner_2{% endtrans %}
                       Manejo de distintos frameworks PHP <em>CodeIgniter, Symfony, Symfony 2, Zend</em>
                   </div>
               </div>
               <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/python-banner.png') }}">
                   <div class="camera_caption fadeFromBottom">
+                      {% trans %}rsantellan_site_index_banner_3{% endtrans %}
                       Python <em>Scripting para servidores, manejo remoto y web crawling</em>
                   </div>
               </div>
               <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/wordpress-banner.png') }}">
                   <div class="camera_caption fadeFromBottom">
+                      {% trans %}rsantellan_site_index_banner_4{% endtrans %}
                       <em>Manejo e instalación de sitios</em>
                   </div>
               </div>
               <div data-src="{{ asset('bundles/rsantellansitio/images/sliders/camera/database-banner.png') }}">
                   <div class="camera_caption fadeFromBottom">
+                      {% trans %}rsantellan_site_index_banner_5{% endtrans %}
                       <em>Optimización y Manejo de base de datos. Migraciones y escabilidades.</em>
                   </div>
               </div>
@@ -54,9 +58,9 @@
 	<div class="container header-block">
 		<!-- start header -->
 		<div class="sixteen columns lp-header">
-			<h6>Latest Projects</h6>
+			<h6>{% trans %}rsantellan_site_index_projects_latest{% endtrans %}Latest Projects</h6>
 			<div class="nav-projects">
-				<a href="{{ path('rsantellan_sitio_projects')}}" class="button viewall">View all</a>
+				<a href="{{ path('rsantellan_sitio_projects')}}" class="button viewall">{% trans %}rsantellan_site_index_projects_view_all{% endtrans %}View all</a>
 			</div><!-- .nav-projects -->
 		</div><!-- .sixteen  -->
 		<!-- end header -->

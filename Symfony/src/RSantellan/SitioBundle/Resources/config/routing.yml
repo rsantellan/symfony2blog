@@ -10,6 +10,11 @@ RSantellanSitioBundle_category:
     resource: "@RSantellanSitioBundle/Resources/config/routing/category.yml"
     prefix:   /admin/rscategory
 
+
+rsantellan_sitio_contact:
+    pattern:  /{_locale}/contact.html
+    defaults: { _controller: RSantellanSitioBundle:Default:contact}
+    
 rsantellan_sitio_projects_show:
     pattern:  /{_locale}/project-{slug}.html
     defaults: { _controller: RSantellanSitioBundle:Default:projectsShow}

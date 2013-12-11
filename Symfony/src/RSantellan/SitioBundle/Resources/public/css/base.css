@@ -344,6 +344,17 @@ transition: color 0.3s linear;
 		width: 330px;
 		}
 	#contacts-form-main textarea  {width: 691px;}
+	/** Nuevo **/
+	.contacts-form input[type=text],.tcontacts-form input[type=password], .contacts-form input[type=email] {
+		float:left;
+		margin-right:20px;}
+	.contacts-form textarea {width: 450px;}
+	.contacts-form-main input[type=text], .contacts-form-main input[type=password], .contacts-form-main input[type=email] {
+		margin-right:20px;
+		width: 330px;
+		}
+	.contacts-form-main textarea  {width: 691px;}
+	/** Nuevo **/
 	#ajax-contact-form-main { margin-bottom: 0;}
 	fieldset.info_fieldset { margin-bottom: 0;}
 	input[type=text].last-item, input[type=email].last-item, input[type=url].last-item, input[type=submit].last-item, input[type=reset].last-item {

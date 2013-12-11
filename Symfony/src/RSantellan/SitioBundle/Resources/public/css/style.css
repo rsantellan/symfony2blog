@@ -1766,6 +1766,13 @@ padding-left: 23px !important;*/ }
 		#contacts-form-main input[type=text], #contacts-form-main input[type=password], #contacts-form-main input[type=email] { width: 190px; }
 		#contacts-form-main textarea { width: 410px; }	
 		
+		/** Nuevo **/
+		
+		.contacts-form-main input[type=text], .contacts-form-main input[type=password], .contacts-form-main input[type=email] { width: 190px; }
+		.contacts-form-main textarea { width: 410px; }	
+		
+		/** Nuevo **/
+		
 		#products .slides_container { width:420px;	height: 221px; }
 		#products .slides_control img {	height: 207px; width: 406px; }
 		#products a.prev, #products a.next { top: 185px; }
