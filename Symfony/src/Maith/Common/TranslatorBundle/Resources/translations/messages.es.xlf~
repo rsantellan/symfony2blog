@@ -20,7 +20,7 @@
       </trans-unit>
       <trans-unit id="dd9efa5c3a42cf39609f0bce71d2f560" resname="admin_translator_go_back">
         <source>admin_translator_go_back</source>
-        <target>__admin_translator_go_back</target>
+        <target>Volver al adminstrador</target>
       </trans-unit>
     </body>
   </file>

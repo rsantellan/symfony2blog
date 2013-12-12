@@ -13,3 +13,13 @@ php app/console translation:update --output-format='xlf' en MaithCommonAdminBund
 sudo chmod 777 src/Maith/Common/ImageBundle/Resources/translations -R
 php app/console translation:update --output-format='xlf' es MaithCommonImageBundle --force
 php app/console translation:update --output-format='xlf' en MaithCommonImageBundle --force
+
+sudo chmod 777 src/RSantellan/SitioBundle/Resources/translations -R
+php app/console translation:update --output-format='xlf' es RSantellanSitioBundle --force
+php app/console translation:update --output-format='xlf' en RSantellanSitioBundle --force
+
+sudo chmod 777 src/Maith/Common/TranslatorBundle/Resources/translations -R
+sudo chmod 777 src/Loopita/MetalizadoraBundle/Resources/translations -R
+sudo chmod 777 src/Maith/Common/AdminBundle/Resources/translations -R
+sudo chmod 777 src/Maith/Common/ImageBundle/Resources/translations -R
+sudo chmod 777 src/RSantellan/SitioBundle/Resources/translations -R

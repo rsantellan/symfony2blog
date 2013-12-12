@@ -48,5 +48,36 @@
     {% block body %}
 
     {% endblock %}
+      	<!-- START FOOTER -->
+	<div id="footer">
+		<div class="btop-1px"></div>
+		<div class="container">
+			<div class="four columns copyright">
+				<img src="{{ asset('bundles/rsantellansitio/images/logo.png') }}" alt="{% trans %}rsantellan_site_menu_logo{% endtrans %}" />
+			</div><!-- .copyright -->
+			<div class="twelve columns">
+				<div id="secondary-nav" class="clearfix">
+					<ul class="clearfix">
+						<li><a href="{{ path('r_santellan_sitio_homepage')}}">{% trans %}rsantellan_site_menu_home{% endtrans %}</a></li>
+                        <li><a href="{{ path('rsantellan_sitio_projects')}}">{% trans %}rsantellan_site_menu_projects{% endtrans %}</a></li>
+						<li><a href="{{ path('rsantellan_sitio_aboutme') }}">{% trans %}rsantellan_site_menu_about{% endtrans %}</a></li>
+						<li><a href="{{ path('rsantellan_sitio_contact') }}">{% trans %}rsantellan_site_menu_contact{% endtrans %}</a></li>
+					</ul>
+					<div class="gray-dash-3px"></div>
+				</div><!-- #secondary-nav -->
+				<ul id="footer-social">
+	    			<!-- <li class="twitter"><a href="http://twitter.com"></a></li> -->
+	    			<!-- <li class="dribbble"><a href="http://dribbble.com"></a></li> -->
+	    			<!-- <li class="facebook"><a href="http://facebook.com"></a></li> -->
+	    			<!-- <li class="google"><a href="http://plus.google.com"></a></li> -->
+	    			<li class="linkedin"><a href="http://uy.linkedin.com/pub/rodrigo-santellan/56/195/a3a/"></a></li>
+	    			<!-- <li class="behance"><a href="http://behance.net"></a></li> -->
+	    			<!-- <li class="rss"><a href="#"></a></li> -->
+	    		</ul><!-- footer-social -->
+			</div><!-- twelve columns -->
+		</div><!-- container -->
+	</div><!-- #footer -->
+	<!-- END FOOTER -->
+    
   </body>
 </html>

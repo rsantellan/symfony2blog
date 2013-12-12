@@ -11,6 +11,10 @@ RSantellanSitioBundle_category:
     prefix:   /admin/rscategory
 
 
+rsantellan_sitio_aboutme:
+    pattern:  /{_locale}/aboutme.html
+    defaults: { _controller: RSantellanSitioBundle:Default:aboutMe}
+    
 rsantellan_sitio_contact:
     pattern:  /{_locale}/contact.html
     defaults: { _controller: RSantellanSitioBundle:Default:contact}

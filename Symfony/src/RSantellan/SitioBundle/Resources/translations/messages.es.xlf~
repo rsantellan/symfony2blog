@@ -88,7 +88,23 @@
       </trans-unit>
       <trans-unit id="60f3ab16f5a13c950b951142e8d2a386" resname="rsantellan_admin_menu_blocks">
         <source>rsantellan_admin_menu_blocks</source>
-        <target>__rsantellan_admin_menu_blocks</target>
+        <target>Bloques</target>
+      </trans-unit>
+      <trans-unit id="70f0889c2dd8897a06e6e53127c1acd1" resname="rsantellan_site_menu_language">
+        <source>rsantellan_site_menu_language</source>
+        <target>Idiomas</target>
+      </trans-unit>
+      <trans-unit id="0a12a11b78ecc17a8d5a499427b1bf69" resname="rsantellan_site_category">
+        <source>rsantellan_site_category</source>
+        <target>Categoria:</target>
+      </trans-unit>
+      <trans-unit id="44ff3d6065f5d0f424eaa76bd52446ff" resname="rsantellan_site_projects">
+        <source>rsantellan_site_projects</source>
+        <target>Proyectos</target>
+      </trans-unit>
+      <trans-unit id="fcff28f88b43de91aa45a6a02df6b627" resname="rsantellan_site_categories_all">
+        <source>rsantellan_site_categories_all</source>
+        <target>Projectos</target>
       </trans-unit>
     </body>
   </file>

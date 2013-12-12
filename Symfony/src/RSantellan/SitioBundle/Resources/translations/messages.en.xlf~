@@ -64,7 +64,7 @@
       </trans-unit>
       <trans-unit id="b980f509479adcf4900b235ba2885a81" resname="rsantellan_site_index_banner_5">
         <source>rsantellan_site_index_banner_5</source>
-        <target>&lt;em&gt;Optimizaci&amp;oacute;n y Manejo de base de datos. Migraciones y escabilidades.&lt;/em&gt;</target>
+        <target>&lt;em&gt;Database optimization and management. Migrations and scability.&lt;/em&gt;</target>
       </trans-unit>
       <trans-unit id="c15a11f51c6519872b63cdbb97450027" resname="rsantellan_site_index_projects_latest">
         <source>rsantellan_site_index_projects_latest</source>
@@ -89,6 +89,22 @@
       <trans-unit id="60f3ab16f5a13c950b951142e8d2a386" resname="rsantellan_admin_menu_blocks">
         <source>rsantellan_admin_menu_blocks</source>
         <target>Blocks</target>
+      </trans-unit>
+      <trans-unit id="70f0889c2dd8897a06e6e53127c1acd1" resname="rsantellan_site_menu_language">
+        <source>rsantellan_site_menu_language</source>
+        <target>Language</target>
+      </trans-unit>
+      <trans-unit id="0a12a11b78ecc17a8d5a499427b1bf69" resname="rsantellan_site_category">
+        <source>rsantellan_site_category</source>
+        <target>Category:</target>
+      </trans-unit>
+      <trans-unit id="44ff3d6065f5d0f424eaa76bd52446ff" resname="rsantellan_site_projects">
+        <source>rsantellan_site_projects</source>
+        <target>Projects</target>
+      </trans-unit>
+      <trans-unit id="fcff28f88b43de91aa45a6a02df6b627" resname="rsantellan_site_categories_all">
+        <source>rsantellan_site_categories_all</source>
+        <target>__rsantellan_site_categories_all</target>
       </trans-unit>
     </body>
   </file>

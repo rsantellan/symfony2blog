@@ -18,7 +18,9 @@
             <a href="javascript:void(0)">{% trans %}rsantellan_site_menu_projects{% endtrans %}</a>
             {{ render_esi(controller('RSantellanSitioBundle:Default:menuCategories')) }}
           </li>
-          <li> <a href="typography.html">{% trans %}rsantellan_site_menu_about{% endtrans %}</a></li>
+          <li class="{% if (activemenu is defined) and activemenu == 'aboutme' %}active{% endif %}"> 
+              <a href="{{ path('rsantellan_sitio_aboutme') }}">{% trans %}rsantellan_site_menu_about{% endtrans %}</a>
+          </li>
           <!--
           <li> <a href="#">Portfolio</a>
             <ul>
@@ -47,7 +49,7 @@
           </li>
           -->
           <li><a href="{{ path('rsantellan_sitio_contact') }}">{% trans %}rsantellan_site_menu_contact{% endtrans %}</a></li>
-          <li><a href="#">Idiomas</a>
+          <li><a href="#">{% trans %}rsantellan_site_menu_language{% endtrans %}</a>
             <ul>
               <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">{% trans %}rsantellan_site_menu_spanish{% endtrans %}</a></li>
               <li><a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">{% trans %}rsantellan_site_menu_english{% endtrans %}</a></li>

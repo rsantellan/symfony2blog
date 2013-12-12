@@ -88,7 +88,7 @@
       </trans-unit>
       <trans-unit id="fcec7cfd2be3bc026cae2d5ae2146f86" resname="metalizadora_admin_menu_categories">
         <source>metalizadora_admin_menu_categories</source>
-        <target>__metalizadora_admin_menu_categories</target>
+        <target>Categorias</target>
       </trans-unit>
       <trans-unit id="b262b264d126c5abed79508b0bcfdaba" resname="metalizadora_admin_categories_new">
         <source>metalizadora_admin_categories_new</source>

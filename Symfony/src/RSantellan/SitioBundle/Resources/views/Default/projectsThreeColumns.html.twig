@@ -19,9 +19,9 @@
     <div class="sixteen columns">
       <h4 class="page-title">
       {% if (page_title is defined) %}
-        Categoria: {{ page_title }}
+        {% trans %}rsantellan_site_category{% endtrans %}{{ page_title }}
       {% else %}
-          Proyectos
+          {% trans %}rsantellan_site_projects{% endtrans %}
       {% endif %}
       </h4>
     </div><!-- sixteen columns -->
@@ -39,7 +39,7 @@
 
     <!-- start filter -->
     <ul id="filters" class="clearfix">
-      <li><a href="#" data-filter="*" class="selected">All</a></li>
+      <li><a href="#" data-filter="*" class="selected">{% trans %}rsantellan_site_categories_all{% endtrans %}</a></li>
       {% for category in categories %}
         <li><a href="#" data-filter=".{{ category.id }}">{{ category.name }}</a></li>
       {% endfor %}

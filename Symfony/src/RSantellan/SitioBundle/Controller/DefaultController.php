@@ -74,6 +74,11 @@ class DefaultController extends Controller
         return $this->render('RSantellanSitioBundle:Admin:index.html.twig');
     }
     
+    public function aboutMeAction()
+    {
+        return $this->render('RSantellanSitioBundle:Default:aboutme.html.twig');
+    }
+    
     public function contactAction(Request $request)
     {
         $form = $this->createForm(new ContactType());
