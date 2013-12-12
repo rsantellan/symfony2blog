@@ -91,9 +91,8 @@ fos_user:
 maith_common_admin:
     upload_token: 'my_token'
     
-#maith_common_admin_translation:    
-#    translation_bundles:
-#        - LoopitaMetalizadoraBundle
-#        - MaithCommonAdminBundle
-#        - RSantellanSitioBundle
+maith_common_translator:    
+    translation_bundles:
+        - MaithCommonAdminBundle
+        - RSantellanSitioBundle
       

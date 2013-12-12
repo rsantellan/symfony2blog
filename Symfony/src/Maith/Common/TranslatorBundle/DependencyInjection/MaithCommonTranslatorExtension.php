@@ -21,7 +21,8 @@ class MaithCommonTranslatorExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        //var_dump($config);
+        $container->setParameter('translation_bundles', $config['translation_bundles']);
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

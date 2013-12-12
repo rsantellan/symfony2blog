@@ -19,11 +19,15 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('maith_common_translator');
-
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
-
+        $rootNode
+            ->children()
+                ->arrayNode("translation_bundles")
+                ->prototype('scalar')->end()
+            ->end();
+        
         return $treeBuilder;
     }
 }

@@ -88,7 +88,7 @@
       </trans-unit>
       <trans-unit id="60f3ab16f5a13c950b951142e8d2a386" resname="rsantellan_admin_menu_blocks">
         <source>rsantellan_admin_menu_blocks</source>
-        <target>Bloques</target>
+        <target>__rsantellan_admin_menu_blocks</target>
       </trans-unit>
     </body>
   </file>

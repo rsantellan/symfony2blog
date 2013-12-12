@@ -2,7 +2,11 @@
   {% for key, value in translations %}
     <div class="translation_container_data" id="tranlation_container_data_{{ key }}">
       <a href="javascript:void(0)" onclick="translatorManager.getInstance().doShowHide('{{ key }}');">
-        {{ key }}
+        {% if key == value %}
+              {{ key }}
+        {% else %}
+              [{{ key }}] - {{ value [:40] }}
+        {% endif %}
       </a>
       <div class="single_translation" id="{{ key }}_translation" style="display:none">
         <form action="{{ path('maith_common_translator_set_tranlations') }}" method="POST" onsubmit="return translatorManager.getInstance().sendPutTranslations(this);">

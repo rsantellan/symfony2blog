@@ -4,91 +4,91 @@
     <body>
       <trans-unit id="657151dcfdae1a48f61976301a77dabd" resname="rsantellan_site_menu_logo">
         <source>rsantellan_site_menu_logo</source>
-        <target>logo</target>
+        <target>Rodrigo Santellan</target>
       </trans-unit>
       <trans-unit id="7f0fd2aaefd4d373c07ef7809cfec154" resname="rsantellan_site_menu_home">
         <source>rsantellan_site_menu_home</source>
-        <target>home1</target>
+        <target>Home</target>
       </trans-unit>
       <trans-unit id="b52ed166e5869f8a03d2c98795571455" resname="rsantellan_site_menu_projects">
         <source>rsantellan_site_menu_projects</source>
-        <target>__rsantellan_site_menu_projects</target>
+        <target>Projects</target>
       </trans-unit>
       <trans-unit id="5d01a474f25ca766d9968435e5f00db7" resname="rsantellan_site_menu_about">
         <source>rsantellan_site_menu_about</source>
-        <target>__rsantellan_site_menu_about</target>
+        <target>About me</target>
       </trans-unit>
       <trans-unit id="540f2cfb17bca198858670919bf9d8eb" resname="rsantellan_site_menu_contact">
         <source>rsantellan_site_menu_contact</source>
-        <target>__rsantellan_site_menu_contact</target>
+        <target>Contact</target>
       </trans-unit>
       <trans-unit id="9a9906a804ec8120cdd6fa0de4d053e6" resname="rsantellan_site_menu_spanish">
         <source>rsantellan_site_menu_spanish</source>
-        <target>__rsantellan_site_menu_spanish</target>
+        <target>Español</target>
       </trans-unit>
       <trans-unit id="4ef400e7dd72e7ebe752ac745b9d3922" resname="rsantellan_site_menu_english">
         <source>rsantellan_site_menu_english</source>
-        <target>__rsantellan_site_menu_english</target>
+        <target>English</target>
       </trans-unit>
       <trans-unit id="67f2eff39192b4f73101d485845f1f2b" resname="rsantellan_contact_page_title">
         <source>rsantellan_contact_page_title</source>
-        <target>__rsantellan_contact_page_title</target>
+        <target>Contact page</target>
       </trans-unit>
       <trans-unit id="1510e4f04e5c837afb35705a9e23b625" resname="rsantellan_contact_title">
         <source>rsantellan_contact_title</source>
-        <target>__rsantellan_contact_title</target>
+        <target>Do you need help, support or advise?</target>
       </trans-unit>
       <trans-unit id="a018ad1a123ef8eabd55cc0e73bba739" resname="rsantellan_contact_description">
         <source>rsantellan_contact_description</source>
-        <target>__rsantellan_contact_description</target>
+        <target>Please just send the contact form</target>
       </trans-unit>
       <trans-unit id="e00dc60ea0123a3fc6946276e0f919b7" resname="rsantellan_site_index_title">
         <source>rsantellan_site_index_title</source>
-        <target>__rsantellan_site_index_title</target>
+        <target>Rodrigo Santellán - Software developer</target>
       </trans-unit>
       <trans-unit id="74980fad887f20006580eebee9ba0d87" resname="rsantellan_site_index_banner_1">
         <source>rsantellan_site_index_banner_1</source>
-        <target>__rsantellan_site_index_banner_1</target>
+        <target>Installing and maintaining servers &lt;em&gt;Bash Scripting&lt;br /&gt;&lt;/em&gt;</target>
       </trans-unit>
       <trans-unit id="89b2de0140e7ef1df012d0d6a7c9fced" resname="rsantellan_site_index_banner_2">
         <source>rsantellan_site_index_banner_2</source>
-        <target>__rsantellan_site_index_banner_2</target>
+        <target>Working with different PHP frameworks &lt;em&gt;CodeIgniter, Symfony, Symfony 2, Zend&lt;/em&gt;</target>
       </trans-unit>
       <trans-unit id="24ef929eca91abce6140def35c03f49c" resname="rsantellan_site_index_banner_3">
         <source>rsantellan_site_index_banner_3</source>
-        <target>__rsantellan_site_index_banner_3</target>
+        <target>Python &lt;em&gt;Scripting for servers, remote administration and web crawling&lt;/em&gt;</target>
       </trans-unit>
       <trans-unit id="d51be740f992301ce76b47fad54016eb" resname="rsantellan_site_index_banner_4">
         <source>rsantellan_site_index_banner_4</source>
-        <target>__rsantellan_site_index_banner_4</target>
+        <target>&lt;em&gt;Installing and Handling wordpress web sites&lt;br /&gt;&lt;/em&gt;</target>
       </trans-unit>
       <trans-unit id="b980f509479adcf4900b235ba2885a81" resname="rsantellan_site_index_banner_5">
         <source>rsantellan_site_index_banner_5</source>
-        <target>__rsantellan_site_index_banner_5</target>
+        <target>&lt;em&gt;Database optimization and management. Migrations and scability.&lt;/em&gt;</target>
       </trans-unit>
       <trans-unit id="c15a11f51c6519872b63cdbb97450027" resname="rsantellan_site_index_projects_latest">
         <source>rsantellan_site_index_projects_latest</source>
-        <target>__rsantellan_site_index_projects_latest</target>
+        <target>Latest projects</target>
       </trans-unit>
       <trans-unit id="e953081e0fb1c82b91456a2a2454c566" resname="rsantellan_site_index_projects_view_all">
         <source>rsantellan_site_index_projects_view_all</source>
-        <target>__rsantellan_site_index_projects_view_all</target>
+        <target>View all</target>
       </trans-unit>
       <trans-unit id="9b691cb936b3af7e9fa208e42294b7c9" resname="rsantellan_admin_menu_dashboard">
         <source>rsantellan_admin_menu_dashboard</source>
-        <target>__rsantellan_admin_menu_dashboard</target>
+        <target>Dashboard</target>
       </trans-unit>
       <trans-unit id="f63e187c136c7130186742ba75b3f504" resname="rsantellan_admin_menu_projects">
         <source>rsantellan_admin_menu_projects</source>
-        <target>__rsantellan_admin_menu_projects</target>
+        <target>Projects</target>
       </trans-unit>
       <trans-unit id="34f818db08a61eb14d3bf93374667d08" resname="rsantellan_admin_menu_categories">
         <source>rsantellan_admin_menu_categories</source>
-        <target>__rsantellan_admin_menu_categories</target>
+        <target>Categories</target>
       </trans-unit>
       <trans-unit id="60f3ab16f5a13c950b951142e8d2a386" resname="rsantellan_admin_menu_blocks">
         <source>rsantellan_admin_menu_blocks</source>
-        <target>__rsantellan_admin_menu_blocks</target>
+        <target>Blocks</target>
       </trans-unit>
     </body>
   </file>
