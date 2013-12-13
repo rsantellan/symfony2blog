@@ -49,7 +49,7 @@
     <div id="container-portfolio" class="portfolio-3">
       {% for project in projects %}
       <!-- Item #1 -->
-      <div class="item-block one-third column {{ project.category.id }}">
+      <div class="item-block one-third column {% for category in project.category %} {{ category.id }} {% endfor %}">
         <!-- start item block -->
         <div class="stack">
           <div class="title"><a href="{{ path('rsantellan_sitio_projects_show', {'slug': project.slug})}}">{{ project.name }}</a></div>

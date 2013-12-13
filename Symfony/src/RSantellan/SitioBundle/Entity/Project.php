@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\Table(name="rs_project")
+ * @ORM\HasLifecycleCallbacks()
  * @Gedmo\TranslationEntity(class="RSantellan\SitioBundle\Entity\ProjectTranslation")
  * @author Rodrigo Santellan
  */
@@ -68,10 +69,9 @@ class Project{
     
 
     /**
-     *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="projects")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     * @Gedmo\SortableGroup
+     * @var Category
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="projects")
+     * @ORM\JoinTable(name="rs_project_category") 
      * 
      */
     protected $category;
@@ -215,22 +215,32 @@ class Project{
     }
 
     /**
-     * Set category
+     * Add complexTags
      *
      * @param \RSantellan\SitioBundle\Entity\Category $category
      * @return Project
      */
-    public function setCategory(\RSantellan\SitioBundle\Entity\Category $category = null)
+    public function addCategory(\RSantellan\SitioBundle\Entity\Category $category)
     {
-        $this->category = $category;
+        $this->category[] = $category;
     
         return $this;
     }
 
     /**
+     * Remove complexTags
+     *
+     * @param \RSantellan\SitioBundle\Entity\Category $category
+     */
+    public function removeCategory(\RSantellan\SitioBundle\Entity\Category $category)
+    {
+        $this->category->removeElement($category);
+    }
+    
+    /**
      * Get category
      *
-     * @return \RSantellan\SitioBundle\Entity\Category 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getCategory()
     {
@@ -281,6 +291,7 @@ class Project{
     public function __construct()
     {
         $this->complexTags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**

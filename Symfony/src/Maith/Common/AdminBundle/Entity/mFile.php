@@ -10,6 +10,7 @@ use Symfony\Component\Finder\Finder;
  * Description of mFile
  * 
  * @ORM\Table(name="maith_file")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @author Rodrigo Santellan
  */
@@ -254,6 +255,16 @@ class mFile {
     public function getShowName()
     {
         return $this->showName;
+    }
+    
+    /**
+    * @ORM\PreRemove
+    */
+    public function simpleRemoveFiles()
+    {
+        //Chanchada para salir del paso!
+        $location = __DIR__.'/../../../../../app/cache';
+        $this->removeAllFiles($location);
     }
     
     public function removeAllFiles($location)
