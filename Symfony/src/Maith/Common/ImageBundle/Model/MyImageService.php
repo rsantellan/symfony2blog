@@ -278,6 +278,7 @@ class MyImageService {
   
   public function retrieveCachePath($path, $type, $parameters = array())
   {
+//      var_dump(strpos($path, $this->root_dir) !== FALSE);die;
     if(strpos($path, $this->root_dir) !== FALSE)
     {
       //El archivo original es de la aplicacion

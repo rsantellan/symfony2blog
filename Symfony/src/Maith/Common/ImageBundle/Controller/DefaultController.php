@@ -26,6 +26,9 @@ class DefaultController extends Controller
       $in_root = $data['r'];
       $imageService = $this->get('maith_common_image.image.mimage');
       $root_dir = $this->get('kernel')->getRootDir();
+      //var_dump($in_root);
+      //var_dump($image);
+      //var_dump($root_dir);
       if($in_root == 1)
       {
         $image = $root_dir.$image;
@@ -35,10 +38,14 @@ class DefaultController extends Controller
 		if($in_root == 2)
 		{
 		  $aux_path = dirname($root_dir);
+          if(strpos($image, DIRECTORY_SEPARATOR) !== 0)
+          {
+              $image = DIRECTORY_SEPARATOR . $image;
+          }
 		  $image = $aux_path.$image;
 		}
 	  }
-      
+      //var_dump($image); die;
       $logger->debug('Show Image Action, image path is -------->>'.$image);
       $return = "";
       switch ($type) {
