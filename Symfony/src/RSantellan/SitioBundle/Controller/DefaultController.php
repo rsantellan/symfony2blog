@@ -12,7 +12,9 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery("select p from RSantellanSitioBundle:Project p order by p.id desc")->setMaxResults(5);
-        $projects = $query->getResult();//$em->getRepository('RSantellanSitioBundle:Project')->findAll();
+        //var_dump($query->getQueryCacheDriver());
+        
+        $projects = $query->useResultCache(true, 360)->getResult();//$em->getRepository('RSantellanSitioBundle:Project')->findAll();
         $response =  $this->render('RSantellanSitioBundle:Default:index.html.twig', array('activemenu' => 'home', 'projects' => $projects));
         $response->setPublic();
         $response->setSharedMaxAge("3600");
@@ -76,7 +78,10 @@ class DefaultController extends Controller
     
     public function aboutMeAction()
     {
-        return $this->render('RSantellanSitioBundle:Default:aboutme.html.twig');
+        $response = $this->render('RSantellanSitioBundle:Default:aboutme.html.twig');
+        $response->setPublic();
+        $response->setSharedMaxAge("3600");
+        return $response;
     }
     
     public function contactAction(Request $request)

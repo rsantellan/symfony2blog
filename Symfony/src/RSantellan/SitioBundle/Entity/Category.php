@@ -51,7 +51,7 @@ class Category
      
     /**
      * var Projects
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="category")
      */
     private $projects;
 
@@ -105,12 +105,12 @@ class Category
     /**
      * Add projects
      *
-     * @param \RSantellan\SitioBundle\Entity\Project $projects
+     * @param \RSantellan\SitioBundle\Entity\Project $project
      * @return Category
      */
-    public function addProject(\RSantellan\SitioBundle\Entity\Project $projects)
+    public function addProject(\RSantellan\SitioBundle\Entity\Project $project)
     {
-        $this->projects[] = $projects;
+        $this->projects[] = $project;
     
         return $this;
     }
@@ -118,11 +118,11 @@ class Category
     /**
      * Remove projects
      *
-     * @param \RSantellan\SitioBundle\Entity\Project $projects
+     * @param \RSantellan\SitioBundle\Entity\Project $project
      */
-    public function removeProject(\RSantellan\SitioBundle\Entity\Project $projects)
+    public function removeProject(\RSantellan\SitioBundle\Entity\Project $project)
     {
-        $this->projects->removeElement($projects);
+        $this->projects->removeElement($project);
     }
 
     /**
