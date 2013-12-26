@@ -51,7 +51,7 @@ class Category
      
     /**
      * var Projects
-     * @ORM\ManyToMany(targetEntity="Project", inversedBy="category")
+     * @ORM\ManyToMany(targetEntity="Project", mappedBy="category")
      */
     private $projects;
 

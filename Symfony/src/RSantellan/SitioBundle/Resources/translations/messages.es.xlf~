@@ -104,7 +104,25 @@
       </trans-unit>
       <trans-unit id="fcff28f88b43de91aa45a6a02df6b627" resname="rsantellan_site_categories_all">
         <source>rsantellan_site_categories_all</source>
-        <target>Projectos</target>
+        <target>Todos</target>
+      </trans-unit>
+      <trans-unit id="a07a610880aeab1917bbb68609df25c1" resname="rsantellan_site_about_me_title">
+        <source>rsantellan_site_about_me_title</source>
+        <target>Acerca de mi</target>
+      </trans-unit>
+      <trans-unit id="390f6126adfe5260d6ca402f78b6ed61" resname="rsantellan_site_about_me_first_paragraph">
+        <source>rsantellan_site_about_me_first_paragraph</source>
+        <target>&lt;p&gt;Hola!! mi nombre es Rodrigo Santell&amp;aacute;n tengo 29 a&amp;ntilde;os y soy un programador web. Desde hace 5 a&amp;ntilde;os que estoy creando paginas y sitios para distintas empresa.&lt;/p&gt;&#13;
+&lt;p&gt;Desde que era chico me intereso la computaci&amp;oacute;n, escribiendo mis primeros programas en pascal y cuando era mas grande en Visual Basic 6. Me costo poder encaminar mi profesion dado que empece a trabajar en otros rubros por un par de a&amp;ntilde;os y estuve un tiempo viviendo en Irlanda para poder mejorar mi ingles. Al volver decidi que ya tenia todo lo necesario para poder enfocarme en lo que yo queria hacer asi que estudie en la Facultad ORT del Uruguay la carrera tecnica de Analista de Tecnolog&amp;iacute;a de la informaci&amp;oacute;n.&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="38b1a04ceb998c12a196f965759dcfeb" resname="rsantellan_site_about_me_second_image_caption">
+        <source>rsantellan_site_about_me_second_image_caption</source>
+        <target>&lt;p&gt;Praesent odio ligula, dapibus sed, tincidunt eget, dictum nibh&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="95328f77333d8847e2a0d4b5790b0a6a" resname="rsantellan_site_about_me_second_paragraph">
+        <source>rsantellan_site_about_me_second_paragraph</source>
+        <target>&lt;p&gt;Desde entonces he estado trabajando en el rubro. Primero haciendo pruebas de testing automatizado en Selenium para aplicaciones web. Al tiempo decidi cambiar para probar otras cosas y fui a trabajar en una empresa que hacia paginas web en PHP Symfony. Ah&amp;iacute; aprendi muchas cosas como scripting, manejo y mantenimiento de servidores, y como funciona internamente PHP&amp;nbsp; dado que estaba trabajando con sitios de mucha concurrencia y nosotros manteniamos todo.&lt;/p&gt;&#13;
+&lt;p&gt;Al par de a&amp;ntilde;os ese trabajo no tenia lugar para mas crecimiento as&amp;iacute; que me vine a trabajar a una empresa que no se dedica a paginas web comerciales si no solo de administraci&amp;oacute;n de los productos. En esta empresa estoy a cargo de todo el desarrollo e investigaci&amp;oacute;n del area web, haciendo posible que todos los d&amp;iacute;as estemos manejando miles de ingresos a paginas administrativas que manejan millones de datos diarios.&lt;/p&gt;</target>
       </trans-unit>
     </body>
   </file>

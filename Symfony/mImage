@@ -1,0 +1,20 @@
+src/Maith/Common/AdminBundle/Twig/mAvatarExtension.php:8: * Description of mImageExtension
+src/Maith/Common/AdminBundle/Resources/views/Albums/fileSortable.html.twig:33:          <img alt="{{ file.showName }}" src="{{ file.fullPath | mImage(100, 100, 't') }}" />
+src/Maith/Common/AdminBundle/Resources/views/Albums/showAlbumFiles.html.twig:9:        <img alt="{{ file.showName }}" src="{{ file.fullPath | mImage(150, 150, 'rcce') }}" />
+src/Maith/Common/AdminBundle/Resources/views/Albums/foldersFiles.html.twig:10:        <img alt="{{ file.fileName }}" src="{{ file.fullPath | mImage(100, 100, 'ot') }}" />
+src/Maith/Common/AdminBundle/Resources/views/Albums/fileForm.html.twig:3:        <img alt="{{ file.showName }}" src="{{ file.fullPath | mImage(250, 200, 'mpr') }}" class="edit_media_img" />
+src/Maith/Common/ImageBundle/Twig/mImageExtension.php:9: * Description of mImageExtension
+src/Maith/Common/ImageBundle/Twig/mImageExtension.php:13:class mImageExtension extends \Twig_Extension
+src/Maith/Common/ImageBundle/Twig/mImageExtension.php:27:        new \Twig_SimpleFilter('mImage', array($this, 'mImageFilter'))
+src/Maith/Common/ImageBundle/Twig/mImageExtension.php:31:  public function mImageFilter($image, $width = 400, $height = 400, $type = "t", $inRootDir = false)
+src/Maith/Common/ImageBundle/Resources/config/services.yml:11:        class: "Maith\Common\ImageBundle\Twig\mImageExtension"
+src/Loopita/MetalizadoraBundle/Resources/views/Default/servicios.html.twig:30:          <img alt="{{ project.name[:45] }}" src="{{ project.id | mAvatar(project.fullClassName) | mImage(300, 165, 'rce') }}" />
+src/RSantellan/SitioBundle/Resources/views/Project/index.html.twig:24:                    <img alt="{{ entity.name[:45] }}" src="{{ entity.id | mAvatar(entity.fullClassName, 'main') | mImage(60, 60, 'rce') }}" />
+src/RSantellan/SitioBundle/Resources/views/Default/indexProject.html.twig:12:      <img alt="{{ project.name[:45] }}" src="{{ project.id | mAvatar(project.fullClassName, 'main') | mImage(283, 262, 'rce') }}" />
+src/RSantellan/SitioBundle/Resources/views/Default/aboutme.html.twig:22:                <img alt="" src="{{ 'web/images/100_3863.JPG' | mImage(283, 262, 'rce', true) }}" class="border alignright" title="Align Right" width="200" />
+src/RSantellan/SitioBundle/Resources/views/Default/aboutme.html.twig:26:                <img alt="" src="{{ 'web/images/100_3750.JPG' | mImage(283, 262, 'rce', true) }}" class="border" title="Align Left" width="150" />
+src/RSantellan/SitioBundle/Resources/views/Default/projectsThreeColumns.html.twig:64:          <img alt="{{ project.name[:45] }}" src="{{ project.id | mAvatar(project.fullClassName, 'main') | mImage(283, 262, 'rce') }}" />
+src/RSantellan/SitioBundle/Resources/views/Default/projectsThreeColumns.html.twig:71:              <img alt="{{ project.name[:45] }}" src="{{ project.id | mAvatar(project.fullClassName, 'main') | mImage(566, 524, 'rce') }}" />
+src/RSantellan/SitioBundle/Resources/views/Default/projectShow.html.twig:37:                              <img alt="{{ image.showName }}" src="{{ image.fullPath | mImage(654, 327, 'rce') }}" />
+src/RSantellan/SitioBundle/Resources/views/Default/projectShow.html.twig:50:                    <a class="zoom" href="{{ image.fullPath | mImage(500, 500, 'mpr') }}"><img src="{{ image.fullPath | mImage(500, 500, 'rce') }}" alt="" class="border " /></a>
+src/RSantellan/SitioBundle/Resources/views/Default/projectShow.html.twig:67:                <img alt="{{ complexTag.name[:45] }}" src="{{ complexTag.id | mAvatar(complexTag.fullClassName, 'main') | mImage(100, 100, 'rce') }}" />

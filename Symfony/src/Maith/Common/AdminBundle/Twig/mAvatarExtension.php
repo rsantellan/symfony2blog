@@ -29,9 +29,23 @@ class mAvatarExtension extends \Twig_Extension
     );
   }
   
-  public function mAvatarFilter($objectId, $objectClass, $albumName = "Default")
+  public function mAvatarFilter($objectId, $objectClass, $albumName = "Default", $cache = False)
   {
-    $query = $this->em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :id and a.object_class = :object_class and a.name = :name ")->setParameters(array('id' => $objectId, 'object_class' => $objectClass, 'name' => $albumName));
+    $query = $this->em->createQuery("select f from MaithCommonAdminBundle:mFile f join f.album a where a.object_id = :id and a.object_class = :object_class and a.name = :name order by f.orden ASC");
+    //$query = $this->em->createQuery("select a from MaithCommonAdminBundle:mAlbum a where a.object_id = :id and a.object_class = :object_class and a.name = :name ");
+    $query->setParameters(array('id' => $objectId, 'object_class' => $objectClass, 'name' => $albumName));
+    $query->setMaxResults(1);
+    if($cache)
+    {
+        $query->useResultCache(true, 360);
+    }
+    $file = $query->getOneOrNullResult();
+    if($file !== null)
+    {
+        return $file->getFullPath();
+    }
+    return $this->rootDir."/../web/bundles/maithcommonimage/images/noimage.png";
+    
     $album = $query->getOneOrNullResult();
     if(!is_null($album))
     {

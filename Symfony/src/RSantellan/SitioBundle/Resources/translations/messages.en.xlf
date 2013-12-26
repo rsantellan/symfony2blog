@@ -106,6 +106,27 @@
         <source>rsantellan_site_categories_all</source>
         <target>All</target>
       </trans-unit>
+      <trans-unit id="a07a610880aeab1917bbb68609df25c1" resname="rsantellan_site_about_me_title">
+        <source>rsantellan_site_about_me_title</source>
+        <target>About me</target>
+      </trans-unit>
+      <trans-unit id="390f6126adfe5260d6ca402f78b6ed61" resname="rsantellan_site_about_me_first_paragraph">
+        <source>rsantellan_site_about_me_first_paragraph</source>
+        <target>&lt;p&gt;Hi!! my name is Rodrigo Santell&amp;aacute;n, I am 29 years old and I am a web developer. For the past 5 years I have been creating websites and web pages for different companies.&lt;/p&gt;&#13;
+&lt;p&gt;Since I was a kid I been insterested in computers and programming, I started writing small programs in Pascal and in Visual Basic 6. After I finish high school I work in different jobs for a couple of years and I was living for a while in Ireland so I can improve my English.&amp;nbsp;&lt;br /&gt;When I came back I was ready to focus on programming so I went to study to ORT University the career of Software developer.&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="38b1a04ceb998c12a196f965759dcfeb" resname="rsantellan_site_about_me_second_image_caption">
+        <source>rsantellan_site_about_me_second_image_caption</source>
+        <target>__rsantellan_site_about_me_second_image_caption</target>
+      </trans-unit>
+      <trans-unit id="95328f77333d8847e2a0d4b5790b0a6a" resname="rsantellan_site_about_me_second_paragraph">
+        <source>rsantellan_site_about_me_second_paragraph</source>
+        <target>&lt;p&gt;Since then I been working as a developer. First doing automatizated testing in Selenium for web sites, but after a while I decided to change to try other things and I went to a company that made web sites in PHP Symfony. Because I was working and managing high concurrency sites I learn scripting, mantainance and management of linux servers and how PHP core works.&lt;/p&gt;&#13;
+&lt;p&gt;After a few years there was no more room to improve in the company so I came to work in a company that didn't make public web sites, only administrative web sites to manage the products they sell. Here I'm in charge of all the development and investigation of the web deparment. We make posibles that thouthands of users can manage and search millions of records that the products creates.&lt;/p&gt;&#13;
+&lt;p&gt;In my spare time I started doing some freelancing jobs so I can make different kinds of developing without affecting my other job. A lot of the works I have done you can see them in the projects page!&lt;/p&gt;&#13;
+&lt;p&gt;But not all in my life is work, I have been living with my life partner for a few years now. Both of us like to travel a lot so any chance we can we go so some place around! And recenlty my daughter was born so my life has improved a 100%!!&lt;/p&gt;&#13;
+&lt;p&gt;If you want to learn more about me or you want to know something more about expierence please use the contact form!&lt;br /&gt;Regards&lt;/p&gt;</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

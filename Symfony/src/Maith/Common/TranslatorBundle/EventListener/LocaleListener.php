@@ -32,7 +32,7 @@ class LocaleListener implements EventSubscriberInterface
         //var_dump($request->getLocale());
         //var_dump($request->get('_locale'));
         //var_dump($request->getSession()->get('_locale'));
-        
+        /*
         if (!is_null($request->get('_locale'))) {
             $request->setLocale($request->get('_locale'));
             $request->getSession()->set('_locale', $request->get('_locale'));
@@ -40,7 +40,14 @@ class LocaleListener implements EventSubscriberInterface
             // if no explicit locale has been set on this request, use one from the session
             $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
         }
-        
+        */
+        if ($request->get('_locale') !== null) {
+            $request->setLocale($request->get('_locale'));
+            $request->getSession()->set('_locale', $request->get('_locale'));
+        } else {
+            // if no explicit locale has been set on this request, use one from the session
+            $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
+        }
         //var_dump($request->getLocale());
     }
     

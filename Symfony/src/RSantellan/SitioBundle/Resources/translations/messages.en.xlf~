@@ -104,7 +104,28 @@
       </trans-unit>
       <trans-unit id="fcff28f88b43de91aa45a6a02df6b627" resname="rsantellan_site_categories_all">
         <source>rsantellan_site_categories_all</source>
-        <target>__rsantellan_site_categories_all</target>
+        <target>All</target>
+      </trans-unit>
+      <trans-unit id="a07a610880aeab1917bbb68609df25c1" resname="rsantellan_site_about_me_title">
+        <source>rsantellan_site_about_me_title</source>
+        <target>About me</target>
+      </trans-unit>
+      <trans-unit id="390f6126adfe5260d6ca402f78b6ed61" resname="rsantellan_site_about_me_first_paragraph">
+        <source>rsantellan_site_about_me_first_paragraph</source>
+        <target>&lt;p&gt;Hi!! my name is Rodrigo Santell&amp;aacute;n, I am 29 years old and I am a web developer. For the past 5 years I have been creating websites and web pages for different companies.&lt;/p&gt;&#13;
+&lt;p&gt;Since I was a kid I been insterested in computers and programming, I started writing small programs in Pascal and in Visual Basic 6. After I finish high school I work in different jobs for a couple of years and I was living for a while in Ireland so I can improve my English.&amp;nbsp;&lt;br /&gt;When I came back I was ready to focus on programming so I went to study to ORT University the career of Software developer.&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="38b1a04ceb998c12a196f965759dcfeb" resname="rsantellan_site_about_me_second_image_caption">
+        <source>rsantellan_site_about_me_second_image_caption</source>
+        <target>__rsantellan_site_about_me_second_image_caption</target>
+      </trans-unit>
+      <trans-unit id="95328f77333d8847e2a0d4b5790b0a6a" resname="rsantellan_site_about_me_second_paragraph">
+        <source>rsantellan_site_about_me_second_paragraph</source>
+        <target>&lt;p&gt;Desde entonces he estado trabajando en el rubro. Primero haciendo pruebas de testing automatizado en Selenium para aplicaciones web. Al tiempo decidi cambiar para probar otras cosas y fui a trabajar en una empresa que hacia paginas web en PHP Symfony. Ah&amp;iacute; aprendi muchas cosas como scripting, manejo y mantenimiento de servidores, y como funciona internamente PHP&amp;nbsp; dado que estaba trabajando con sitios de mucha concurrencia y nosotros manteniamos todo.&lt;/p&gt;&#13;
+&lt;p&gt;Al par de a&amp;ntilde;os ese trabajo no tenia lugar para mas crecimiento as&amp;iacute; que me vine a trabajar a una empresa que no se dedica a paginas web comerciales si no solo de administraci&amp;oacute;n de los productos. En esta empresa estoy a cargo de todo el desarrollo e investigaci&amp;oacute;n del area web, haciendo posible que todos los d&amp;iacute;as estemos manejando miles de ingresos a paginas administrativas que manejan millones de datos diarios.&lt;/p&gt;&#13;
+&lt;p&gt;En mi tiempo libre me he dedicado a hacer trabajo freelance para poder mantenerme haciendo cosas diferentes sin que afecten mi trabajo. Muchos de los trabajos los podran ver en los proyectos realizados!&lt;/p&gt;&#13;
+&lt;p&gt;Pero todo en mi vida no es trabajo, desde hace un tiempo que estoy viviendo con mi compa&amp;ntilde;era con la cual nos encanta ir de viaje para todos lados que podamos y hace poco nacio mi hija que realmente hizo que mi vida diera un cambio para mejor en un 100%!!&lt;/p&gt;&#13;
+&lt;p&gt;Si quieren saber algo mas de mi o quieren preguntarme algo no duden en utilizar el formulario de contacto!! Saludos&lt;/p&gt;</target>
       </trans-unit>
     </body>
   </file>
