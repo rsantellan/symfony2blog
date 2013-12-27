@@ -55,6 +55,14 @@ class Category
      */
     private $projects;
 
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
+    
+    
     public function setId($id)
     {
       $this->id = $id;
@@ -180,5 +188,10 @@ class Category
     public function getSlug()
     {
         return $this->slug;
+    }
+    
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

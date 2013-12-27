@@ -16,9 +16,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-{% if error %}
-<div>{{ error|trans }}</div>
-{% endif %}
+
 
 <div id="login-wrapper">
   <div id="inner-wrapper">
@@ -37,10 +35,10 @@
 		<div>
 		</div>
 
-		<div class="hs-error ">
-		</div>
-
-		<div class="hs-error ">
+		<div class="hs-error {% if error %} visible {% endif %}">
+            {% if error %}
+                <p>{{ error|trans }}</p>
+            {% endif %}
 		</div>
 
 		<div id="submit">

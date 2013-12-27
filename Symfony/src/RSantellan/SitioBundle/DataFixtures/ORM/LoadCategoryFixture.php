@@ -7,14 +7,14 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use FOS\UserBundle\Model\User;
+use RSantellan\SitioBundle\Entity\Category;
 
 /**
  * Description of LoadUserFixture
  *
  * @author Rodrigo Santellan
  */
-class LoadUserFixture implements FixtureInterface, OrderedFixtureInterface, ContainerAwareInterface{
+class LoadCategoryFixture implements FixtureInterface, OrderedFixtureInterface, ContainerAwareInterface{
     
     /**
      * @var ContainerInterface
@@ -22,18 +22,25 @@ class LoadUserFixture implements FixtureInterface, OrderedFixtureInterface, Cont
     private $container;
     
     public function getOrder() {
-        return 1;
+        return 2;
     }
 
     public function load(ObjectManager $manager) {
-        $userManager = $this->container->get('fos_user.user_manager');
-        $user = $userManager->createUser();
-        $user->setUsername('admin');
-        $user->setEmail('user@domain.com');
-        $user->setPlainPassword('1234');
-        $user->setEnabled(true);
-        $user->setSuperAdmin(true);
-        $manager->persist($user);
+        $websites = new Category();
+        $websites->setName("Sitios web");
+        $websites->setTranslatableLocale('es');
+        $manager->persist($websites);
+        
+        $scripting = new Category();
+        $scripting->setName("Scripting");
+        $scripting->setTranslatableLocale('es');
+        $manager->persist($scripting);
+        
+        $wordpress = new Category();
+        $wordpress->setName("Wordpress");
+        $wordpress->setTranslatableLocale('es');
+        $manager->persist($wordpress);
+        
         $manager->flush();
     }
 

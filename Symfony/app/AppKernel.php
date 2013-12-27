@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Maith\Common\UsersBundle\MaithCommonUsersBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Loopita\MetalizadoraBundle\LoopitaMetalizadoraBundle(),
+            //new Loopita\MetalizadoraBundle\LoopitaMetalizadoraBundle(),
             new Maith\Common\AdminBundle\MaithCommonAdminBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Maith\Common\ImageBundle\MaithCommonImageBundle(),
