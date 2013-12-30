@@ -58,6 +58,12 @@ class ComplexTag
      */
     private $projects;
 
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
     
     function __construct() {
       $this->projects = new \Doctrine\Common\Collections\ArrayCollection();
@@ -189,4 +195,8 @@ class ComplexTag
         return $this->getName();
     }
 
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
 }
