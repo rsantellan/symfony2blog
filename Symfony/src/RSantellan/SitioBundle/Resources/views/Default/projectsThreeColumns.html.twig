@@ -39,10 +39,16 @@
 
     <!-- start filter -->
     <ul id="filters" class="clearfix">
-      <li><a href="#" data-filter="*" class="selected">{% trans %}rsantellan_site_categories_all{% endtrans %}</a></li>
-      {% for category in categories %}
+      {% if categories|length > 0 %}
+            <li><a href="#" data-filter="*" class="selected">{% trans %}rsantellan_site_categories_all{% endtrans %}</a></li>
+            {% for category in categories %}
+              <li><a href="#" data-filter=".{{ category.id }}">{{ category.name }}</a></li>
+            {% endfor %}
+      {% else %}
         <li><a href="#" data-filter=".{{ category.id }}">{{ category.name }}</a></li>
-      {% endfor %}
+      {% endif %}
+      
+      
     </ul>
     <!-- end filter -->
 

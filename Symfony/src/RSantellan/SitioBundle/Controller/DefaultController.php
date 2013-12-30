@@ -38,9 +38,11 @@ class DefaultController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
       $category = $em->getRepository("RSantellanSitioBundle:Category")->findOneBySlug($slug);
-      $queryProjects = $em->createQuery("select p from RSantellanSitioBundle:Project p where p.category = :category order by p.id desc")->setParameter('category', $category->getId());
-      $projects = $queryProjects->useResultCache(true, 360)->getResult();//$em->getRepository('RSantellanSitioBundle:Project')->findAll();
-      $response = $this->render('RSantellanSitioBundle:Default:projectsThreeColumns.html.twig', array('activemenu' => 'projects', 'page_title' => $category->getName(), 'projects' => $projects, 'categories' => array()));
+      $repository = $em->getRepository("RSantellanSitioBundle:Project");
+      $queryProjects = $repository->createQueryBuilder('p');
+      $queryProjects->select('p')->leftJoin('p.category', 'c')->where('c.id = :category')->setParameter('category', $category->getId());
+      $projects = $queryProjects->getQuery()->useResultCache(true, 360)->getResult();//$em->getRepository('RSantellanSitioBundle:Project')->findAll();
+      $response = $this->render('RSantellanSitioBundle:Default:projectsThreeColumns.html.twig', array('activemenu' => 'projects', 'page_title' => $category->getName(), 'projects' => $projects, 'categories' => array(), 'category' => $category));
       $response->setPublic();
       $response->setSharedMaxAge("3600");
       return $response;

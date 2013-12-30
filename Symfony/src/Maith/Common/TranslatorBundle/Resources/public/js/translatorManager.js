@@ -21,6 +21,7 @@ translatorManager.prototype = {
     {
         var self = this;
         self.removeEditorOpenInstances();
+        self._selected_key = null;
         var my_waiting_noty = callNoty("Procesando", "information");
         $.ajax({
           url: $(form).attr('action'),
@@ -108,10 +109,9 @@ translatorManager.prototype = {
     
     doShowHide: function (key)
     {
-      
       $('#'+key+'_translation').toggle();
       var self = this;
-      self.removeEditorOpenInstances();      
+      translatorManager.getInstance().removeEditorOpenInstances();      
       self._selected_key = key;
       $(".translation_container_data").each(function(index, data){
           if(data.id != "tranlation_container_data_"+key)
@@ -128,7 +128,6 @@ translatorManager.prototype = {
           }
       });
       self._toggle = ! self._toggle;
-      //console.info($('#'+key+'_translation textarea'));
       
       var tinyOptions = {
           force_p_newlines: false,
@@ -143,8 +142,6 @@ translatorManager.prototype = {
       };
       //console.info(tinyOptions);
       $('#'+key+'_translation textarea').tinymce(tinyOptions);
-      
-      
     }
 }
 
