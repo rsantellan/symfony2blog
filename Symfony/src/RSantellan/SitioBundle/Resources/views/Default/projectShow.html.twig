@@ -33,9 +33,11 @@
                 <div id="slidesjs-container">
                     <div id="slides-item">
                         <div class="slides_container">
-                            {% for image in mainAlbums.files %}
-                              <img alt="{{ image.showName }}" src="{{ image.fullPath | mImage(654, 327, 'rce') }}" />
-                            {% endfor %}
+                            {% if mainAlbums is not null %}
+                                {% for image in mainAlbums.files %}
+                                  <img alt="{{ image.showName }}" src="{{ image.fullPath | mImage(654, 327, 'rce') }}" />
+                                {% endfor %}
+                            {% endif %}
                         </div><!-- .slides_container -->
                     </div><!-- slides-item -->
                 </div><!-- #container -->
@@ -45,13 +47,14 @@
                     <h6>{{ project.tipoDeTrabajo }} - {{ project.cliente }}</h6>	
                     </div>
                 <p>{{ project.description }}</p>
-                {% for image in imagesAlbum.files %}
-                  <div class="four-column {% if loop.index is divisible by(4) %}column-last{% endif %}">
-                    <a class="zoom" href="{{ image.fullPath | mImage(500, 500, 'mpr') }}"><img src="{{ image.fullPath | mImage(500, 500, 'rce') }}" alt="" class="border " /></a>
-                    <p class="description">{{ image.showName }}</p>
-                </div>  
-                {% endfor %}
-                
+                {% if imagesAlbum is not null %}
+                    {% for image in imagesAlbum.files %}
+                      <div class="four-column {% if loop.index is divisible by(4) %}column-last{% endif %}">
+                        <a class="zoom" href="{{ image.fullPath | mImage(500, 500, 'mpr') }}"><img src="{{ image.fullPath | mImage(500, 500, 'rce') }}" alt="" class="border " /></a>
+                        <p class="description">{{ image.showName }}</p>
+                    </div>  
+                    {% endfor %}
+                {% endif %}
             </div><!-- text-item -->				
         </div><!-- entry-item -->
 
@@ -64,7 +67,7 @@
         {% for complexTag in project.complexTags %}
             <h4>{{ complexTag.name }}</h4>
             <p>
-                <img alt="{{ complexTag.name[:45] }}" src="{{ complexTag.id | mAvatar(complexTag.fullClassName, 'main') | mImage(100, 100, 'rce') }}" />
+                <img alt="{{ complexTag.name[:45] }}" src="{{ complexTag.id | mAvatar(complexTag.fullClassName, 'main') | mImage(70, 70, 'rce') }}" />
             </p>
             <p>{{ complexTag.description }}</p>
             <hr/>

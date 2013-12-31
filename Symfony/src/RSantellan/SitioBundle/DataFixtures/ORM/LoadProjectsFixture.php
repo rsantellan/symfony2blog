@@ -2,7 +2,7 @@
 
 namespace RSantellan\SitioBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -14,7 +14,7 @@ use RSantellan\SitioBundle\Entity\Project;
  *
  * @author Rodrigo Santellan
  */
-class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, ContainerAwareInterface{
+class LoadProjectsFixture extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface{
     
     /**
      * @var ContainerInterface
@@ -37,7 +37,16 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= "las inscripciones se a agilizado";
         $cnea->setDescription($description);
         $cnea->setTranslatableLocale('es');
-        $manager->persist($cnea);
+        $cnea->addCategory($this->getReference('category-web'));
+        $cnea->addComplexTag($this->getReference('block-forms'));
+        $cnea->addComplexTag($this->getReference('block-codeigniter'));
+        $cnea->addComplexTag($this->getReference('block-mysql'));
+        $cnea->addComplexTag($this->getReference('block-php'));
+        $cnea->addComplexTag($this->getReference('block-javascript'));
+        $cnea->addComplexTag($this->getReference('block-jquery'));
+        $cnea->addComplexTag($this->getReference('block-jqueryui'));
+        $cnea->addComplexTag($this->getReference('block-texts'));
+        
         
         $metalizadorauruguaya = new Project();
         $metalizadorauruguaya->setName("Metalizadora Uruguaya");
@@ -49,7 +58,16 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= "sin conocimiento previo de HTML o CSS";
         $metalizadorauruguaya->setDescription($description);
         $metalizadorauruguaya->setTranslatableLocale('es');
-        $manager->persist($metalizadorauruguaya);
+        $metalizadorauruguaya->addCategory($this->getReference('category-web'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-codeigniter'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-mysql'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-php'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-javascript'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-jquery'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-jqueryui'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-texts'));
+        $metalizadorauruguaya->addComplexTag($this->getReference('block-slider'));
+        
         
         $datosaccuchek = new Project();
         $datosaccuchek->setName("Accu-check Uruguay");
@@ -60,7 +78,16 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= "Con un sistema de subir facturas y agregar personas facilmente se pueden localizar todas las ventas realizadas en segundos para una rapida respuesta al cliente final. ";
         $datosaccuchek->setDescription($description);
         $datosaccuchek->setTranslatableLocale('es');
-        $manager->persist($datosaccuchek);
+        $datosaccuchek->addCategory($this->getReference('category-web'));
+        $datosaccuchek->addComplexTag($this->getReference('block-forms'));
+        $datosaccuchek->addComplexTag($this->getReference('block-codeigniter'));
+        $datosaccuchek->addComplexTag($this->getReference('block-mysql'));
+        $datosaccuchek->addComplexTag($this->getReference('block-php'));
+        $datosaccuchek->addComplexTag($this->getReference('block-javascript'));
+        $datosaccuchek->addComplexTag($this->getReference('block-jquery'));
+        $datosaccuchek->addComplexTag($this->getReference('block-jqueryui'));
+        $datosaccuchek->addComplexTag($this->getReference('block-texts'));
+        
         
         $surco = new Project();
         $surco->setName("Surco Uruguay");
@@ -70,7 +97,14 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= " En la misma van contestan preguntas multiple opción haciendo que el semaforo se prende en relación a las preguntas.";
         $surco->setDescription($description);
         $surco->setTranslatableLocale('es');
-        $manager->persist($surco);
+        $surco->addCategory($this->getReference('category-web'));
+        $surco->addComplexTag($this->getReference('block-mysql'));
+        $surco->addComplexTag($this->getReference('block-php'));
+        $surco->addComplexTag($this->getReference('block-javascript'));
+        $surco->addComplexTag($this->getReference('block-jquery'));
+        $surco->addComplexTag($this->getReference('block-jqueryui'));
+        $surco->addComplexTag($this->getReference('block-html'));
+        
         
         $c5 = new Project();
         $c5->setName("C5 Negocios Inmobiliarios");
@@ -80,7 +114,16 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= " buscar las mismas pudiendo tener una primera aproximación a traves de las imagenes subidas.";
         $c5->setDescription($description);
         $c5->setTranslatableLocale('es');
-        $manager->persist($c5);
+        $c5->addCategory($this->getReference('category-web'));
+        $c5->addComplexTag($this->getReference('block-forms'));
+        $c5->addComplexTag($this->getReference('block-codeigniter'));
+        $c5->addComplexTag($this->getReference('block-mysql'));
+        $c5->addComplexTag($this->getReference('block-php'));
+        $c5->addComplexTag($this->getReference('block-javascript'));
+        $c5->addComplexTag($this->getReference('block-jquery'));
+        $c5->addComplexTag($this->getReference('block-jqueryui'));
+        $c5->addComplexTag($this->getReference('block-texts'));
+        
         
         $rentnchill = new Project();
         $rentnchill->setName("Rent and Chill");
@@ -90,7 +133,21 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= "Se le creo y mejoro el sistema de newsletter para que soporte todos los mismos, se integro con PayPal y se mejoro el administrador.";
         $rentnchill->setDescription($description);
         $rentnchill->setTranslatableLocale('es');
-        $manager->persist($rentnchill);
+        $rentnchill->addCategory($this->getReference('category-web'));
+        $rentnchill->addCategory($this->getReference('category-scripting'));
+        $rentnchill->addComplexTag($this->getReference('block-forms'));
+        $rentnchill->addComplexTag($this->getReference('block-wordpress'));
+        $rentnchill->addComplexTag($this->getReference('block-mysql'));
+        $rentnchill->addComplexTag($this->getReference('block-php'));
+        $rentnchill->addComplexTag($this->getReference('block-javascript'));
+        $rentnchill->addComplexTag($this->getReference('block-jquery'));
+        $rentnchill->addComplexTag($this->getReference('block-jqueryui'));
+        $rentnchill->addComplexTag($this->getReference('block-texts'));
+        $rentnchill->addComplexTag($this->getReference('block-bash'));
+        $rentnchill->addComplexTag($this->getReference('block-slider'));
+        $rentnchill->addComplexTag($this->getReference('block-ecommerce'));
+        
+        
 
         $airsoft = new Project();
         $airsoft->setName("Airsoft Uruguay");
@@ -101,7 +158,22 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= "Al mismo se le hace un manteniento para que continue funcionando agilmente.";
         $airsoft->setDescription($description);
         $airsoft->setTranslatableLocale('es');
-        $manager->persist($airsoft);
+        $airsoft->addCategory($this->getReference('category-web'));
+        $airsoft->addCategory($this->getReference('category-wordpress'));
+        $airsoft->addCategory($this->getReference('category-scripting'));
+        $airsoft->addComplexTag($this->getReference('block-forms'));
+        $airsoft->addComplexTag($this->getReference('block-wordpress'));
+        $airsoft->addComplexTag($this->getReference('block-mysql'));
+        $airsoft->addComplexTag($this->getReference('block-php'));
+        $airsoft->addComplexTag($this->getReference('block-javascript'));
+        $airsoft->addComplexTag($this->getReference('block-jquery'));
+        $airsoft->addComplexTag($this->getReference('block-jqueryui'));
+        $airsoft->addComplexTag($this->getReference('block-bash'));
+        $airsoft->addComplexTag($this->getReference('block-slider'));
+        $airsoft->addComplexTag($this->getReference('block-desgin'));
+        $airsoft->addComplexTag($this->getReference('block-html'));
+        
+        
         
         $ums = new Project();
         $ums->setName("UMS");
@@ -111,8 +183,64 @@ class LoadProjectsFixture implements FixtureInterface, OrderedFixtureInterface, 
         $description .= "Con el cual el mismo pudo salir a producción.";
         $ums->setDescription($description);
         $ums->setTranslatableLocale('es');
-        $manager->persist($ums);
+        $ums->addCategory($this->getReference('category-web'));
+        $ums->addCategory($this->getReference('category-scripting'));
+        $ums->addComplexTag($this->getReference('block-html'));
+        $ums->addComplexTag($this->getReference('block-mysql'));
+        $ums->addComplexTag($this->getReference('block-php'));
+        $ums->addComplexTag($this->getReference('block-javascript'));
+        $ums->addComplexTag($this->getReference('block-jquery'));
+        $ums->addComplexTag($this->getReference('block-bash'));
+        $ums->addComplexTag($this->getReference('block-webscrapping'));
+        $ums->addComplexTag($this->getReference('block-python'));
         
+        $datascrapping = new Project();
+        $datascrapping->setName("Data analytics");
+        $datascrapping->setCliente("Data analytics");
+        $datascrapping->setTipoDeTrabajo("Obtención de datos a traves de script para obtener datos de paginas web");
+        $description = "Mediante web scrapping se obtuvieron todos los datos necesarios para popular ";
+        $description .= "una base de datos con datos obtenidos de diferentes sitios web";
+        $datascrapping->setDescription($description);
+        $datascrapping->setTranslatableLocale('es');
+        $datascrapping->addCategory($this->getReference('category-web'));
+        $datascrapping->addCategory($this->getReference('category-scripting'));
+        $datascrapping->addComplexTag($this->getReference('block-bash'));
+        $datascrapping->addComplexTag($this->getReference('block-webscrapping'));
+        $datascrapping->addComplexTag($this->getReference('block-python'));
+        
+        $rsantellan = new Project();
+        $rsantellan->setName("Rodrigo Santellan");
+        $rsantellan->setCliente("Rodrigo Santellan");
+        $rsantellan->setTipoDeTrabajo("Sitio intitucional");
+        $description = "Creación del sitio que estas viendo!";
+        $rsantellan->setDescription($description);
+        $rsantellan->setTranslatableLocale('es');
+        $rsantellan->addCategory($this->getReference('category-web'));
+        $rsantellan->addCategory($this->getReference('category-scripting'));
+        $rsantellan->addComplexTag($this->getReference('block-symfony2'));
+        $rsantellan->addComplexTag($this->getReference('block-html'));
+        $rsantellan->addComplexTag($this->getReference('block-desgin'));
+        $rsantellan->addComplexTag($this->getReference('block-texts'));
+        $rsantellan->addComplexTag($this->getReference('block-slider'));
+        $rsantellan->addComplexTag($this->getReference('block-mysql'));
+        $rsantellan->addComplexTag($this->getReference('block-php'));
+        $rsantellan->addComplexTag($this->getReference('block-javascript'));
+        $rsantellan->addComplexTag($this->getReference('block-jquery'));
+        $rsantellan->addComplexTag($this->getReference('block-jqueryui'));
+        $rsantellan->addComplexTag($this->getReference('block-bash'));
+        $rsantellan->addComplexTag($this->getReference('block-webscrapping'));
+        $rsantellan->addComplexTag($this->getReference('block-python'));
+        
+        $manager->persist($ums);
+        $manager->persist($c5);
+        $manager->persist($rentnchill);
+        $manager->persist($airsoft);
+        $manager->persist($datosaccuchek);
+        $manager->persist($metalizadorauruguaya);
+        $manager->persist($cnea);
+        $manager->persist($surco);
+        $manager->persist($datascrapping);
+        $manager->persist($rsantellan);
         
         $manager->flush();
     }

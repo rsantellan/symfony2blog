@@ -2,7 +2,7 @@
 
 namespace RSantellan\SitioBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -14,7 +14,7 @@ use RSantellan\SitioBundle\Entity\ComplexTag;
  *
  * @author Rodrigo Santellan
  */
-class LoadBlocksFixture implements FixtureInterface, OrderedFixtureInterface, ContainerAwareInterface{
+class LoadBlocksFixture extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface{
     
     /**
      * @var ContainerInterface
@@ -51,7 +51,7 @@ class LoadBlocksFixture implements FixtureInterface, OrderedFixtureInterface, Co
         $manager->persist($jqueryui);
         
         $slider = new ComplexTag();
-        $slider->setName("Sliders");
+        $slider->setName("Slideshows");
         $slider->setDescription("Este sitio contiene efectos de imagenes creados con sliders");
         $slider->setTranslatableLocale('es');
         $manager->persist($slider);
@@ -146,7 +146,35 @@ class LoadBlocksFixture implements FixtureInterface, OrderedFixtureInterface, Co
         $html->setTranslatableLocale('es');
         $manager->persist($html);
         
+        $ecommmerce = new ComplexTag();
+        $ecommmerce->setName("Integracion con e-commerce");
+        $ecommmerce->setDescription("El sitio soporta medios de pagos");
+        $ecommmerce->setTranslatableLocale('es');
+        $manager->persist($ecommmerce);
+        
         $manager->flush();
+        
+        $this->addReference('block-php', $php);
+        $this->addReference('block-javascript', $javascript);
+        $this->addReference('block-jquery', $jquery);
+        $this->addReference('block-jqueryui', $jqueryui);
+        $this->addReference('block-slider', $slider);
+        $this->addReference('block-mysql', $mysql);
+        $this->addReference('block-sqlite', $sqlite);
+        $this->addReference('block-python', $python);
+        $this->addReference('block-oracle', $oracle);
+        $this->addReference('block-wordpress', $wordpress);
+        $this->addReference('block-codeigniter', $codeigniter);
+        $this->addReference('block-symfony', $symfony);
+        $this->addReference('block-symfony2', $symfony2);
+        $this->addReference('block-bash', $bash);
+        $this->addReference('block-webscrapping', $webscrapping);
+        $this->addReference('block-html', $html);
+        $this->addReference('block-forms', $formularios);
+        $this->addReference('block-forum', $foro);
+        $this->addReference('block-texts', $textosDinamicos);
+        $this->addReference('block-desgin', $design);
+        $this->addReference('block-ecommerce', $ecommmerce);
         
         
     }
