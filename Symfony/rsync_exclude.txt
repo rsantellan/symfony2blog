@@ -1,0 +1,16 @@
+app/cache/*
+web/upload/*
+app/logs/*
+
+# SCM files
+.arch-params
+.bzr
+_darcs
+.git
+.hg
+.monotone
+.svn
+CVS
+
+
+#rsync --dry-run -azC --force --delete --progress --exclude-from="rsync_exclude.txt" -e "ssh -p2200" ./ rodrigoa@rodrigosantellan.com:/home/rodrigos/site
