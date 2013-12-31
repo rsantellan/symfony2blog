@@ -202,7 +202,6 @@ class LoadProjectsFixture extends AbstractFixture implements OrderedFixtureInter
         $description .= "una base de datos con datos obtenidos de diferentes sitios web";
         $datascrapping->setDescription($description);
         $datascrapping->setTranslatableLocale('es');
-        $datascrapping->addCategory($this->getReference('category-web'));
         $datascrapping->addCategory($this->getReference('category-scripting'));
         $datascrapping->addComplexTag($this->getReference('block-bash'));
         $datascrapping->addComplexTag($this->getReference('block-webscrapping'));
