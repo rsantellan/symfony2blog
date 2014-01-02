@@ -80,6 +80,18 @@ class DefaultController extends Controller
       {
          @unlink($file->getRealpath());
       }
+      $finderTwig = new Finder();
+      $finderTwig->files()->in($cacheDir.DIRECTORY_SEPARATOR."*".DIRECTORY_SEPARATOR."twig");
+      foreach($finderTwig as $file)
+      {
+         @unlink($file->getRealpath());
+      }
+      $finderHttpCache = new Finder();
+      $finderHttpCache->files()->in($cacheDir.DIRECTORY_SEPARATOR."*".DIRECTORY_SEPARATOR."http_cache");
+      foreach($finderHttpCache as $file)
+      {
+         @unlink($file->getRealpath());
+      }
       $response = new JsonResponse();
       $response->setData(array('status' => 'OK'));
       return $response;
