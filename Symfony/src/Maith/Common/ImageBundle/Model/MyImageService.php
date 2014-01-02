@@ -4,6 +4,8 @@ namespace Maith\Common\ImageBundle\Model;
 
 
 use Imagine\Imagick\Imagine as mImagick;
+use Imagine\Gd\Imagine as gdImagine;
+use Imagine\Gmagick\Imagine as gMagick;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
 use Imagine\Image\Color;
@@ -20,7 +22,22 @@ class MyImageService {
   private $root_dir = NULL;
   
   public function __construct() {
-    $this->imageInterface = new mImagick();
+    if (class_exists('Imagick'))
+    {
+        $this->imageInterface = new mImagick();
+    }
+    else
+    {
+        if (class_exists('Gmagick'))
+        {
+            $this->imageInterface = new gMagick();
+        }
+        else 
+        {
+            $this->imageInterface = new gdImagine();
+        }
+    }
+    
     $kernel_container = null;
     if(get_class($GLOBALS['kernel']) == "AppCache")
     {
