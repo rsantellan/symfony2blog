@@ -1,5 +1,6 @@
 {% extends 'RSantellanSitioBundle::layout.html.twig' %}
 
+{% block title %}Rodrigo Santellan - {% if (page_title is defined) %}{% trans %}rsantellan_site_category{% endtrans %}{{ page_title }}{% else %}{% trans %}rsantellan_site_projects{% endtrans %}{% endif %}{% endblock %}
 {% block javascripts %}
 <script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/jquery.isotope.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/rsantellansitio/js/jquery.colorbox-min.js') }}"></script>
@@ -19,7 +20,7 @@
     <div class="sixteen columns">
       <h4 class="page-title">
       {% if (page_title is defined) %}
-        {% trans %}rsantellan_site_category{% endtrans %}{{ page_title }}
+        {% trans %}rsantellan_site_category{% endtrans %} {{ page_title }}
       {% else %}
           {% trans %}rsantellan_site_projects{% endtrans %}
       {% endif %}
