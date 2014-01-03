@@ -31,6 +31,10 @@ rsantellan_sitio_projects:
     pattern:  /{_locale}/projects.html
     defaults: { _controller: RSantellanSitioBundle:Default:projects}  
 
+r_santellan_sitio_homepage_locale:
+    pattern:  /{_locale}
+    defaults: { _controller: RSantellanSitioBundle:Default:index }
+    
 r_santellan_sitio_homepage:
     pattern:  /
     defaults: { _controller: RSantellanSitioBundle:Default:index }
