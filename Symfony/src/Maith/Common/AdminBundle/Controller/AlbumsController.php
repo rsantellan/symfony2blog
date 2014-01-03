@@ -145,6 +145,36 @@ class AlbumsController extends Controller
       return $this->render('MaithCommonAdminBundle:Albums:upload.html.twig', array('albumId' => $id, 'dataSession' => urldecode($encrypt->encrypt(session_id()))));
     }
     
+    private function retrieveExtensionAndMiMeType($filename)
+    {
+        /* Figure out the MIME type (if not specified) */
+        $known_mime_types = array(
+            "pdf" => "application/pdf",
+            "txt" => "text/plain",
+            "html" => "text/html",
+            "htm" => "text/html",
+            "exe" => "application/octet-stream",
+            "zip" => "application/zip",
+            "doc" => "application/msword",
+            "xls" => "application/vnd.ms-excel",
+            "ppt" => "application/vnd.ms-powerpoint",
+            "gif" => "image/gif",
+            "png" => "image/png",
+            "jpeg" => "image/jpg",
+            "jpg" => "image/jpg",
+            "php" => "text/plain"
+        );
+
+        
+        $file_extension = strtolower(substr(strrchr($filename, "."), 1));
+        if (array_key_exists($file_extension, $known_mime_types)) {
+            $mime_type = $known_mime_types[$file_extension];
+        } else {
+            $mime_type = "application/force-download";
+        }
+        
+        return array('extension' => $file_extension, 'mime' => $mime_type);
+    }
     
     public function doFormUploadAction()
     {
@@ -157,7 +187,17 @@ class AlbumsController extends Controller
       if (!file_exists($targetDir))
         @mkdir($targetDir);
       $fileUploaded = $this->container->get('request')->files->get('file');
-      $name = uniqid() . '.' . $fileUploaded->guessExtension();
+      $mimeAndName = null;
+      if(function_exists('finfo_open'))
+      {
+          $name = uniqid() . '.' . $fileUploaded->guessExtension();
+      }
+      else
+      {
+          $mimeAndName = $this->retrieveExtensionAndMiMeType($fileUploaded->getClientOriginalName());
+          $name = uniqid(). '.'.$mimeAndName['extension'];
+      }
+      
       $movedFile = $fileUploaded->move($targetDir, $name);
       if ($movedFile) 
       {
@@ -166,7 +206,14 @@ class AlbumsController extends Controller
         $myFile->setAlbum($em->getRepository("MaithCommonAdminBundle:mAlbum")->find($albumId));
         $myFile->setName($name);
         $myFile->setPath($targetDir);
-        $myFile->setType($movedFile->getMimeType());
+        if($mimeAndName === null)
+        {
+            $myFile->setType($movedFile->getMimeType());
+        }
+        else
+        {
+            $myFile->setType($mimeAndName['mime']);
+        }
         $myFile->setSfPath($sf_targetDir);
         $em->persist($myFile);
         $em->flush();
