@@ -27,6 +27,11 @@ security:
                 path: /%locale%/logout
                 target: /
             anonymous: ~
+            remember_me:
+                key:      rodrigoSantellanSites
+                lifetime: 3600
+                path:     /
+                domain:   ~            
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

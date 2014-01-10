@@ -43,3 +43,6 @@ r_santellan_sitio_admin:
     pattern:  /admin
     defaults: { _controller: RSantellanSitioBundle:Default:admin }
 
+r_santellan_sitio_admin_locale:
+    pattern:  /{_locale}/admin
+    defaults: { _controller: RSantellanSitioBundle:Default:admin }

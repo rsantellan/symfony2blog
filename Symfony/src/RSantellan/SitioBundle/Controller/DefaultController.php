@@ -4,6 +4,7 @@ namespace RSantellan\SitioBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use RSantellan\SitioBundle\Form\ContactType;
 
 class DefaultController extends Controller
@@ -75,6 +76,9 @@ class DefaultController extends Controller
     
     public function adminAction()
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN') && false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN') ) {
+            throw new AccessDeniedException();
+        }
         return $this->render('RSantellanSitioBundle:Admin:index.html.twig');
     }
     
