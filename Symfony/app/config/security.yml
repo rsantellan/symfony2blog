@@ -19,9 +19,13 @@ security:
         main:
             pattern:    ^/
             form_login:
+                login_path: /%locale%/login
+                check_path: /%locale%/login_check
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
-            logout: true
+            logout:
+                path: /%locale%/logout
+                target: /
             anonymous: ~
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
