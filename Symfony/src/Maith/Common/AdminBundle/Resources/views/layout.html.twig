@@ -10,7 +10,7 @@
     {% block stylesheets %}{% endblock %}
     
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-1.10.1.min.js') }}"></script>    
-    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-migrate-1.2.1.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/jquery-migrate-1.2.1.min.js') }}"></script>
     
     <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/adminManager.js') }}"></script>
     {% block javascripts %}{% endblock %}
@@ -38,5 +38,6 @@
       <a href="#">Contact Me</a>
       <div class="espacio"></div>
     </div>
+    <input type="hidden" value="{{ path('maith_admin_jquery_datatable_langs')}}" id="jquery-datatable-langs" />
   </body>
 </html>

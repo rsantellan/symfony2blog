@@ -1,9 +1,17 @@
 {% extends 'RSantellanSitioBundle:Admin:layout.html.twig' %}
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/datatable/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/maithcommonadmin/js/datatable/simpleStartTable.js') }}"></script>
+{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/datatable/jquery.dataTables.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/maithcommonadmin/css/datatable/data_table_admin.css') }}" />
+{% endblock %}
 {% block body -%}
     <h1>Project list</h1>
 
-    <table class="records_list">
+    <table class="records_list" id="table_data">
         <thead>
             <tr>
                 <th></th>
@@ -42,7 +50,9 @@
         </tbody>
     </table>
 
-        <ul>
+    <hr/>
+    
+    <ul>
         <li>
             <a href="{{ path('rsproject_new') }}">
                 Create a new entry

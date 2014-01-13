@@ -8,6 +8,10 @@ maith_admin_homepage:
 
 #
 
+maith_admin_jquery_datatable_langs:
+    pattern:  /{_locale}/admin/datatablelang.html
+    defaults: { _controller: MaithCommonAdminBundle:Default:retrieveDataTableTexts }  
+
 maith_admin_media_download_file:
     pattern:  /admin/media/download-file/{id}
     defaults: { _controller: MaithCommonAdminBundle:Albums:downloadOriginalFile }
