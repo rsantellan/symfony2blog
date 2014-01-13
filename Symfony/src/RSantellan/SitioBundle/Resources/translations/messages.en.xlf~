@@ -121,11 +121,47 @@
       </trans-unit>
       <trans-unit id="95328f77333d8847e2a0d4b5790b0a6a" resname="rsantellan_site_about_me_second_paragraph">
         <source>rsantellan_site_about_me_second_paragraph</source>
-        <target>&lt;p&gt;Desde entonces he estado trabajando en el rubro. Primero haciendo pruebas de testing automatizado en Selenium para aplicaciones web. Al tiempo decidi cambiar para probar otras cosas y fui a trabajar en una empresa que hacia paginas web en PHP Symfony. Ah&amp;iacute; aprendi muchas cosas como scripting, manejo y mantenimiento de servidores, y como funciona internamente PHP&amp;nbsp; dado que estaba trabajando con sitios de mucha concurrencia y nosotros manteniamos todo.&lt;/p&gt;&#13;
-&lt;p&gt;Al par de a&amp;ntilde;os ese trabajo no tenia lugar para mas crecimiento as&amp;iacute; que me vine a trabajar a una empresa que no se dedica a paginas web comerciales si no solo de administraci&amp;oacute;n de los productos. En esta empresa estoy a cargo de todo el desarrollo e investigaci&amp;oacute;n del area web, haciendo posible que todos los d&amp;iacute;as estemos manejando miles de ingresos a paginas administrativas que manejan millones de datos diarios.&lt;/p&gt;&#13;
-&lt;p&gt;En mi tiempo libre me he dedicado a hacer trabajo freelance para poder mantenerme haciendo cosas diferentes sin que afecten mi trabajo. Muchos de los trabajos los podran ver en los proyectos realizados!&lt;/p&gt;&#13;
-&lt;p&gt;Pero todo en mi vida no es trabajo, desde hace un tiempo que estoy viviendo con mi compa&amp;ntilde;era con la cual nos encanta ir de viaje para todos lados que podamos y hace poco nacio mi hija que realmente hizo que mi vida diera un cambio para mejor en un 100%!!&lt;/p&gt;&#13;
-&lt;p&gt;Si quieren saber algo mas de mi o quieren preguntarme algo no duden en utilizar el formulario de contacto!! Saludos&lt;/p&gt;</target>
+        <target>&lt;p&gt;Since then I been working as a developer. First doing automatizated testing in Selenium for web sites, but after a while I decided to change to try other things and I went to a company that made web sites in PHP Symfony. Because I was working and managing high concurrency sites I learn scripting, mantainance and management of linux servers and how PHP core works.&lt;/p&gt;&#13;
+&lt;p&gt;After a few years there was no more room to improve in the company so I came to work in a company that didn't make public web sites, only administrative web sites to manage the products they sell. Here I'm in charge of all the development and investigation of the web deparment. We make posibles that thouthands of users can manage and search millions of records that the products creates.&lt;/p&gt;&#13;
+&lt;p&gt;In my spare time I started doing some freelancing jobs so I can make different kinds of developing without affecting my other job. A lot of the works I have done you can see them in the projects page!&lt;/p&gt;&#13;
+&lt;p&gt;But not all in my life is work, I have been living with my life partner for a few years now. Both of us like to travel a lot so any chance we can we go so some place around! And recenlty my daughter was born so my life has improved a 100%!!&lt;/p&gt;&#13;
+&lt;p&gt;If you want to learn more about me or you want to know something more about expierence please use the contact form!&lt;br /&gt;Regards&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="aaa32556e9192149ccd918ec46b204e4" resname="rsantellan_site_used_complex_tags">
+        <source>rsantellan_site_used_complex_tags</source>
+        <target>__rsantellan_site_used_complex_tags</target>
+      </trans-unit>
+      <trans-unit id="a1" resname="contact.form.name">
+        <source>contact.form.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="a2" resname="contact.form.name.placeholder">
+        <source>contact.form.name.placeholder</source>
+        <target>What\'s your name?</target>
+      </trans-unit>
+      <trans-unit id="a3" resname="contact.form.name">
+        <source>contact.form.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="a4" resname="contact.form.email.placeholder">
+        <source>contact.form.email.placeholder</source>
+        <target>So I can get back to you.</target>
+      </trans-unit>
+      <trans-unit id="a5" resname="contact.form.subject">
+        <source>contact.form.subject</source>
+        <target>Subject</target>
+      </trans-unit>
+      <trans-unit id="a6" resname="contact.form.subject.placeholder">
+        <source>contact.form.subject.placeholder</source>
+        <target>The subject of your message.</target>
+      </trans-unit>
+      <trans-unit id="a7" resname="contact.form.message">
+        <source>contact.form.message</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="a8" resname="contact.form.message.placeholder">
+        <source>contact.form.message.placeholder</source>
+        <target>And your message to me...</target>
       </trans-unit>
     </body>
   </file>

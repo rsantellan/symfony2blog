@@ -127,6 +127,42 @@
 &lt;p&gt;But not all in my life is work, I have been living with my life partner for a few years now. Both of us like to travel a lot so any chance we can we go so some place around! And recenlty my daughter was born so my life has improved a 100%!!&lt;/p&gt;&#13;
 &lt;p&gt;If you want to learn more about me or you want to know something more about expierence please use the contact form!&lt;br /&gt;Regards&lt;/p&gt;</target>
       </trans-unit>
+      <trans-unit id="aaa32556e9192149ccd918ec46b204e4" resname="rsantellan_site_used_complex_tags">
+        <source>rsantellan_site_used_complex_tags</source>
+        <target>Blocks</target>
+      </trans-unit>
+      <trans-unit id="75b273a31c6800bc9d0a04b3c0ad090c" resname="contact.form.name">
+        <source>contact.form.name</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="3f396238d9b7a5c8b62b4e7f099f7665" resname="contact.form.name.placeholder">
+        <source>contact.form.name.placeholder</source>
+        <target>What\'s your name?</target>
+      </trans-unit>
+      <trans-unit id="d12ba126715ad93fa99febeb97567271" resname="contact.form.email.placeholder">
+        <source>contact.form.email.placeholder</source>
+        <target>So I can get back to you.</target>
+      </trans-unit>
+      <trans-unit id="82e0578857b215c0cb8b8294e5a40843" resname="contact.form.subject">
+        <source>contact.form.subject</source>
+        <target>Subject</target>
+      </trans-unit>
+      <trans-unit id="85ad3802aa2b1204785f86c5ea9ff1ce" resname="contact.form.subject.placeholder">
+        <source>contact.form.subject.placeholder</source>
+        <target>The subject of your message.</target>
+      </trans-unit>
+      <trans-unit id="d8e04406559dd968c9efd1e2d94dbbbb" resname="contact.form.message">
+        <source>contact.form.message</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="637b3b3c2192f6b11dc717ff1237e218" resname="contact.form.message.placeholder">
+        <source>contact.form.message.placeholder</source>
+        <target>And your message to me...</target>
+      </trans-unit>
+      <trans-unit id="f1b16683881a113636a60409ac1b2191" resname="rsantellan_contact_send">
+        <source>rsantellan_contact_send</source>
+        <target>Send</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

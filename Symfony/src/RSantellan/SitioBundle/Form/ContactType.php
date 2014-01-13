@@ -21,27 +21,31 @@ class ContactType extends AbstractType{
         $builder
             ->add('name', 'text', array(
                 'attr' => array(
-                    'placeholder' => 'What\'s your name?',
+                    'placeholder' => 'contact.form.name.placeholder',
                     'pattern'     => '.{2,}' //minlength
-                )
+                ),
+                'label' => 'contact.form.name'
             ))
             ->add('email', 'email', array(
                 'attr' => array(
-                    'placeholder' => 'So I can get back to you.'
-                )
+                    'placeholder' => 'contact.form.email.placeholder'
+                ),
+                'label' => 'contact.form.email'
             ))
             ->add('subject', 'text', array(
                 'attr' => array(
-                    'placeholder' => 'The subject of your message.',
+                    'placeholder' => 'contact.form.subject.placeholder',
                     'pattern'     => '.{3,}' //minlength
-                )
+                ),
+                'label' => 'contact.form.subject'
             ))
             ->add('message', 'textarea', array(
                 'attr' => array(
                     'cols' => 90,
                     'rows' => 10,
-                    'placeholder' => 'And your message to me...'
-                )
+                    'placeholder' => 'contact.form.message.placeholder'
+                ),
+                'label' => 'contact.form.message'
             ));
     }
 

@@ -117,14 +117,50 @@
       </trans-unit>
       <trans-unit id="38b1a04ceb998c12a196f965759dcfeb" resname="rsantellan_site_about_me_second_image_caption">
         <source>rsantellan_site_about_me_second_image_caption</source>
-        <target>&lt;p&gt;Praesent odio ligula, dapibus sed, tincidunt eget, dictum nibh&lt;/p&gt;</target>
+        <target>&lt;p&gt;Praesent odio ligula, dapibus sed, tincidunt eget, dictum nibh 435&lt;/p&gt;</target>
       </trans-unit>
       <trans-unit id="95328f77333d8847e2a0d4b5790b0a6a" resname="rsantellan_site_about_me_second_paragraph">
         <source>rsantellan_site_about_me_second_paragraph</source>
         <target>&lt;p&gt;Desde entonces he estado trabajando en el rubro. Primero haciendo pruebas de testing automatizado en Selenium para aplicaciones web y luego trabajando en una empresa que hac&amp;iacute;a p&amp;aacute;ginas web en PHP Symfony. All&amp;iacute; aprend&amp;iacute; scripting, manejo y mantenimiento de servidores, y funcionamiento interno de PHP,&amp;nbsp; dado que trabajaba con sitios de gran concurrencia y nosotros hac&amp;iacute;amos su mantenimiento.&lt;/p&gt;&#13;
-&lt;p&gt;Un par de a&amp;ntilde;os despu&amp;eacute;s en ese trabajo no hab&amp;iacute;a m&amp;aacute;s lugar para el crecimiento profesional as&amp;iacute; que comenc&amp;eacute; a trabajar en una empresa que no se dedica s&amp;oacute;lo a la realizaci&amp;oacute;n de p&amp;aacute;ginas web comerciales, sino tambi&amp;eacute;n a la administraci&amp;oacute;n de los productos. En esta empresa me encuentro trabajando actualmente y estoy a cargo del desarrollo e investigaci&amp;oacute;n del &amp;aacute;rea web, haciendo posible que diariamente manejemos miles de ingresos a p&amp;aacute;ginas administrativas que trabajan con millones de datos.&lt;/p&gt;&#13;
+&lt;p&gt;Un par de a&amp;ntilde;os despu&amp;eacute;s en ese trabajo no hab&amp;iacute;a m&amp;aacute;s lugar para el crecimiento profesional as&amp;iacute; que comenc&amp;eacute; a trabajar en una empresa que no se dedica a la realizaci&amp;oacute;n de p&amp;aacute;ginas web comerciales, sino a sitios de administraci&amp;oacute;n de los productos. En esta empresa me encuentro trabajando actualmente y estoy a cargo del desarrollo e investigaci&amp;oacute;n del &amp;aacute;rea web, haciendo posible que diariamente manejemos miles de ingresos a p&amp;aacute;ginas administrativas que trabajan con millones de datos.&lt;/p&gt;&#13;
 &lt;p&gt;A su vez me dedico a realizar trabajos freelance, muchos de los cu&amp;aacute;les podr&amp;aacute;n ver en la secci&amp;oacute;n &amp;ldquo;Proyectos realizados&amp;rdquo;..&lt;/p&gt;&#13;
 &lt;p&gt;Si desean m&amp;aacute;s informaci&amp;oacute;n sobre m&amp;iacute; o desean preguntarme algo no duden en utilizar el formulario de &amp;ldquo;Contacto&amp;rdquo;. &amp;iexcl;Saludos!&lt;/p&gt;</target>
+      </trans-unit>
+      <trans-unit id="aaa32556e9192149ccd918ec46b204e4" resname="rsantellan_site_used_complex_tags">
+        <source>rsantellan_site_used_complex_tags</source>
+        <target>__rsantellan_site_used_complex_tags</target>
+      </trans-unit>
+      <trans-unit id="a1" resname="contact.form.name">
+        <source>contact.form.name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="a2" resname="contact.form.name.placeholder">
+        <source>contact.form.name.placeholder</source>
+        <target>¿Cual es tu nombre?</target>
+      </trans-unit>
+      <trans-unit id="a3" resname="contact.form.name">
+        <source>contact.form.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="a4" resname="contact.form.email.placeholder">
+        <source>contact.form.email.placeholder</source>
+        <target>Así te puedo responder!</target>
+      </trans-unit>
+      <trans-unit id="a5" resname="contact.form.subject">
+        <source>contact.form.subject</source>
+        <target>Asunto</target>
+      </trans-unit>
+      <trans-unit id="a6" resname="contact.form.subject.placeholder">
+        <source>contact.form.subject.placeholder</source>
+        <target>El asunto del email.</target>
+      </trans-unit>
+      <trans-unit id="a7" resname="contact.form.message">
+        <source>contact.form.message</source>
+        <target>Mensaje</target>
+      </trans-unit>
+      <trans-unit id="a8" resname="contact.form.message.placeholder">
+        <source>contact.form.message.placeholder</source>
+        <target>Tu mensaje para mí...</target>
       </trans-unit>
     </body>
   </file>
