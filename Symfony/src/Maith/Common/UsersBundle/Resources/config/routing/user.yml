@@ -28,3 +28,7 @@ admin_users_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "MaithCommonUsersBundle:User:delete" }
     requirements: { _method: post|delete }
+
+admin_users_reset_password:
+    pattern:  /{id}/resetpassword.html
+    defaults: { _controller: "MaithCommonUsersBundle:User:sendChangePasswordEmail" }

@@ -40,11 +40,20 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+			$form_data = $form->getData();
+			//var_dump($form->getData());
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_users_show', array('id' => $entity->getId())));
+			$userManager = $this->container->get('fos_user.user_manager');
+			$user = $userManager->createUser();
+			$user->setUsername($form_data->getUsername());
+			$user->setEmail($form_data->getEmail());
+			$user->setPlainPassword(new \DateTime());
+			$user->setEnabled($form_data->isEnabled());
+			$em->persist($user);
+			$em->flush();
+            //$em->persist($entity);
+            //$em->flush();
+			return $this->redirect($this->generateUrl('admin_users_show', array('id' => $user->getId())));
         }
 
         return $this->render('MaithCommonUsersBundle:User:new.html.twig', array(
@@ -62,7 +71,20 @@ class UserController extends Controller
     */
     private function createCreateForm(User $entity)
     {
-        $roles = $this->container->getParameter('security.role_hierarchy.roles');
+        
+        $form = $this->createForm(new UserType(), $entity, array(
+            'action' => $this->generateUrl('admin_users_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+	
+	private function getUsedRoles()
+	{
+		$roles = $this->container->getParameter('security.role_hierarchy.roles');
         $used_roles = array();
         foreach($roles as $role => $childs)
         {
@@ -75,16 +97,8 @@ class UserController extends Controller
                 }
             }
         }
-        var_dump($used_roles);
-        $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('admin_users_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
+		return $used_roles;
+	}
 
     /**
      * Displays a form to create a new User entity.
@@ -94,7 +108,6 @@ class UserController extends Controller
     {
         $entity = new User();
         $form   = $this->createCreateForm($entity);
-        var_dump($this->container->getParameter('security.role_hierarchy.roles'));
         return $this->render('MaithCommonUsersBundle:User:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
@@ -234,4 +247,54 @@ class UserController extends Controller
             ->getForm()
         ;
     }
+	
+	const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
+	
+	/**
+     * Get the truncated email displayed when requesting the resetting.
+     *
+     * The default implementation only keeps the part following @ in the address.
+     *
+     * @param \FOS\UserBundle\Model\UserInterface $user
+     *
+     * @return string
+     */
+    protected function getObfuscatedEmail(User $user)
+    {
+        $email = $user->getEmail();
+        if (false !== $pos = strpos($email, '@')) {
+            $email = '...' . substr($email, $pos);
+        }
+
+        return $email;
+    }
+	
+	public function sendChangePasswordEmailAction($id)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('MaithCommonUsersBundle:User')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+		$username = $entity->getUsername();
+		/** @var $user UserInterface */
+        $userInterface = $this->container->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
+
+        if (null === $userInterface) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+
+        if (null === $userInterface->getConfirmationToken()) {
+            /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+            $tokenGenerator = $this->container->get('fos_user.util.token_generator');
+            $userInterface->setConfirmationToken($tokenGenerator->generateToken());
+        }
+
+        $this->container->get('session')->set(static::SESSION_EMAIL, $this->getObfuscatedEmail($userInterface));
+        $this->container->get('fos_user.mailer')->sendResettingEmailMessage($userInterface);
+        $userInterface->setPasswordRequestedAt(new \DateTime());
+        $this->container->get('fos_user.user_manager')->updateUser($userInterface);
+	}
 }
