@@ -6,6 +6,12 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "repositories": [
+    {
+		"type" : "vcs",
+        "url" : "https://github.com/rsantellan/symfony2-maith-admin.git"
+    }
+	],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.3.*",
@@ -25,7 +31,8 @@
         "knplabs/knp-paginator-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
-        "imagine/Imagine": "dev-master"
+        "imagine/Imagine": "dev-master",
+        "Maith/Common/AdminBundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

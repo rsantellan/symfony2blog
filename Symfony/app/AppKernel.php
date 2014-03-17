@@ -21,14 +21,14 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Maith\Common\UsersBundle\MaithCommonUsersBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             //new Loopita\MetalizadoraBundle\LoopitaMetalizadoraBundle(),
-            new Maith\Common\AdminBundle\MaithCommonAdminBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new RSantellan\SitioBundle\RSantellanSitioBundle(),
+            new Maith\Common\UsersBundle\MaithCommonUsersBundle(),
+            new Maith\Common\AdminBundle\MaithCommonAdminBundle(),
             new Maith\Common\ImageBundle\MaithCommonImageBundle(),
             new Maith\Common\TranslatorBundle\MaithCommonTranslatorBundle(),
-            new RSantellan\SitioBundle\RSantellanSitioBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
