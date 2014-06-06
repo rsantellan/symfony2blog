@@ -14,27 +14,39 @@ RSantellanSitioBundle_category:
 rsantellan_sitio_aboutme:
     pattern:  /{_locale}/aboutme.html
     defaults: { _controller: RSantellanSitioBundle:Default:aboutMe}
-    
+    requirements:
+        _locale: en|es
+        
 rsantellan_sitio_contact:
     pattern:  /{_locale}/contact.html
     defaults: { _controller: RSantellanSitioBundle:Default:contact}
-    
+    requirements:
+        _locale: en|es
+        
 rsantellan_sitio_projects_show:
     pattern:  /{_locale}/project-{slug}.html
     defaults: { _controller: RSantellanSitioBundle:Default:projectsShow}
-
+    requirements:
+        _locale: en|es
+        
 rsantellan_sitio_projects_category:
     pattern:  /{_locale}/projects/{slug}.html
     defaults: { _controller: RSantellanSitioBundle:Default:projectsCategory}
-
+    requirements:
+        _locale: en|es
+        
 rsantellan_sitio_projects:
     pattern:  /{_locale}/projects.html
     defaults: { _controller: RSantellanSitioBundle:Default:projects}  
+    requirements:
+        _locale: en|es
 
 r_santellan_sitio_homepage_locale:
     pattern:  /{_locale}
     defaults: { _controller: RSantellanSitioBundle:Default:index }
-    
+    requirements:
+        _locale: en|es
+        
 r_santellan_sitio_homepage:
     pattern:  /
     defaults: { _controller: RSantellanSitioBundle:Default:index }
@@ -46,3 +58,5 @@ r_santellan_sitio_admin:
 r_santellan_sitio_admin_locale:
     pattern:  /{_locale}/admin
     defaults: { _controller: RSantellanSitioBundle:Default:admin }
+    requirements:
+        _locale: en|es

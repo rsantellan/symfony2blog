@@ -67,8 +67,6 @@ class ComplexTagController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
         return $form;
     }
 
@@ -145,9 +143,6 @@ class ComplexTagController extends Controller
             'action' => $this->generateUrl('admin_blocktags_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
         return $form;
     }
     /**
@@ -216,7 +211,6 @@ class ComplexTagController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_blocktags_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
