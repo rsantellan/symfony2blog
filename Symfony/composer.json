@@ -10,6 +10,18 @@
     {
 		"type" : "vcs",
         "url" : "https://github.com/rsantellan/symfony2-maith-admin.git"
+    },
+    {
+		"type" : "vcs",
+        "url" : "https://github.com/rsantellan/symfony2-maith-images.git"
+    },
+    {
+		"type" : "vcs",
+        "url" : "https://github.com/rsantellan/symfony2-maith-translator.git"
+    },
+    {
+		"type" : "vcs",
+        "url" : "https://github.com/rsantellan/symfony2-maith-users.git"
     }
 	],
     "require": {
@@ -32,7 +44,10 @@
         "friendsofsymfony/user-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
         "imagine/Imagine": "dev-master",
-        "Maith/Common/AdminBundle": "dev-master"
+        "Maith/Common/AdminBundle": "dev-master",
+        "Maith/Common/ImageBundle": "dev-master",
+        "Maith/Common/TranslatorBundle": "dev-master",
+        "Maith/Common/UsersBundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
