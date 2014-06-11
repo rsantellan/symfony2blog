@@ -1,10 +1,17 @@
 {% set gridClass = 'col-md-12' %}
 {% set open = 'false' %}
+{% set counter = 0 %}
 {% for file in files%}
-  {% if loop.first or loop.index is divisibleby(4)%}
+  {% if loop.first %}
   <div class="row show-grid">
-  {% set open = 'true' %}  
+  {% set open = 'true' %} 
+  {% else %}
+      {% if counter == 0 %}
+      <div class="row show-grid">
+      {% set open = 'true' %}  
+      {% endif %}
   {% endif %}
+  {% set counter = counter + 1 %}
     <div class="{{gridClass}}" id="file_container_{{file.id}}">
       <div class="img_thumb_container">
         <div class="img_edit">
@@ -21,9 +28,17 @@
       </div>
     </div>
    {% set gridClass = 'col-md-3' %}  
-   {% if loop.first or loop.index is divisibleby(4)%}
+
+   {% if loop.first%}
       </div>
       {% set open = 'false' %}
+      {% set counter = 0 %}
+   {% else %}
+     {%  if counter is divisibleby(4) %}
+       </div>
+      {% set open = 'false' %}
+      {% set counter = 0 %}
+     {% endif %}
   {% endif %}
 {% endfor %}
 {% if open == 'true' %}
