@@ -1,5 +1,5 @@
 <?php
-
+define('WEB_DIRECTORY', __DIR__);
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
