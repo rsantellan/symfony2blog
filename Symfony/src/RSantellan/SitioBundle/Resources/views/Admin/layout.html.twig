@@ -1,3 +1,4 @@
+{#
 {% extends 'MaithCommonAdminBundle::layout.html.twig' %}
 
 {% block adminlogo %}
@@ -11,4 +12,26 @@
           <li><a href="{{ path("admin_blocktags")}}">{% trans %}rsantellan_admin_menu_blocks{% endtrans %}</a></li>
           <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'es'})) }}">Spanish</a></li>
           <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">English</a></li>
+{% endblock %}
+#}
+{% extends 'MaithCommonAdminBundle::bootstrap-layout.html.twig' %}
+
+
+{% block adminlogo %}
+        <img src="{{ asset('bundles/rsantellansitio/images/logo.png') }}" height="70"/>
+{% endblock %}
+
+{% block adminmenu %}
+<li>
+    <a href="{{ path('r_santellan_sitio_admin_locale')}}"><i class="fa fa-dashboard fa-fw"></i>{% trans %}rsantellan_admin_menu_dashboard{% endtrans %}</a>
+</li>
+<li>
+    <a href="{{ path('rsproject') }}"><i class="fa fa-table fa-fw"></i>{% trans %}rsantellan_admin_menu_projects{% endtrans %}</a>
+</li>
+<li>
+    <a href="{{ path('category') }}"><i class="fa fa-edit fa-fw"></i>{% trans %}rsantellan_admin_menu_categories{% endtrans %}</a>
+</li>
+<li>
+    <a href="{{ path('admin_blocktags') }}"><i class="fa fa-wrench fa-fw"></i>{% trans %}rsantellan_admin_menu_blocks{% endtrans %}</a>
+</li>
 {% endblock %}
