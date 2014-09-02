@@ -1,0 +1,3 @@
+maith_common_mailbox_homepage:
+    path:     /mailer/hello/{name}
+    defaults: { _controller: MaithCommonMailboxBundle:Default:index }

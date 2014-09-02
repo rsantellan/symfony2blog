@@ -44,6 +44,7 @@
         "friendsofsymfony/user-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
         "imagine/Imagine": "dev-master",
+		"tedivm/fetch": "0.5.*",
         "Maith/Common/AdminBundle": "dev-master",
         "Maith/Common/ImageBundle": "dev-master",
         "Maith/Common/TranslatorBundle": "dev-master",

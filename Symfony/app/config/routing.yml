@@ -1,3 +1,7 @@
+maith_common_mailbox:
+    resource: "@MaithCommonMailboxBundle/Resources/config/routing.yml"
+    prefix:   /
+
 r_santellan_sitio:
     resource: "@RSantellanSitioBundle/Resources/config/routing.yml"
     prefix:   /

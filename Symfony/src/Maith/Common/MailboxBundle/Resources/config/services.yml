@@ -1,0 +1,8 @@
+parameters:
+    maith_common_mailbox.server.class: Maith\Common\MailboxBundle\Model\MaithLazyMailboxServer
+    maith_common_mailbox_db_data: default
+
+services:
+    maith_mailbox.server:
+        class: %maith_common_mailbox.server.class%
+        arguments: [@doctrine.dbal.default_connection]

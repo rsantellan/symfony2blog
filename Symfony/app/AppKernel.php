@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Maith\Common\AdminBundle\MaithCommonAdminBundle(),
             new Maith\Common\ImageBundle\MaithCommonImageBundle(),
             new Maith\Common\TranslatorBundle\MaithCommonTranslatorBundle(),
+            new Maith\Common\MailboxBundle\MaithCommonMailboxBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
