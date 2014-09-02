@@ -11,13 +11,16 @@ class DefaultController extends Controller
 		$mailbox = $this->get('maith_mailbox.server');
 		var_dump(get_class($mailbox));
 		$mailbox->setConnectionData('imap.gmail.com', 993);
-		$mailbox->setAuthentication('rsantellan@gmail.com', 'xxxxxxxxx');
+		$mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXXXX');
 		var_dump($mailbox->numMessages());
-		$mailbox->search('SINCE '. date('d-M-Y',strtotime("-1 week")));
+		$mailbox->search();
 		$folders = $mailbox->retrieveAllMailboxes();
 		var_dump($folders);
+                $mailbox->setLimitSize(1);
 		$messages = $mailbox->retrieveNextMessagesInLine();
+                
 		var_dump(count($messages));
+                
         return $this->render('MaithCommonMailboxBundle:Default:index.html.twig', array('name' => $name));
     }
 }

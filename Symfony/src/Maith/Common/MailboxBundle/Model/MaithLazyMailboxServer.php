@@ -149,8 +149,7 @@ class MaithLazyMailboxServer extends FetchServer{
   
   
   protected function getData(){
-	switch ($datatype){
-        
+    switch ($datatype){
         case 'uidlist':
           $sqlselect = 'select datakey, data from datacontainer where datakey = :datakey';
           $stmt = $this->dbfile->prepare($sqlselect);
@@ -167,7 +166,8 @@ class MaithLazyMailboxServer extends FetchServer{
   }
   
   protected function saveData(){
-	switch ($datatype){
+
+    switch ($datatype){
         case 'folderlist':
           $sqlinsert = 'INSERT into folderlist (foldername, connectionstring) values (:foldername, :connectionstring)';
           $stmt = $this->db_file->prepare($sqlinsert);
