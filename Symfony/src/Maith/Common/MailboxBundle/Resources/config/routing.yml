@@ -1,3 +1,7 @@
 maith_common_mailbox_homepage:
-    path:     /mailer/hello/{name}
+    path:     /mailer/
     defaults: { _controller: MaithCommonMailboxBundle:Default:index }
+
+maith_common_mailbox_list_folder:
+    path:     /mailer/list/{folderId}
+    defaults: { _controller: MaithCommonMailboxBundle:Default:folder }

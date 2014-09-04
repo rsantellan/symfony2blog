@@ -29,11 +29,11 @@ class LazyMessage extends FetchMessage{
 
         foreach (self::$flagTypes as $flag)
             $this->status[$flag] = ($messageOverview->$flag == 1);
-
+		//var_dump($messageOverview);
         /* Next load in all of the header information */
 
         $headers = $this->getHeaders();
-
+		//var_dump($headers);
         if (isset($headers->to))
             $this->to = $this->processAddressObject($headers->to);
 

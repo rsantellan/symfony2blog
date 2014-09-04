@@ -1,1 +1,11 @@
-Hello {{ name }}!
+{% extends 'MaithCommonAdminBundle::bootstrap-layout.html.twig' %}
+
+{% block body -%}
+  <ul>
+  {% for folderid, folder in folders %}
+	<li>
+	  <a href="{{ path('maith_common_mailbox_list_folder', { 'folder': folderid }) }}">{{ folder }}</a>
+	</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -69,26 +69,19 @@ class MaithLazyMailboxServer extends FetchServer{
   public function search($criteria = 'ALL', $limit = null)
   {
 	  $cacheKey = $this->getServerString().'-'.$criteria;
-//	  if ($this->cacheHandler !== null) {
-//
-//		$results = $this->cacheHandler->getData($cacheKey, 'uidlist');
-//		if ($results) {
-//		  $this->uidList = $results;
-//
-//		  return true;
-//		}
-//	  }
-
 	  if ($results = imap_search($this->getImapStream(), $criteria, SE_UID)) {
 		  $this->uidList = $results;
-//		  if ($this->cacheHandler !== null) {
-//			$this->cacheHandler->saveData($cacheKey, 'uidlist', $results);
-//		  }
-		  var_dump(count($results));
 		  return true;
 	  } else {
 		  return false;
 	  }
+  }
+  
+  public function searchAndReverse($criteria = 'ALL'){
+	if($this->search($criteria))
+	{
+	  $this->uidList = array_reverse($this->uidList);
+	}
   }
 
   public function retrieveNextMessagesInLine($page = null)
@@ -100,49 +93,72 @@ class MaithLazyMailboxServer extends FetchServer{
 	$messages = array();
 	$this->page ++;
 	foreach ($results as $messageId) {
-	  $cacheKey = $this->getServerString().'-'.$messageId;
-	  $inCache = false;
-//	  if ($this->cacheHandler !== null) {
-//		$message  = $this->cacheHandler->getData($cacheKey, 'messagelist');
-//		if ($message) {
-//		  $messages[] = $message;
-//		  $inCache = true;
-//		}
-//	  }
-	  if (!$inCache) {
-		$message = new LazyMessage($messageId, $this);
-		$messages[] = $message;
-//		if ($this->cacheHandler !== null) {
-//		  $this->cacheHandler->saveData($cacheKey, 'messagelist', $message);
-//		}
-	  }
+	  $message = new LazyMessage($messageId, $this);
+	  $messages[] = $message;
 	}
-
 	return $messages;
+  }
+  
+  public function getFolderById($folderId)
+  {
+	$retrieveSql = 'select id, name from mailboxfolders where connectionstring = :connectionstring and user = :user and id = :id';
+	$stmt = $this->connection->prepare($retrieveSql);
+	$stmt->bindValue('connectionstring', $this->getServerSpecification());
+	$stmt->bindValue('user', $this->username);
+	$stmt->bindValue('id', $folderId);
+	$stmt->execute();
+	return $stmt->fetch();
   }
 
 
   public function retrieveAllMailboxes()
   {
-//	if ($this->cacheHandler !== null) {
-//	  $folders  = $this->cacheHandler->getData($this->getServerSpecification(), 'folderlist');
-//	  if($folders !== null)
-//	  {
-//		return $folders;
-//	  }
-//
-//	}
-	$folders = imap_list($this->getImapStream(), $this->getServerSpecification(), '*');
+	$lastupdatesql = 'select lastupdated from mailboxupdated where connectionstring = :connectionstring and user = :user and updatedkey = :updatedkey';
+	$stmtLastUpdated = $this->connection->prepare($lastupdatesql);
+	$stmtLastUpdated->bindValue('updatedkey', 'folders');
+	$stmtLastUpdated->bindValue('connectionstring', $this->getServerSpecification());
+	$stmtLastUpdated->bindValue('user', $this->username);
+	$stmtLastUpdated->execute();
+	$lastupdated = $stmtLastUpdated->fetch();
+	if($lastupdated)
+	{
+	  $lastupdated = $lastupdated['lastupdated'];
+	}
+	$retrieveSql = 'select id, name from mailboxfolders where connectionstring = :connectionstring and user = :user';
+	$stmt = $this->connection->prepare($retrieveSql);
+	$stmt->bindValue('connectionstring', $this->getServerSpecification());
+	$stmt->bindValue('user', $this->username);
+	$stmt->execute();
+	$dbfolders = $stmt->fetchAll();
 	$returnFolders = array();
+	if(count($dbfolders) > 0)
+	{
+	  foreach($dbfolders as $folder)
+	  {
+		$returnFolders[$folder['id']] = $folder['name'];
+	  }
+	  return $returnFolders;
+	}
+
+	$folders = imap_list($this->getImapStream(), $this->getServerSpecification(), '*');
+	
 	foreach ($folders as $folder) {
 	  $folder = str_replace($this->getServerSpecification(), "", imap_utf7_decode($folder));
 	  $returnFolders[] = $folder;
 	}
-//	var_dump($returnFolders);
-//	if ($this->cacheHandler !== null) {
-//	  $this->cacheHandler->saveData($this->getServerSpecification(), 'folderlist', $returnFolders);
-//	}
 	
+
+	$insertsql = 'INSERT INTO mailboxfolders (  name  ,  connectionstring  ,  user  ) VALUES ( :name, :connectionstring, :user )';
+	$stmtinsert = $this->connection->prepare($insertsql);
+	foreach($folders as $folder)
+	{
+	  $folder = str_replace($this->getServerSpecification(), "", imap_utf7_decode($folder));
+	  $stmtinsert->bindValue('name', $folder);
+	  $stmtinsert->bindValue('connectionstring', $this->getServerSpecification());
+	  $stmtinsert->bindValue('user', $this->username);
+	  $stmtinsert->execute();
+	  $returnFolders[$this->connection->lastInsertId()] = $folder;
+	}
 	return $returnFolders;
 
   }  
@@ -156,7 +172,7 @@ class MaithLazyMailboxServer extends FetchServer{
           $stmt->bind(':datakey', $key);
           //$stmt->execute();
           $data = $stmt->fetchAll();
-          var_dump($data);
+          //var_dump($data);
           break;
         
         case 'messagelist':
