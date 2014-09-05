@@ -2,6 +2,7 @@
 
 namespace Maith\Common\MailboxBundle\Model;
 use Fetch\Message as FetchMessage;
+use Fetch\Attachment as FetchAttachment;
 /**
  * Description of LazyMessage
  *
@@ -9,6 +10,8 @@ use Fetch\Message as FetchMessage;
  */
 class LazyMessage extends FetchMessage{
 
+    protected $seen = true;
+    protected $decodedSubject = '';
 
     /**
      * This function is called when the message class is loaded. It loads general information about the message from the
@@ -23,7 +26,7 @@ class LazyMessage extends FetchMessage{
         if(!is_object($messageOverview = $this->getOverview()))
             return false;
 
-        $this->subject = $messageOverview->subject;
+        $this->subject = $messageOverview->subject; // 
         $this->date    = strtotime($messageOverview->date);
         $this->size    = $messageOverview->size;
 
@@ -33,7 +36,21 @@ class LazyMessage extends FetchMessage{
         /* Next load in all of the header information */
 
         $headers = $this->getHeaders();
-		//var_dump($headers);
+        
+        $anotherHeader = imap_headerinfo ($this->imapStream, imap_msgno($this->imapStream, $this->uid));
+/*        
+        var_dump($anotherHeader);
+        echo '<hr/>';
+        var_dump($headers);
+        echo '<hr/>';
+        echo '<hr/>';
+        echo '<hr/>';
+*/        
+        if($anotherHeader->Unseen == "U")
+        {
+          $this->seen = false;
+        }
+        // 
         if (isset($headers->to))
             $this->to = $this->processAddressObject($headers->to);
 
@@ -49,7 +66,8 @@ class LazyMessage extends FetchMessage{
         /* Finally load the structure itself */
 
         $structure = $this->getStructure();
-
+        //$parameters = FetchMessage::getParametersFromStructure($structure);
+        //$this->decodedSubject =  iconv($parameters['charset'], FetchMessage::$charset, $this->subject);//
         if (!isset($structure->parts)) {
             // not multipart
             $this->processStructure($structure, null, $peek);
@@ -58,7 +76,7 @@ class LazyMessage extends FetchMessage{
             foreach ($structure->parts as $id => $part)
                 $this->processStructure($part, $id + 1, $peek);
         }
-
+        
         return true;
     }
 	
@@ -79,7 +97,7 @@ class LazyMessage extends FetchMessage{
         $parameters = self::getParametersFromStructure($structure);
 
         if (isset($parameters['name']) || isset($parameters['filename'])) {
-            $attachment          = new Attachment($this, $structure, $partIdentifier);
+            $attachment          = new FetchAttachment($this, $structure, $partIdentifier);
             $this->attachments[] = $attachment;
         } elseif ($structure->type == 0 || $structure->type == 1) {
             $messageBody = isset($partIdentifier) ?
@@ -122,7 +140,102 @@ class LazyMessage extends FetchMessage{
             }
         }
     }	
-  
+
+    public function getStatus() {
+      return $this->status;
+    }
+
+    public function setStatus($status) {
+      $this->status = $status;
+    }
+
+    public function getPlaintextMessage() {
+      return $this->plaintextMessage;
+    }
+
+    public function setPlaintextMessage($plaintextMessage) {
+      $this->plaintextMessage = $plaintextMessage;
+    }
+
+    public function getHtmlMessage() {
+      return $this->htmlMessage;
+    }
+
+    public function setHtmlMessage($htmlMessage) {
+      $this->htmlMessage = $htmlMessage;
+    }
+
+    public function getSize() {
+      return $this->size;
+    }
+
+    public function setSize($size) {
+      $this->size = $size;
+    }
+
+    public function getFrom() {
+      return $this->from;
+    }
+
+    public function setFrom($from) {
+      $this->from = $from;
+    }
+
+    public function getTo() {
+      return $this->to;
+    }
+
+    public function setTo($to) {
+      $this->to = $to;
+    }
+
+    public function getCc() {
+      return $this->cc;
+    }
+
+    public function setCc($cc) {
+      $this->cc = $cc;
+    }
+
+    public function getBcc() {
+      return $this->bcc;
+    }
+
+    public function setBcc($bcc) {
+      $this->bcc = $bcc;
+    }
+
+    public function getReplyTo() {
+      return $this->replyTo;
+    }
+    
+    public function getSeen() {
+      return $this->seen;
+    }
+
+    public function setSeen($seen) {
+      $this->seen = $seen;
+    }
+    
+    public function hasAttachments()
+    {
+      $quantity = $this->getAttachments();
+      if($quantity)
+      {
+        return true;
+      }
+      return false;
+    }
+    
+    public function getDecodedSubject() {
+      return $this->decodedSubject;
+    }
+
+    public function setDecodedSubject($decodedSubject) {
+      $this->decodedSubject = $decodedSubject;
+    }
+
+
 }
 
 

@@ -11,6 +11,8 @@ use Fetch\Server as FetchServer;
  */
 class MaithLazyMailboxServer extends FetchServer{
 
+  const FOLDERSKEY = 'folders';
+  
   private $uidList = array();
   private $page = 0;
   private $limitSize = 10;
@@ -113,18 +115,79 @@ class MaithLazyMailboxServer extends FetchServer{
 
   public function retrieveAllMailboxes()
   {
-	$lastupdatesql = 'select lastupdated from mailboxupdated where connectionstring = :connectionstring and user = :user and updatedkey = :updatedkey';
-	$stmtLastUpdated = $this->connection->prepare($lastupdatesql);
-	$stmtLastUpdated->bindValue('updatedkey', 'folders');
-	$stmtLastUpdated->bindValue('connectionstring', $this->getServerSpecification());
-	$stmtLastUpdated->bindValue('user', $this->username);
-	$stmtLastUpdated->execute();
-	$lastupdated = $stmtLastUpdated->fetch();
-	if($lastupdated)
-	{
-	  $lastupdated = $lastupdated['lastupdated'];
+	$lastupdated = $this->retrieveLastUpdated(self::FOLDERSKEY);
+    $updateFolders = false;
+    if($lastupdated < strtotime("-1 week"))
+    {
+      $updateFolders = true;
+    }
+    $returnFolders = $this->retrieveDbMailboxFolders(); 
+    if(count($returnFolders) > 0 && !$updateFolders)
+    {
+      return $returnFolders;
+    }
+	$folders = imap_list($this->getImapStream(), $this->getServerSpecification(), '*');
+	
+	foreach ($folders as $folder) {
+	  $folder = str_replace($this->getServerSpecification(), "", imap_utf7_decode($folder));
+	  $returnFolders[] = $folder;
 	}
-	$retrieveSql = 'select id, name from mailboxfolders where connectionstring = :connectionstring and user = :user';
+    
+    $this->saveLastUpdated(self::FOLDERSKEY);
+    if(!$updateFolders)
+    {
+      return $this->saveImapFolderToDb($folders);
+    }
+    else
+    {
+      return $this->updateImapFolderToDb($folders, $returnFolders);
+    }
+	
+  }  
+  
+  private function updateImapFolderToDb($folders, $returnFolders)
+  {
+    
+    $insertsql = 'INSERT INTO mailboxfolders (  name  ,  connectionstring  ,  user  ) VALUES ( :name, :connectionstring, :user )';
+    $stmtinsert = $this->connection->prepare($insertsql);
+    foreach($folders as $folder)
+	{
+	  $folder = str_replace($this->getServerSpecification(), "", imap_utf7_decode($folder));
+      if(!in_array($folder, $returnFolders))
+      {
+        $stmtinsert->bindValue('name', $folder);
+        $stmtinsert->bindValue('connectionstring', $this->getServerSpecification());
+        $stmtinsert->bindValue('user', $this->username);
+        $stmtinsert->execute();
+        $returnFolders[$this->connection->lastInsertId()] = $folder;
+      }
+    }
+    //Missing the folder deletion on server.
+    //TODO
+    return $returnFolders;
+  }
+  
+  private function saveImapFolderToDb($folders)
+  {
+    $returnFolders = array();
+    $insertsql = 'INSERT INTO mailboxfolders (  name  ,  connectionstring  ,  user  ) VALUES ( :name, :connectionstring, :user )';
+	$stmtinsert = $this->connection->prepare($insertsql);
+	foreach($folders as $folder)
+	{
+	  $folder = str_replace($this->getServerSpecification(), "", imap_utf7_decode($folder));
+	  $stmtinsert->bindValue('name', $folder);
+	  $stmtinsert->bindValue('connectionstring', $this->getServerSpecification());
+	  $stmtinsert->bindValue('user', $this->username);
+	  $stmtinsert->execute();
+	  $returnFolders[$this->connection->lastInsertId()] = $folder;
+	}
+    return $returnFolders;
+  }
+
+  
+  private function retrieveDbMailboxFolders()
+  {
+    $retrieveSql = 'select id, name from mailboxfolders where connectionstring = :connectionstring and user = :user';
 	$stmt = $this->connection->prepare($retrieveSql);
 	$stmt->bindValue('connectionstring', $this->getServerSpecification());
 	$stmt->bindValue('user', $this->username);
@@ -137,32 +200,36 @@ class MaithLazyMailboxServer extends FetchServer{
 	  {
 		$returnFolders[$folder['id']] = $folder['name'];
 	  }
-	  return $returnFolders;
 	}
-
-	$folders = imap_list($this->getImapStream(), $this->getServerSpecification(), '*');
-	
-	foreach ($folders as $folder) {
-	  $folder = str_replace($this->getServerSpecification(), "", imap_utf7_decode($folder));
-	  $returnFolders[] = $folder;
-	}
-	
-
-	$insertsql = 'INSERT INTO mailboxfolders (  name  ,  connectionstring  ,  user  ) VALUES ( :name, :connectionstring, :user )';
-	$stmtinsert = $this->connection->prepare($insertsql);
-	foreach($folders as $folder)
-	{
-	  $folder = str_replace($this->getServerSpecification(), "", imap_utf7_decode($folder));
-	  $stmtinsert->bindValue('name', $folder);
-	  $stmtinsert->bindValue('connectionstring', $this->getServerSpecification());
-	  $stmtinsert->bindValue('user', $this->username);
-	  $stmtinsert->execute();
-	  $returnFolders[$this->connection->lastInsertId()] = $folder;
-	}
-	return $returnFolders;
-
-  }  
+    return $returnFolders;
+  }
   
+  private function saveLastUpdated($key)
+  {
+    $insertSql = 'insert into mailboxupdated (lastupdated, connectionstring, user, updatedkey) values ( now(), :connectionstring, :user, :updatedkey) ';
+    $insertSql .= ' on duplicate key update lastupdated = now()';
+    $stmtLastUpdated = $this->connection->prepare($insertSql);
+	$stmtLastUpdated->bindValue('updatedkey', $key);
+	$stmtLastUpdated->bindValue('connectionstring', $this->getServerSpecification());
+	$stmtLastUpdated->bindValue('user', $this->username);
+	$stmtLastUpdated->execute();
+  }
+  
+  private function retrieveLastUpdated($key)
+  {
+    $lastupdatesql = 'select UNIX_TIMESTAMP(lastupdated) as lastupdated from mailboxupdated where connectionstring = :connectionstring and user = :user and updatedkey = :updatedkey';
+	$stmtLastUpdated = $this->connection->prepare($lastupdatesql);
+	$stmtLastUpdated->bindValue('updatedkey', $key);
+	$stmtLastUpdated->bindValue('connectionstring', $this->getServerSpecification());
+	$stmtLastUpdated->bindValue('user', $this->username);
+	$stmtLastUpdated->execute();
+	$lastupdated = $stmtLastUpdated->fetch();
+	if($lastupdated)
+	{
+	  $lastupdated = $lastupdated['lastupdated'];
+	}
+    return $lastupdated;
+  }
   
   protected function getData(){
     switch ($datatype){

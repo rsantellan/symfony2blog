@@ -11,7 +11,7 @@ class DefaultController extends Controller
 	  $mailbox = $this->get('maith_mailbox.server');
 	  //var_dump(get_class($mailbox));
 	  $mailbox->setConnectionData('imap.gmail.com', 993);
-	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXX');
+	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXXXXX');
 	  return $mailbox;
 	}
   
@@ -33,8 +33,15 @@ class DefaultController extends Controller
 	{
 	  $mailbox = $this->getConfiguredMailbox();
 	  $folder = $mailbox->getFolderById($folderId);
-	  
-	  var_dump($folder);
+      if(!$folder)
+      {
+        throw $this->createNotFoundException("No mailbox with id: ".$folderId);
+      }
+	  $mailbox->setMailBox($folder['name']);
+      $mailbox->searchAndReverse();
+      $messages = $mailbox->retrieveNextMessagesInLine();
+      return $this->render('MaithCommonMailboxBundle:Default:folder.html.twig', array('folder' => $folder, 'messages' => $messages));
+	  //var_dump($folder);
 	}
 	
 	
