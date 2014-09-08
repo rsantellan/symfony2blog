@@ -95,11 +95,60 @@ class MaithLazyMailboxServer extends FetchServer{
 	$messages = array();
 	$this->page ++;
 	foreach ($results as $messageId) {
-	  $message = new LazyMessage($messageId, $this);
+	  $cacheMessage = $this->getDbMessageByUid($messageId);
+	  $message = new LazyMessage($messageId, $this, $cacheMessage);
+	  if(!$cacheMessage){
+		$this->saveDbMessage($message);
+	  }
 	  $messages[] = $message;
 	}
 	return $messages;
   }
+  
+  public function saveDbMessage(LazyMessage $message)
+  {
+	$insertSql = 'INSERT INTO mailboxmessages (uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, connectionstring, user) VALUES (:uid, :headers, :plainMessage, :htmlMessage, :messageDate, :subject, :decodedSubject, :size, :hasAttachment, :readed, :headerFrom, :headerTo, :headerCc, :headerBcc, :connectionstring, :user)';
+	$stmtinsert = $this->connection->prepare($insertSql);
+	$stmtinsert->bindValue('uid', $message->getUid());
+	$stmtinsert->bindValue('headers', serialize($message->getHeaders()));
+	$stmtinsert->bindValue('plainMessage', $message->getPlaintextMessage());
+	$stmtinsert->bindValue('htmlMessage', $message->getHtmlMessage());
+	$stmtinsert->bindValue('messageDate', $message->getDate());
+	$stmtinsert->bindValue('subject', $message->getSubject());
+	$stmtinsert->bindValue('decodedSubject', $message->getDecodedSubject());
+	$stmtinsert->bindValue('size', $message->getSize());
+	$hasAttachment = 0;
+	if($message->getAttachments()){
+	  $hasAttachment = 1;
+	}
+	$stmtinsert->bindValue('hasAttachment', $hasAttachment);
+	$readed = 0;
+	if($message->getSeen()){
+	  $readed = 1;
+	}
+	$stmtinsert->bindValue('readed', $readed);
+	$stmtinsert->bindValue('headerFrom', serialize($message->getFrom()));
+	$stmtinsert->bindValue('headerTo', serialize($message->getTo()));
+	$stmtinsert->bindValue('headerCc', serialize($message->getCc()));
+	$stmtinsert->bindValue('headerBcc', serialize($message->getBcc()));
+	$stmtinsert->bindValue('connectionstring', $this->getServerString());
+	$stmtinsert->bindValue('user', $this->username);
+	$stmtinsert->execute();
+  }
+  
+  public function getDbMessageByUid($messageId)
+  {
+	$retrieveSql = 'select uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, connectionstring, user from mailboxmessages where connectionstring = :connectionstring and user = :user and uid = :uid';
+	$stmt = $this->connection->prepare($retrieveSql);
+	$stmt->bindValue('connectionstring', $this->getServerString());
+	$stmt->bindValue('user', $this->username);
+	$stmt->bindValue('uid', $messageId);
+	$stmt->execute();
+	return $stmt->fetch();
+  }
+  
+  
+  
   
   public function getFolderById($folderId)
   {

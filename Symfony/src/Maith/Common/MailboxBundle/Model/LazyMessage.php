@@ -13,6 +13,37 @@ class LazyMessage extends FetchMessage{
     protected $seen = true;
     protected $decodedSubject = '';
 
+	
+    /**
+     * This constructor takes in the uid for the message and the Imap class representing the mailbox the
+     * message should be opened from. This constructor should generally not be called directly, but rather retrieved
+     * through the apprioriate Imap functions.
+     *
+     * @param int    $messageUniqueId
+     * @param Server $mailbox
+     */
+    public function __construct($messageUniqueId, MaithLazyMailboxServer $connection, $cacheData = null)
+    {
+		if(false && $cacheData)
+		{
+		  $this->buildFromCache($cacheData);
+		}
+		else
+		{
+		  $this->imapConnection = $connection;
+		  $this->mailbox        = $connection->getMailBox();
+		  $this->uid            = $messageUniqueId;
+		  $this->imapStream     = $this->imapConnection->getImapStream();
+		  if($this->loadMessage() !== true)
+			  throw new \RuntimeException('Message with ID ' . $messageUniqueId . ' not found.');
+		}
+    }	
+	
+	private function buildFromCache($cacheData)
+	{
+	  var_dump(array_keys($cacheData));
+	}
+	
     /**
      * This function is called when the message class is loaded. It loads general information about the message from the
      * imap server.
@@ -38,14 +69,15 @@ class LazyMessage extends FetchMessage{
         $headers = $this->getHeaders();
         
         $anotherHeader = imap_headerinfo ($this->imapStream, imap_msgno($this->imapStream, $this->uid));
-/*        
+/*
         var_dump($anotherHeader);
         echo '<hr/>';
         var_dump($headers);
         echo '<hr/>';
         echo '<hr/>';
         echo '<hr/>';
-*/        
+*/
+//		$ymd = DateTime::createFromFormat('m-d-Y', '10-16-2003')->format('Y-m-d');
         if($anotherHeader->Unseen == "U")
         {
           $this->seen = false;
@@ -67,7 +99,12 @@ class LazyMessage extends FetchMessage{
 
         $structure = $this->getStructure();
         //$parameters = FetchMessage::getParametersFromStructure($structure);
-        //$this->decodedSubject =  iconv($parameters['charset'], FetchMessage::$charset, $this->subject);//
+		//var_dump($parameters);
+		$this->decodedSubject = iconv_mime_decode($this->subject, 0, "UTF8");//utf8_decode(imap_utf8($this->subject));
+//		var_dump(iconv_mime_decode($this->subject, 0, "ISO-8859-1"));
+//		var_dump(iconv_mime_decode($this->subject, 0, "UTF8"));
+//		var_dump(iconv_mime_decode("Subject: =?UTF-8?B?UHLDvGZ1bmcgUHLDvGZ1bmc=?=", 0, "ISO-8859-1"));
+        //$this->decodedSubject =  iconv('ISO-8859-1', FetchMessage::$charset, $this->subject);//
         if (!isset($structure->parts)) {
             // not multipart
             $this->processStructure($structure, null, $peek);
@@ -76,7 +113,6 @@ class LazyMessage extends FetchMessage{
             foreach ($structure->parts as $id => $part)
                 $this->processStructure($part, $id + 1, $peek);
         }
-        
         return true;
     }
 	

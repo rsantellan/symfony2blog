@@ -11,7 +11,7 @@ class DefaultController extends Controller
 	  $mailbox = $this->get('maith_mailbox.server');
 	  //var_dump(get_class($mailbox));
 	  $mailbox->setConnectionData('imap.gmail.com', 993);
-	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXXXXX');
+	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXXXXXXXXXX');
 	  return $mailbox;
 	}
   
