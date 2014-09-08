@@ -12,6 +12,9 @@ class LazyMessage extends FetchMessage{
 
     protected $seen = true;
     protected $decodedSubject = '';
+    protected $hasAttachments = false;
+    
+    public static $charset = 'UTF-8//IGNORE';
 
 	
     /**
@@ -24,9 +27,9 @@ class LazyMessage extends FetchMessage{
      */
     public function __construct($messageUniqueId, MaithLazyMailboxServer $connection, $cacheData = null)
     {
-		if(false && $cacheData)
+		if($cacheData)
 		{
-		  $this->buildFromCache($cacheData);
+		  $this->buildFromCache($cacheData, $connection);
 		}
 		else
 		{
@@ -39,9 +42,26 @@ class LazyMessage extends FetchMessage{
 		}
     }	
 	
-	private function buildFromCache($cacheData)
+	private function buildFromCache($cacheData, MaithLazyMailboxServer $connection)
 	{
-	  var_dump(array_keys($cacheData));
+      $this->imapConnection = $connection;
+      $this->mailbox = $connection->getMailBox();
+      $this->uid = $cacheData['uid'];
+      $this->subject = $cacheData['subject'];
+      $this->decodedSubject = $cacheData['decodedSubject'];
+      $this->date = $cacheData['messageDate'];
+      $this->size = $cacheData['size'];
+      $this->size = $cacheData['size'];
+      $this->headers = unserialize($cacheData['headers']);
+      $this->hasAttachments = $cacheData['hasAttachment'];
+      $this->seen = $cacheData['readed'];
+      $this->to = unserialize($cacheData['headerTo']);
+      $this->cc = unserialize($cacheData['headerCc']);
+      $this->bcc = unserialize($cacheData['headerBcc']);
+      $this->from    =  unserialize($cacheData['headerFrom']);
+      $this->plaintextMessage = $cacheData['plainMessage'];
+      $this->htmlMessage = $cacheData['htmlMessage'];
+	  //var_dump(array_keys($cacheData));
 	}
 	
     /**
@@ -83,15 +103,17 @@ class LazyMessage extends FetchMessage{
           $this->seen = false;
         }
         // 
-        if (isset($headers->to))
-            $this->to = $this->processAddressObject($headers->to);
-
-        if (isset($headers->cc))
-            $this->cc = $this->processAddressObject($headers->cc);
-
-        if (isset($headers->bcc))
-            $this->bcc = $this->processAddressObject($headers->bcc);
-
+        if (isset($headers->to)){
+          $this->to = $this->processAddressObject($headers->to);
+        }
+        
+        if (isset($headers->cc)){
+          $this->cc = $this->processAddressObject($headers->cc);
+        }
+            
+        if (isset($headers->bcc)){
+          $this->bcc = $this->processAddressObject($headers->bcc);
+        }
         $this->from    = $this->processAddressObject($headers->from);
         $this->replyTo = isset($headers->reply_to) ? $this->processAddressObject($headers->reply_to) : $this->from;
 
@@ -100,11 +122,14 @@ class LazyMessage extends FetchMessage{
         $structure = $this->getStructure();
         //$parameters = FetchMessage::getParametersFromStructure($structure);
 		//var_dump($parameters);
-		$this->decodedSubject = iconv_mime_decode($this->subject, 0, "UTF8");//utf8_decode(imap_utf8($this->subject));
-//		var_dump(iconv_mime_decode($this->subject, 0, "ISO-8859-1"));
-//		var_dump(iconv_mime_decode($this->subject, 0, "UTF8"));
-//		var_dump(iconv_mime_decode("Subject: =?UTF-8?B?UHLDvGZ1bmcgUHLDvGZ1bmc=?=", 0, "ISO-8859-1"));
-        //$this->decodedSubject =  iconv('ISO-8859-1', FetchMessage::$charset, $this->subject);//
+        if (function_exists('mb_convert_encoding'))
+        {
+          $this->decodedSubject =  mb_convert_encoding($this->subject, "UTF-8", mb_detect_encoding($this->subject, "UTF-8, ISO-8859-1, ISO-8859-15", true));
+        }
+        else
+        {
+          $this->decodedSubject = iconv_mime_decode($this->subject, 0, "UTF8");
+        }
         if (!isset($structure->parts)) {
             // not multipart
             $this->processStructure($structure, null, $peek);
@@ -141,10 +166,16 @@ class LazyMessage extends FetchMessage{
                 : imap_body($this->imapStream, $this->uid, FT_UID | FT_PEEK);
 
             $messageBody = self::decode($messageBody, $structure->encoding);
-
-            if (!empty($parameters['charset']) && $parameters['charset'] !== self::$charset)
+            if (function_exists('mb_convert_encoding'))
+            {
+              $messageBody = mb_convert_encoding($messageBody, "UTF-8", mb_detect_encoding($messageBody, "UTF-8, ISO-8859-1, ISO-8859-15", true));
+            }
+            else
+            {
+              if (!empty($parameters['charset']) && $parameters['charset'] !== self::$charset){
                 $messageBody = iconv($parameters['charset'], self::$charset, $messageBody);
-
+              }
+            }
             if (strtolower($structure->subtype) === 'plain' || ($structure->type == 1 && strtolower($structure->subtype) !== 'alternative')) {
                 if (isset($this->plaintextMessage)) {
                     $this->plaintextMessage .= PHP_EOL . PHP_EOL;
@@ -177,6 +208,33 @@ class LazyMessage extends FetchMessage{
         }
     }	
 
+    protected function processAddressObject($addresses)
+    {
+        $outputAddresses = array();
+        if (is_array($addresses))
+            foreach ($addresses as $address) {
+                $currentAddress            = array();
+                $usedAddress = '';
+                if(isset($address->mailbox) && isset($address->host))
+                {
+                  $usedAddress = $address->mailbox . '@' . $address->host;
+                }
+                else
+                {
+                  if(isset($address->mailbox))
+                  {
+                    $usedAddress = $address->mailbox; 
+                  }
+                }
+                $currentAddress['address'] = $usedAddress;
+                if (isset($address->personal))
+                    $currentAddress['name'] = $address->personal;
+                $outputAddresses[] = $currentAddress;
+            }
+
+        return $outputAddresses;
+    }
+    
     public function getStatus() {
       return $this->status;
     }

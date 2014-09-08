@@ -94,8 +94,13 @@ class MaithLazyMailboxServer extends FetchServer{
 	$results = array_slice($this->uidList, $this->page, $this->getLimitSize());
 	$messages = array();
 	$this->page ++;
-	foreach ($results as $messageId) {
-	  $cacheMessage = $this->getDbMessageByUid($messageId);
+    $dbMessageList = $this->retrieveDbMessagesByUidList($results);
+    foreach ($results as $messageId) {
+      $cacheMessage = null;
+      if(isset($dbMessageList[$messageId]))
+      {
+        $cacheMessage = $dbMessageList[$messageId];
+      }
 	  $message = new LazyMessage($messageId, $this, $cacheMessage);
 	  if(!$cacheMessage){
 		$this->saveDbMessage($message);
@@ -134,6 +139,38 @@ class MaithLazyMailboxServer extends FetchServer{
 	$stmtinsert->bindValue('connectionstring', $this->getServerString());
 	$stmtinsert->bindValue('user', $this->username);
 	$stmtinsert->execute();
+  }
+  
+  public function retrieveDbMessagesByUidList(Array $uidList)
+  {
+    
+    $retrieveSql = 'select uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, connectionstring, user from mailboxmessages where connectionstring = ? and user = ? and uid IN (?)';
+	$stmt = $this->connection->executeQuery(
+            $retrieveSql, 
+            array(
+                $this->getServerString(),
+                $this->username,
+                $uidList
+            ), 
+            array(
+                \PDO::PARAM_STR,
+                \PDO::PARAM_STR,
+                Connection::PARAM_INT_ARRAY
+            )
+    );
+    $returnData = array();
+    foreach($stmt->fetchAll() as $dbData)
+    {
+      $returnData[$dbData['uid']] = $dbData;
+    }
+    return $returnData;
+    return $stmt->fetchAll();
+    $stmt = $this->connection->prepare($retrieveSql);
+	$stmt->bindValue('connectionstring', $this->getServerString(), \PDO::PARAM_STR);
+	$stmt->bindValue('user', $this->username, \PDO::PARAM_STR);
+	$stmt->bindValue('uid', $uidList, Connection::PARAM_INT_ARRAY);
+	$stmt->execute();
+	return $stmt->fetchAll();
   }
   
   public function getDbMessageByUid($messageId)
@@ -280,6 +317,17 @@ class MaithLazyMailboxServer extends FetchServer{
     return $lastupdated;
   }
   
+  /**
+   * This close the imap connection
+   *
+   */
+  public function closeImapStream()
+  {
+    $stream = $this->getImapStream();
+    if($stream !== null)
+      imap_close($stream);
+  }  
+  
   protected function getData(){
     switch ($datatype){
         case 'uidlist':
@@ -344,6 +392,7 @@ class MaithLazyMailboxServer extends FetchServer{
           break;
       }
   }
+
   
 }
 

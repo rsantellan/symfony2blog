@@ -24,7 +24,7 @@ CREATE TABLE `mailboxupdated` (
 CREATE TABLE IF NOT EXISTS `mailboxmessages` (
   `uid` int(11) NOT NULL,
   `headers` text NOT NULL,
-  `plainMessage` text NOT NULL,
+  `plainMessage` text,
   `htmlMessage` text NOT NULL,
   `messageDate` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
