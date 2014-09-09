@@ -15,7 +15,7 @@ class MaithLazyMailboxServer extends FetchServer{
   
   private $uidList = array();
   private $page = 0;
-  private $limitSize = 10;
+  private $limitSize = 50;
   
   /**
   *
@@ -115,7 +115,7 @@ class MaithLazyMailboxServer extends FetchServer{
 	$insertSql = 'INSERT INTO mailboxmessages (uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, connectionstring, user) VALUES (:uid, :headers, :plainMessage, :htmlMessage, :messageDate, :subject, :decodedSubject, :size, :hasAttachment, :readed, :headerFrom, :headerTo, :headerCc, :headerBcc, :connectionstring, :user)';
 	$stmtinsert = $this->connection->prepare($insertSql);
 	$stmtinsert->bindValue('uid', $message->getUid());
-	$stmtinsert->bindValue('headers', serialize($message->getHeaders()));
+	$stmtinsert->bindValue('headers', base64_encode( serialize($message->getHeaders())));
 	$stmtinsert->bindValue('plainMessage', $message->getPlaintextMessage());
 	$stmtinsert->bindValue('htmlMessage', $message->getHtmlMessage());
 	$stmtinsert->bindValue('messageDate', $message->getDate());
@@ -132,10 +132,11 @@ class MaithLazyMailboxServer extends FetchServer{
 	  $readed = 1;
 	}
 	$stmtinsert->bindValue('readed', $readed);
-	$stmtinsert->bindValue('headerFrom', serialize($message->getFrom()));
-	$stmtinsert->bindValue('headerTo', serialize($message->getTo()));
-	$stmtinsert->bindValue('headerCc', serialize($message->getCc()));
-	$stmtinsert->bindValue('headerBcc', serialize($message->getBcc()));
+	//var_dump($message->getCc());
+	$stmtinsert->bindValue('headerFrom', base64_encode(serialize($message->getFrom())));
+	$stmtinsert->bindValue('headerTo', base64_encode(serialize($message->getTo())));
+	$stmtinsert->bindValue('headerCc', base64_encode(serialize($message->getCc())));
+	$stmtinsert->bindValue('headerBcc', base64_encode(serialize($message->getBcc())));
 	$stmtinsert->bindValue('connectionstring', $this->getServerString());
 	$stmtinsert->bindValue('user', $this->username);
 	$stmtinsert->execute();

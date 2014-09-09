@@ -52,16 +52,26 @@ class LazyMessage extends FetchMessage{
       $this->date = $cacheData['messageDate'];
       $this->size = $cacheData['size'];
       $this->size = $cacheData['size'];
-      $this->headers = unserialize($cacheData['headers']);
+      $this->headers = unserialize(base64_decode($cacheData['headers']));
       $this->hasAttachments = $cacheData['hasAttachment'];
       $this->seen = $cacheData['readed'];
-      $this->to = unserialize($cacheData['headerTo']);
-      $this->cc = unserialize($cacheData['headerCc']);
-      $this->bcc = unserialize($cacheData['headerBcc']);
-      $this->from    =  unserialize($cacheData['headerFrom']);
+	  $this->to = unserialize(base64_decode($cacheData['headerTo']));
+	  $this->cc = unserialize($this->parseSerialize(base64_decode($cacheData['headerCc'])));
+      $this->bcc = unserialize(base64_decode($cacheData['headerBcc']));
+      $this->from    =  unserialize(base64_decode($cacheData['headerFrom']));
       $this->plaintextMessage = $cacheData['plainMessage'];
       $this->htmlMessage = $cacheData['htmlMessage'];
 	  //var_dump(array_keys($cacheData));
+	}
+	
+	protected function parseSerialize($error_serialized_data)
+	{
+	  $fixed_serialized_data = preg_replace_callback ( '!s:(\d+):"(.*?)";!',
+		function($match) {
+			return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
+		},
+	  $error_serialized_data );
+	  return $fixed_serialized_data;
 	}
 	
     /**
