@@ -23,22 +23,24 @@ CREATE TABLE `mailboxupdated` (
 
 CREATE TABLE IF NOT EXISTS `mailboxmessages` (
   `uid` int(11) NOT NULL,
-  `headers` text NOT NULL,
+  `headers` blob NOT NULL,
   `plainMessage` text,
-  `htmlMessage` text NOT NULL,
+  `htmlMessage` text,
   `messageDate` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `decodedSubject` varchar(255) NOT NULL,
   `size` int(11) NOT NULL,
   `hasAttachment` tinyint(1) NOT NULL DEFAULT '0',
   `readed` tinyint(1) NOT NULL DEFAULT '0',
-  `headerFrom` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `headerTo` varchar(255) NOT NULL,
-  `headerCc` varchar(255) NOT NULL,
-  `headerBcc` varchar(255) NOT NULL,
+  `headerFrom` blob NOT NULL,
+  `headerTo` blob NOT NULL,
+  `headerCc` blob NOT NULL,
+  `headerBcc` blob NOT NULL,
+  `headerReplyTo` blob NOT NULL,
   `connectionstring` varchar(255) NOT NULL,
   `user` varchar(255) NOT NULL,
   PRIMARY KEY (`uid`,`connectionstring`,`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 SET FOREIGN_KEY_CHECKS=1;

@@ -59,6 +59,7 @@ class LazyMessage extends FetchMessage{
 	  $this->cc = unserialize($this->parseSerialize(base64_decode($cacheData['headerCc'])));
       $this->bcc = unserialize(base64_decode($cacheData['headerBcc']));
       $this->from    =  unserialize(base64_decode($cacheData['headerFrom']));
+      $this->replyTo = unserialize(base64_decode($cacheData['headerReplyTo']));
       $this->plaintextMessage = $cacheData['plainMessage'];
       $this->htmlMessage = $cacheData['htmlMessage'];
 	  //var_dump(array_keys($cacheData));
@@ -134,7 +135,7 @@ class LazyMessage extends FetchMessage{
 		//var_dump($parameters);
         if (function_exists('mb_convert_encoding'))
         {
-          $this->decodedSubject =  mb_convert_encoding($this->subject, "UTF-8", mb_detect_encoding($this->subject, "UTF-8, ISO-8859-1, ISO-8859-15", true));
+          $this->decodedSubject =  mb_convert_encoding(imap_utf8($this->subject), "UTF-8", mb_detect_encoding($this->subject, "UTF-8, ISO-8859-1, ISO-8859-15", true));
         }
         else
         {
@@ -237,8 +238,18 @@ class LazyMessage extends FetchMessage{
                   }
                 }
                 $currentAddress['address'] = $usedAddress;
-                if (isset($address->personal))
+                if (isset($address->personal)){
+                  
+                  if (function_exists('mb_convert_encoding'))
+                  {
+                    $currentAddress['name'] = mb_convert_encoding(imap_utf8($address->personal), "UTF-8", mb_detect_encoding($this->subject, "UTF-8, ISO-8859-1, ISO-8859-15", true));;
+                  }
+                  else
+                  {
                     $currentAddress['name'] = $address->personal;
+                  }
+                }
+                    
                 $outputAddresses[] = $currentAddress;
             }
 

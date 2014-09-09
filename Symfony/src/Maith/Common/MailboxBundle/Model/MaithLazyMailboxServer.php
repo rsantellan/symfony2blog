@@ -91,7 +91,8 @@ class MaithLazyMailboxServer extends FetchServer{
 	if($page !== null){
 	  $this->page = $page;
 	}
-	$results = array_slice($this->uidList, $this->page, $this->getLimitSize());
+    var_dump(($this->getLimitSize() * $this->page));
+	$results = array_slice($this->uidList, ($this->getLimitSize() * $this->page), $this->getLimitSize());
 	$messages = array();
 	$this->page ++;
     $dbMessageList = $this->retrieveDbMessagesByUidList($results);
@@ -112,7 +113,7 @@ class MaithLazyMailboxServer extends FetchServer{
   
   public function saveDbMessage(LazyMessage $message)
   {
-	$insertSql = 'INSERT INTO mailboxmessages (uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, connectionstring, user) VALUES (:uid, :headers, :plainMessage, :htmlMessage, :messageDate, :subject, :decodedSubject, :size, :hasAttachment, :readed, :headerFrom, :headerTo, :headerCc, :headerBcc, :connectionstring, :user)';
+	$insertSql = 'INSERT INTO mailboxmessages (uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, headerReplyTo, connectionstring, user) VALUES (:uid, :headers, :plainMessage, :htmlMessage, :messageDate, :subject, :decodedSubject, :size, :hasAttachment, :readed, :headerFrom, :headerTo, :headerCc, :headerBcc, :headerReplyTo, :connectionstring, :user)';
 	$stmtinsert = $this->connection->prepare($insertSql);
 	$stmtinsert->bindValue('uid', $message->getUid());
 	$stmtinsert->bindValue('headers', base64_encode( serialize($message->getHeaders())));
@@ -137,6 +138,7 @@ class MaithLazyMailboxServer extends FetchServer{
 	$stmtinsert->bindValue('headerTo', base64_encode(serialize($message->getTo())));
 	$stmtinsert->bindValue('headerCc', base64_encode(serialize($message->getCc())));
 	$stmtinsert->bindValue('headerBcc', base64_encode(serialize($message->getBcc())));
+	$stmtinsert->bindValue('headerReplyTo', base64_encode(serialize($message->getReplyTo())));
 	$stmtinsert->bindValue('connectionstring', $this->getServerString());
 	$stmtinsert->bindValue('user', $this->username);
 	$stmtinsert->execute();
@@ -145,7 +147,7 @@ class MaithLazyMailboxServer extends FetchServer{
   public function retrieveDbMessagesByUidList(Array $uidList)
   {
     
-    $retrieveSql = 'select uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, connectionstring, user from mailboxmessages where connectionstring = ? and user = ? and uid IN (?)';
+    $retrieveSql = 'select uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, headerReplyTo, connectionstring, user from mailboxmessages where connectionstring = ? and user = ? and uid IN (?)';
 	$stmt = $this->connection->executeQuery(
             $retrieveSql, 
             array(

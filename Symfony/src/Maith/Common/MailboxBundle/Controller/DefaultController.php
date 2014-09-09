@@ -3,6 +3,7 @@
 namespace Maith\Common\MailboxBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -11,7 +12,7 @@ class DefaultController extends Controller
 	  $mailbox = $this->get('maith_mailbox.server');
 	  //var_dump(get_class($mailbox));
 	  $mailbox->setConnectionData('imap.gmail.com', 993);
-	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXXXXXXXx');
+	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXXXx');
 	  return $mailbox;
 	}
   
@@ -30,11 +31,12 @@ class DefaultController extends Controller
         return $this->render('MaithCommonMailboxBundle:Default:index.html.twig', array('folders' => $folders));
     }
 	
-	public function folderAction($folderId, $page = 0)
+	public function folderAction(Request $request, $folderId)
 	{
-      if(!is_int($page))
+      $pager = (int) $request->get('pager');
+      if(!is_int($pager))
       {
-        $page = 0;
+        $pager = 0;
       }
       echo sprintf('Controller start: %s', microtime(true));
       echo '<hr/>';
@@ -57,7 +59,8 @@ class DefaultController extends Controller
       //$mailbox->searchAndReverse('SINCE '. date('d-M-Y',strtotime("-1 week")));
       echo sprintf('Retrieve data query: %s', microtime(true));
       echo '<hr/>';
-      $messages = $mailbox->retrieveNextMessagesInLine($page);
+      var_dump($pager);
+      $messages = $mailbox->retrieveNextMessagesInLine($pager);
       echo sprintf('Close Stream query: %s', microtime(true));
       echo '<hr/>';
       $mailbox->closeImapStream();

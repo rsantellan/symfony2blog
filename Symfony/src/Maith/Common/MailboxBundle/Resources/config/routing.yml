@@ -3,5 +3,7 @@ maith_common_mailbox_homepage:
     defaults: { _controller: MaithCommonMailboxBundle:Default:index }
 
 maith_common_mailbox_list_folder:
-    path:     /mailer/list/{folderId}/{page}
-    defaults: { _controller: MaithCommonMailboxBundle:Default:folder, page: 0 }
+    path:     /mailer/list/{folderId}/{pager}
+    defaults: { _controller: MaithCommonMailboxBundle:Default:folder, pager: 0 }
+    requirements:
+        page:  \d+
