@@ -25,7 +25,7 @@ class LazyMessage extends FetchMessage{
      * @param int    $messageUniqueId
      * @param Server $mailbox
      */
-    public function __construct($messageUniqueId, MaithLazyMailboxServer $connection, $cacheData = null)
+    public function __construct($messageUniqueId, MaithLazyMailboxServer $connection, $cacheData = null, $peek = true)
     {
 		if($cacheData)
 		{
@@ -37,7 +37,7 @@ class LazyMessage extends FetchMessage{
 		  $this->mailbox        = $connection->getMailBox();
 		  $this->uid            = $messageUniqueId;
 		  $this->imapStream     = $this->imapConnection->getImapStream();
-		  if($this->loadMessage() !== true)
+		  if($this->loadMessage($peek) !== true)
 			  throw new \RuntimeException('Message with ID ' . $messageUniqueId . ' not found.');
 		}
     }	

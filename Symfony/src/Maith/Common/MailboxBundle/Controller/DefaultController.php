@@ -55,11 +55,10 @@ class DefaultController extends Controller
 	  $mailbox->setMailBox($folder['name']);
       echo sprintf('Set mailbox query: %s', microtime(true));
       echo '<hr/>';
-      $mailbox->searchAndReverse();
-      //$mailbox->searchAndReverse('SINCE '. date('d-M-Y',strtotime("-1 week")));
+      //$mailbox->searchAndReverse();
+      $mailbox->searchAndReverse('SINCE '. date('d-M-Y',strtotime("-1 week")));
       echo sprintf('Retrieve data query: %s', microtime(true));
       echo '<hr/>';
-      var_dump($pager);
       $messages = $mailbox->retrieveNextMessagesInLine($pager);
       echo sprintf('Close Stream query: %s', microtime(true));
       echo '<hr/>';
@@ -68,5 +67,33 @@ class DefaultController extends Controller
 	  //var_dump($folder);
 	}
 	
-	
+	public function messageAction($folderId, $uid)
+	{
+      echo sprintf('Controller start: %s', microtime(true));
+      echo '<hr/>';
+	  $mailbox = $this->getConfiguredMailbox();
+      echo sprintf('Get configured mailbox: %s', microtime(true));
+      echo '<hr/>';
+	  $folder = $mailbox->getFolderById($folderId);
+      echo sprintf('Get folder mailbox: %s', microtime(true));
+      echo '<hr/>';
+      if(!$folder)
+      {
+        throw $this->createNotFoundException("No mailbox with id: ".$folderId);
+      }
+      echo sprintf('Set folder mailbox: %s', microtime(true));
+      echo '<hr/>';
+	  $mailbox->setMailBox($folder['name']);
+      echo sprintf('Retrieve by uid: %s', microtime(true));
+      echo '<hr/>';
+      $message = $mailbox->getMessageByUid($uid);
+      echo sprintf('Close Stream query: %s', microtime(true));
+      echo '<hr/>';
+      $mailbox->closeImapStream();
+      
+      var_dump($folderId);
+      var_dump($uid);
+      
+      die;
+    }
 }

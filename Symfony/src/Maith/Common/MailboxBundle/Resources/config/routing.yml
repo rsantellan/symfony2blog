@@ -6,4 +6,12 @@ maith_common_mailbox_list_folder:
     path:     /mailer/list/{folderId}/{pager}
     defaults: { _controller: MaithCommonMailboxBundle:Default:folder, pager: 0 }
     requirements:
-        page:  \d+
+        folderId:  \d+
+        page:  \d+        
+        
+maith_common_mailbox_view_message:
+    path:     /mailer/message/{folderId}/{uid}
+    defaults: { _controller: MaithCommonMailboxBundle:Default:message }
+    requirements:
+        uid:  \d+
+        folderId:  \d+        

@@ -10,6 +10,7 @@
         <th>Asunto</th>
         <th>Recibido</th>
         <th>Adjuntos</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -28,6 +29,9 @@
           <td>{#{ message.subject }#}- {{ message.decodedSubject }}</td>
           <td>{{ message.date |date('Y-m-d H:i:s') }}</td>
           <td>{% if message.hasAttachments %} Si {% endif %}</td>
+          <td>
+            <a href="{{ path('maith_common_mailbox_view_message', { 'folderId': folder.id, 'uid' : message.uid }) }}">Ver</a>
+          </td>
         </tr>  
         {% endfor %}
       </tbody>
