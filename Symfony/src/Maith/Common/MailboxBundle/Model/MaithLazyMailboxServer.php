@@ -70,7 +70,7 @@ class MaithLazyMailboxServer extends FetchServer{
    */
   public function search($criteria = 'ALL', $limit = null)
   {
-	  $cacheKey = $this->getServerString().'-'.$criteria;
+	  //$cacheKey = $this->getServerString().'-'.$criteria;
 	  if ($results = imap_search($this->getImapStream(), $criteria, SE_UID)) {
 		  $this->uidList = $results;
 		  return true;
@@ -84,6 +84,55 @@ class MaithLazyMailboxServer extends FetchServer{
 	{
 	  $this->uidList = array_reverse($this->uidList);
 	}
+  }
+  
+  private function searchAndReversePerWeek($sinceWeek = 1, $beforeWeek = null)
+  {
+    $criteria = 'SINCE '. date('d-M-Y',strtotime(sprintf("-%s week", $sinceWeek)));
+    if($beforeWeek !== null)
+    {
+      $criteria .= ' BEFORE '. date('d-M-Y',strtotime(sprintf("-%s week", $beforeWeek)));;
+    }
+    if($this->search($criteria))
+	{
+      if ($results = imap_search($this->getImapStream(), $criteria, SE_UID)) {
+        $this->uidList = array_merge($this->uidList, array_reverse($results));
+      }
+	}
+  }
+  
+  public function retrieveMessages($page = null)
+  {
+    if(count($this->uidList) == 0)
+    {
+      $this->searchAndReversePerWeek();
+    }
+    if($page !== null){
+	  $this->page = $page;
+	}
+	$results = array_slice($this->uidList, ($this->getLimitSize() * $this->page), $this->getLimitSize());
+	$messages = array();
+	$this->page ++;
+    $dbMessageList = $this->retrieveDbMessagesByUidList($results);
+    foreach ($results as $messageId) {
+//      echo sprintf('Read message : %s', microtime(true));
+//      echo '<hr/>';
+      $cacheMessage = null;
+      if(isset($dbMessageList[$messageId]))
+      {
+        $cacheMessage = $dbMessageList[$messageId];
+      }
+	  $message = new LazyMessage($messageId, $this, $cacheMessage);
+	  if(!$cacheMessage){
+		$this->saveDbMessage($message);
+//        echo sprintf('Save in db message : %s', microtime(true));
+//        echo '<hr/>';
+	  }
+//      echo sprintf('Finish read message : %s', microtime(true));
+//      echo '<hr/>';
+	  $messages[] = $message;
+	}
+	return $messages;
   }
 
   public function retrieveNextMessagesInLine($page = null)
