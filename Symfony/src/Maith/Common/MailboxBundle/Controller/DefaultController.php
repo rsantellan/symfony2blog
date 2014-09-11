@@ -12,7 +12,7 @@ class DefaultController extends Controller
 	  $mailbox = $this->get('maith_mailbox.server');
 	  //var_dump(get_class($mailbox));
 	  $mailbox->setConnectionData('imap.gmail.com', 993);
-	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXX');
+	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXX');
 	  return $mailbox;
 	}
   
@@ -59,7 +59,7 @@ class DefaultController extends Controller
       //$mailbox->searchAndReverse('SINCE '. date('d-M-Y',strtotime("-1 week")));
       echo sprintf('Retrieve data query: %s', microtime(true));
       echo '<hr/>';
-	  $mailbox->setLimitSize(2000);
+	  //$mailbox->setLimitSize(2000);
       $messages = $mailbox->retrieveMessages($pager);
       echo sprintf('Close Stream query: %s', microtime(true));
       echo '<hr/>';
@@ -70,31 +70,31 @@ class DefaultController extends Controller
 	
 	public function messageAction($folderId, $uid)
 	{
-      echo sprintf('Controller start: %s', microtime(true));
-      echo '<hr/>';
+//      echo sprintf('Controller start: %s', microtime(true));
+//      echo '<hr/>';
 	  $mailbox = $this->getConfiguredMailbox();
-      echo sprintf('Get configured mailbox: %s', microtime(true));
-      echo '<hr/>';
+//      echo sprintf('Get configured mailbox: %s', microtime(true));
+//      echo '<hr/>';
 	  $folder = $mailbox->getFolderById($folderId);
-      echo sprintf('Get folder mailbox: %s', microtime(true));
-      echo '<hr/>';
+//      echo sprintf('Get folder mailbox: %s', microtime(true));
+//      echo '<hr/>';
       if(!$folder)
       {
         throw $this->createNotFoundException("No mailbox with id: ".$folderId);
       }
-      echo sprintf('Set folder mailbox: %s', microtime(true));
-      echo '<hr/>';
+//      echo sprintf('Set folder mailbox: %s', microtime(true));
+//      echo '<hr/>';
 	  $mailbox->setMailBox($folder['name']);
-      echo sprintf('Retrieve by uid: %s', microtime(true));
-      echo '<hr/>';
-      $message = $mailbox->getMessageByUid($uid);
-      echo sprintf('Close Stream query: %s', microtime(true));
-      echo '<hr/>';
+//      echo sprintf('Retrieve by uid: %s', microtime(true));
+//      echo '<hr/>';
+      $message = $mailbox->getMessageByUid($uid, true);
+//      echo sprintf('Close Stream query: %s', microtime(true));
+//      echo '<hr/>';
       $mailbox->closeImapStream();
       
-      var_dump($folderId);
-      var_dump($uid);
-      
+      //var_dump($folderId);
+      //var_dump($uid);
+      return $this->render('MaithCommonMailboxBundle:Default:message.html.twig', array('folder' => $folder, 'message' => $message));
       die;
     }
 }

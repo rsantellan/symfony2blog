@@ -88,19 +88,23 @@ class MaithLazyMailboxServer extends FetchServer{
   
   private function searchAndReversePerWeek($sinceWeek = 1, $beforeWeek = null, $timeUnit = 'week')
   {
-    $criteria = 'SINCE '. date('d-M-Y',strtotime(sprintf("-%s %s", $sinceWeek, $timeUnit)));
+    $criteria = 'ALL';
+    if($sinceWeek !== null)
+    {
+      $criteria = 'SINCE '. date('d-M-Y',strtotime(sprintf("-%s %s", $sinceWeek, $timeUnit)));
+    }
     if($beforeWeek !== null)
     {
       $criteria .= ' BEFORE '. date('d-M-Y',strtotime(sprintf("-%s %s", $beforeWeek, $timeUnit)));;
     }
 	var_dump($criteria);
 	if ($results = imap_search($this->getImapStream(), $criteria, SE_UID)) {
-	  /*$reversed = array_reverse($results);
+	  $reversed = array_reverse($results);
 	  foreach($reversed as $uid)
 	  {
-		$this->uidList[] = $uid;
-	  }*/
-	  $this->uidList = array_merge($this->uidList, array_reverse($results));
+		$this->uidList[$uid] = $uid;
+	  }
+	  //$this->uidList = array_merge($this->uidList, array_reverse($results));
 	  //var_dump(array_reverse($results));
 	}
 	
@@ -135,21 +139,25 @@ class MaithLazyMailboxServer extends FetchServer{
 	//die;
 	//while($i )
     
-	if(count($this->uidList) == 0)
+	if(count($this->uidList) < $offset + $this->getLimitSize())
     {
 	  $sinceWeek = 1;
 	  $searchs = 0;
 	  $timeUnit = 'day';
       $this->searchAndReversePerWeek($sinceWeek, null, $timeUnit);
-	  while($searchs < 10 && count($this->uidList) < $offset + $this->getLimitSize())
+      $beforeWeek = null;
+	  while($searchs < 3 && count($this->uidList) < $offset + $this->getLimitSize())
 	  {
-		
-		$beforeWeek = $sinceWeek;
-		$sinceWeek++;
+        $timeUnit = 'week';
 		$this->searchAndReversePerWeek($sinceWeek, $beforeWeek, $timeUnit);
-		$timeUnit = 'week';
+        $beforeWeek = $sinceWeek;
+		$sinceWeek++;
 		$searchs++;
 	  }
+      if(count($this->uidList) < $offset + $this->getLimitSize())
+      {
+        $this->searchAndReversePerWeek(null);
+      }
     }
 	
 	
@@ -220,14 +228,37 @@ class MaithLazyMailboxServer extends FetchServer{
    */
   public function getMessageByUid($uid, $peek = false)
   {
+      $cacheData = $this->getDbMessageByUid($uid);
       try {
-          $message = new LazyMessage($uid, $this, null, $peek);
+          $message = new LazyMessage($uid, $this, $cacheData, $peek);
+          if($cacheData && $peek)
+          {
+            if((int) $message->getSeen() == 0)
+            {
+              $this->changeDbReadStatus($message);
+            }
+          }
           return $message;
       }catch(\Exception $e){
           return false;
       }
   }
-    
+  
+  public function changeDbReadStatus(LazyMessage $message)
+  {
+    $setSeenSql = 'UPDATE mailboxmessages set readed = :readed where connectionstring = :connectionstring and user = :user and uid = :uid';
+    $stmt = $this->connection->prepare($setSeenSql);
+    $readed = 0;
+	if($message->getSeen()){
+	  $readed = 1;
+	}
+	$stmt->bindValue('readed', $readed);
+	$stmt->bindValue('connectionstring', $this->getServerString());
+	$stmt->bindValue('user', $this->username);
+	$stmt->bindValue('uid', $message->getUid());
+	$stmt->execute();
+  }
+  
   public function saveDbMessage(LazyMessage $message)
   {
 	$insertSql = 'INSERT INTO mailboxmessages (uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, headerReplyTo, connectionstring, user) VALUES (:uid, :headers, :plainMessage, :htmlMessage, :messageDate, :subject, :decodedSubject, :size, :hasAttachment, :readed, :headerFrom, :headerTo, :headerCc, :headerBcc, :headerReplyTo, :connectionstring, :user)';
@@ -295,7 +326,7 @@ class MaithLazyMailboxServer extends FetchServer{
   
   public function getDbMessageByUid($messageId)
   {
-	$retrieveSql = 'select uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, connectionstring, user from mailboxmessages where connectionstring = :connectionstring and user = :user and uid = :uid';
+	$retrieveSql = 'select uid, headers, plainMessage, htmlMessage, messageDate, subject, decodedSubject, size, hasAttachment, readed, headerFrom, headerTo, headerCc, headerBcc, headerReplyTo, connectionstring, user from mailboxmessages where connectionstring = :connectionstring and user = :user and uid = :uid';
 	$stmt = $this->connection->prepare($retrieveSql);
 	$stmt->bindValue('connectionstring', $this->getServerString());
 	$stmt->bindValue('user', $this->username);
@@ -445,7 +476,7 @@ class MaithLazyMailboxServer extends FetchServer{
   {
     $stream = $this->getImapStream();
     if($stream !== null)
-      imap_close($stream);
+      imap_close($stream, CL_EXPUNGE);
   }  
   
 }

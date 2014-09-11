@@ -30,6 +30,14 @@ class LazyMessage extends FetchMessage{
 		if($cacheData)
 		{
 		  $this->buildFromCache($cacheData, $connection);
+          if($peek)
+          {
+            if((int)$this->seen == 0)
+            {
+              $this->setSeen(1);
+              imap_setflag_full($connection->getImapStream(), $messageUniqueId, '\\Seen', ST_UID);
+            }
+          }
 		}
 		else
 		{
@@ -50,7 +58,6 @@ class LazyMessage extends FetchMessage{
       $this->subject = $cacheData['subject'];
       $this->decodedSubject = $cacheData['decodedSubject'];
       $this->date = $cacheData['messageDate'];
-      $this->size = $cacheData['size'];
       $this->size = $cacheData['size'];
       $this->headers = unserialize(base64_decode($cacheData['headers']));
       $this->hasAttachments = $cacheData['hasAttachment'];
@@ -100,14 +107,7 @@ class LazyMessage extends FetchMessage{
         $headers = $this->getHeaders();
         
         $anotherHeader = imap_headerinfo ($this->imapStream, imap_msgno($this->imapStream, $this->uid));
-/*
-        var_dump($anotherHeader);
-        echo '<hr/>';
-        var_dump($headers);
-        echo '<hr/>';
-        echo '<hr/>';
-        echo '<hr/>';
-*/
+
 //		$ymd = DateTime::createFromFormat('m-d-Y', '10-16-2003')->format('Y-m-d');
         if($anotherHeader->Unseen == "U")
         {
@@ -133,9 +133,13 @@ class LazyMessage extends FetchMessage{
         $structure = $this->getStructure();
         //$parameters = FetchMessage::getParametersFromStructure($structure);
 		//var_dump($parameters);
+        //$this->decodedSubject =  utf8_decode(imap_utf8($this->subject));
+        mb_internal_encoding('UTF-8');
+        $this->decodedSubject = str_replace("_"," ", mb_decode_mimeheader($this->subject));
         if (function_exists('mb_convert_encoding'))
         {
-          $this->decodedSubject =  mb_convert_encoding(imap_utf8($this->subject), "UTF-8", mb_detect_encoding($this->subject, "UTF-8, ISO-8859-1, ISO-8859-15", true));
+          //$this->decodedSubject =  mb_convert_encoding($this->subject, "UTF-8", mb_detect_encoding($this->subject, "UTF-8, ISO-8859-1, ISO-8859-15", true));
+          //$this->decodedSubject =  utf8_decode(imap_utf8($this->subject));
         }
         else
         {
@@ -177,6 +181,9 @@ class LazyMessage extends FetchMessage{
                 : imap_body($this->imapStream, $this->uid, FT_UID | FT_PEEK);
 
             $messageBody = self::decode($messageBody, $structure->encoding);
+            //mb_internal_encoding('UTF-8');
+            //$messageBody = str_replace("_"," ", mb_decode_mimeheader($messageBody));
+            /*
             if (function_exists('mb_convert_encoding'))
             {
               $messageBody = mb_convert_encoding($messageBody, "UTF-8", mb_detect_encoding($messageBody, "UTF-8, ISO-8859-1, ISO-8859-15", true));
@@ -187,6 +194,7 @@ class LazyMessage extends FetchMessage{
                 $messageBody = iconv($parameters['charset'], self::$charset, $messageBody);
               }
             }
+            */
             if (strtolower($structure->subtype) === 'plain' || ($structure->type == 1 && strtolower($structure->subtype) !== 'alternative')) {
                 if (isset($this->plaintextMessage)) {
                     $this->plaintextMessage .= PHP_EOL . PHP_EOL;
