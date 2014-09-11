@@ -12,7 +12,7 @@ class DefaultController extends Controller
 	  $mailbox = $this->get('maith_mailbox.server');
 	  //var_dump(get_class($mailbox));
 	  $mailbox->setConnectionData('imap.gmail.com', 993);
-	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXXXXXx');
+	  $mailbox->setAuthentication('rsantellan@gmail.com', 'XXXXXXXXXXX');
 	  return $mailbox;
 	}
   
@@ -56,10 +56,11 @@ class DefaultController extends Controller
       echo sprintf('Set mailbox query: %s', microtime(true));
       echo '<hr/>';
       //$mailbox->searchAndReverse();
-      $mailbox->searchAndReverse('SINCE '. date('d-M-Y',strtotime("-1 week")));
+      //$mailbox->searchAndReverse('SINCE '. date('d-M-Y',strtotime("-1 week")));
       echo sprintf('Retrieve data query: %s', microtime(true));
       echo '<hr/>';
-      $messages = $mailbox->retrieveNextMessagesInLine($pager);
+	  $mailbox->setLimitSize(2000);
+      $messages = $mailbox->retrieveMessages($pager);
       echo sprintf('Close Stream query: %s', microtime(true));
       echo '<hr/>';
       $mailbox->closeImapStream();

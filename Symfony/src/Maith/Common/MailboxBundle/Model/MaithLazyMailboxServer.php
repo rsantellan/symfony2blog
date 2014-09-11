@@ -86,31 +86,77 @@ class MaithLazyMailboxServer extends FetchServer{
 	}
   }
   
-  private function searchAndReversePerWeek($sinceWeek = 1, $beforeWeek = null)
+  private function searchAndReversePerWeek($sinceWeek = 1, $beforeWeek = null, $timeUnit = 'week')
   {
-    $criteria = 'SINCE '. date('d-M-Y',strtotime(sprintf("-%s week", $sinceWeek)));
+    $criteria = 'SINCE '. date('d-M-Y',strtotime(sprintf("-%s %s", $sinceWeek, $timeUnit)));
     if($beforeWeek !== null)
     {
-      $criteria .= ' BEFORE '. date('d-M-Y',strtotime(sprintf("-%s week", $beforeWeek)));;
+      $criteria .= ' BEFORE '. date('d-M-Y',strtotime(sprintf("-%s %s", $beforeWeek, $timeUnit)));;
     }
-    if($this->search($criteria))
-	{
-      if ($results = imap_search($this->getImapStream(), $criteria, SE_UID)) {
-        $this->uidList = array_merge($this->uidList, array_reverse($results));
-      }
+	var_dump($criteria);
+	if ($results = imap_search($this->getImapStream(), $criteria, SE_UID)) {
+	  /*$reversed = array_reverse($results);
+	  foreach($reversed as $uid)
+	  {
+		$this->uidList[] = $uid;
+	  }*/
+	  $this->uidList = array_merge($this->uidList, array_reverse($results));
+	  //var_dump(array_reverse($results));
 	}
+	
   }
   
   public function retrieveMessages($page = null)
   {
-    if(count($this->uidList) == 0)
-    {
-      $this->searchAndReversePerWeek();
-    }
-    if($page !== null){
+	if($page !== null){
 	  $this->page = $page;
 	}
-	$results = array_slice($this->uidList, ($this->getLimitSize() * $this->page), $this->getLimitSize());
+	$offset = ($this->getLimitSize() * $this->page);
+	/*
+	echo sprintf('Get mailbox msg number: %s', microtime(true));
+    echo '<hr/>';
+	$numMessages = $this->numMessages();
+	echo sprintf('Finish mailbox msg number: %s', microtime(true));
+    echo '<hr/>';
+	$startNumber = $numMessages - ($offset);
+	$finishNumber = $numMessages - ($offset + $this->getLimitSize());
+	while($startNumber > $finishNumber)
+	{
+	  echo sprintf('Get uid mailbox: %s', microtime(true));
+	  echo '<hr/>';
+	  $this->uidList[] =  imap_uid($this->getImapStream(), $startNumber);
+	  $startNumber--;
+	  echo sprintf('Finish uid mailbox: %s', microtime(true));
+	  echo '<hr/>';
+	}
+	*/
+	//var_dump($startNumber);
+	//var_dump($finishNumber);
+	//die;
+	//while($i )
+    
+	if(count($this->uidList) == 0)
+    {
+	  $sinceWeek = 1;
+	  $searchs = 0;
+	  $timeUnit = 'day';
+      $this->searchAndReversePerWeek($sinceWeek, null, $timeUnit);
+	  while($searchs < 10 && count($this->uidList) < $offset + $this->getLimitSize())
+	  {
+		
+		$beforeWeek = $sinceWeek;
+		$sinceWeek++;
+		$this->searchAndReversePerWeek($sinceWeek, $beforeWeek, $timeUnit);
+		$timeUnit = 'week';
+		$searchs++;
+	  }
+    }
+	
+	
+    
+	$results = array_slice($this->uidList, $offset, $this->getLimitSize());
+	echo '<hr/>';
+	//var_dump($results);
 	$messages = array();
 	$this->page ++;
     $dbMessageList = $this->retrieveDbMessagesByUidList($results);
