@@ -94,7 +94,18 @@ class DefaultController extends Controller
       
       //var_dump($folderId);
       //var_dump($uid);
-      return $this->render('MaithCommonMailboxBundle:Default:message.html.twig', array('folder' => $folder, 'message' => $message));
+	  /*
+	  $dom = new \DOMDocument();
+	  $dom->loadHTML(htmlentities($message->getHtmlMessage()));
+	  $bodies = $dom->getElementsByTagName('body');
+	  $body = $bodies->item(0);*/
+	  //$parser = $this->container->get('simple_html_dom');
+	  //$parser->load($message->getHtmlMessage());
+	  //var_dump($parser->find('body'));
+	  
+	  $messageBody = '';//$parser->find('body')->innertext;//$dom->saveHTML();
+	  
+      return $this->render('MaithCommonMailboxBundle:Default:message.html.twig', array('folder' => $folder, 'message' => $message, 'body' => $messageBody));
       die;
     }
 }
