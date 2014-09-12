@@ -181,8 +181,8 @@ class LazyMessage extends FetchMessage{
                 : imap_body($this->imapStream, $this->uid, FT_UID | FT_PEEK);
 
             $messageBody = self::decode($messageBody, $structure->encoding);
-            //mb_internal_encoding('UTF-8');
-            //$messageBody = str_replace("_"," ", mb_decode_mimeheader($messageBody));
+            mb_internal_encoding('UTF-8');
+            $messageBody = str_replace("_"," ", mb_decode_mimeheader($messageBody));
             /*
             if (function_exists('mb_convert_encoding'))
             {

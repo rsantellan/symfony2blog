@@ -3,8 +3,9 @@
 {% block body -%}
   <h2>{{ folder['name'] }}</h2><h3>{{ message.decodedSubject }}</h3>
   
-  {#{ message.htmlMessage | raw }#}
-  
+  <div>
+    {{ message.htmlMessage | raw }}
+  </div>
 
 
 {% endblock %}
