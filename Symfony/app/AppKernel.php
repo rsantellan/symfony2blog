@@ -27,7 +27,6 @@ class AppKernel extends Kernel
             new Maith\Common\ImageBundle\MaithCommonImageBundle(),
             new Maith\Common\TranslatorBundle\MaithCommonTranslatorBundle(),
             new Maith\Common\MailboxBundle\MaithCommonMailboxBundle(),
-			new Erivello\SimpleHtmlDomBundle\ErivelloSimpleHtmlDomBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

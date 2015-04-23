@@ -27,7 +27,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.3.*",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
         "symfony/assetic-bundle": "2.3.*",
@@ -44,12 +44,10 @@
         "friendsofsymfony/user-bundle": "dev-master",
         "genemu/form-bundle": "2.2.*",
         "imagine/Imagine": "dev-master",
-		"tedivm/fetch": "0.5.*",
         "Maith/Common/AdminBundle": "dev-master",
         "Maith/Common/ImageBundle": "dev-master",
         "Maith/Common/TranslatorBundle": "dev-master",
-        "Maith/Common/UsersBundle": "dev-master",
-        "erivello/simple-html-dom-bundle": "dev-master"
+        "Maith/Common/UsersBundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
@@ -74,6 +72,7 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },

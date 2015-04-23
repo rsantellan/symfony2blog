@@ -7,7 +7,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use FOS\UserBundle\Model\User;
+use Maith\Common\UsersBundle\Entity\Role;
+use Maith\Common\UsersBundle\Entity\GroupRole;
 
 /**
  * Description of LoadUserFixture
@@ -26,6 +27,19 @@ class LoadUserFixture implements FixtureInterface, OrderedFixtureInterface, Cont
     }
 
     public function load(ObjectManager $manager) {
+
+        $roleAdmin = new Role();
+        $roleAdmin->setName("ROLE_ADMIN");
+        $roleAdmin->setDescription("Permiso del administrador");
+        $manager->persist($roleAdmin);
+
+        $manager->flush();
+        
+        $adminGroup = new GroupRole();
+        $adminGroup->setName("Permisos del admin");
+        $adminGroup->addGroupRole($roleAdmin);
+        $manager->persist($adminGroup);
+
         $userManager = $this->container->get('fos_user.user_manager');
         $user = $userManager->createUser();
         $user->setUsername('admin');
@@ -33,6 +47,8 @@ class LoadUserFixture implements FixtureInterface, OrderedFixtureInterface, Cont
         $user->setPlainPassword('1234');
         $user->setEnabled(true);
         $user->setSuperAdmin(true);
+        $user->setFullName("Rodrigo Santellan");
+        $user->fixtureAddUserGroup($adminGroup);
         $manager->persist($user);
         $manager->flush();
     }

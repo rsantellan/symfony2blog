@@ -1,6 +1,9 @@
 <?php
 
-namespace { $loader = require_once __DIR__.'/autoload.php'; }
+namespace {
+    error_reporting(error_reporting() & ~E_USER_DEPRECATED);
+    $loader = require_once __DIR__.'/autoload.php';
+}
 
  
 namespace Symfony\Component\HttpFoundation
@@ -95,7 +98,7 @@ public function getInt($key, $default = 0, $deep = false)
 {
 return (int) $this->get($key, $default, $deep);
 }
-public function filter($key, $default = null, $deep = false, $filter=FILTER_DEFAULT, $options=array())
+public function filter($key, $default = null, $deep = false, $filter = FILTER_DEFAULT, $options = array())
 {
 $value = $this->get($key, $default, $deep);
 if (!is_array($options) && $options) {
@@ -334,8 +337,8 @@ $files = $data;
 foreach (self::$fileKeys as $k) {
 unset($files[$k]);
 }
-foreach (array_keys($data['name']) as $key) {
-$files[$key] = $this->fixPhpFilesArray(array('error'=> $data['error'][$key],'name'=> $data['name'][$key],'type'=> $data['type'][$key],'tmp_name'=> $data['tmp_name'][$key],'size'=> $data['size'][$key]
+foreach ($data['name'] as $key => $name) {
+$files[$key] = $this->fixPhpFilesArray(array('error'=> $data['error'][$key],'name'=> $name,'type'=> $data['type'][$key],'tmp_name'=> $data['tmp_name'][$key],'size'=> $data['size'][$key],
 ));
 }
 return $files;
@@ -455,7 +458,16 @@ $this->format = null;
 }
 public static function createFromGlobals()
 {
-$request = new static($_GET, $_POST, array(), $_COOKIE, $_FILES, $_SERVER);
+$server = $_SERVER;
+if ('cli-server'=== php_sapi_name()) {
+if (array_key_exists('HTTP_CONTENT_LENGTH', $_SERVER)) {
+$server['CONTENT_LENGTH'] = $_SERVER['HTTP_CONTENT_LENGTH'];
+}
+if (array_key_exists('HTTP_CONTENT_TYPE', $_SERVER)) {
+$server['CONTENT_TYPE'] = $_SERVER['HTTP_CONTENT_TYPE'];
+}
+}
+$request = new static($_GET, $_POST, array(), $_COOKIE, $_FILES, $server);
 if (0 === strpos($request->headers->get('CONTENT_TYPE'),'application/x-www-form-urlencoded')
 && in_array(strtoupper($request->server->get('REQUEST_METHOD','GET')), array('PUT','DELETE','PATCH'))
 ) {
@@ -565,7 +577,7 @@ if (!$dup->get('_format') && $this->get('_format')) {
 $dup->attributes->set('_format', $this->get('_format'));
 }
 if (!$dup->getRequestFormat(null)) {
-$dup->setRequestFormat($format = $this->getRequestFormat(null));
+$dup->setRequestFormat($this->getRequestFormat(null));
 }
 return $dup;
 }
@@ -672,7 +684,16 @@ return self::$httpMethodParameterOverride;
 }
 public function get($key, $default = null, $deep = false)
 {
-return $this->query->get($key, $this->attributes->get($key, $this->request->get($key, $default, $deep), $deep), $deep);
+if ($this !== $result = $this->query->get($key, $this, $deep)) {
+return $result;
+}
+if ($this !== $result = $this->attributes->get($key, $this, $deep)) {
+return $result;
+}
+if ($this !== $result = $this->request->get($key, $this, $deep)) {
+return $result;
+}
+return $default;
 }
 public function getSession()
 {
@@ -693,7 +714,7 @@ $this->session = $session;
 public function getClientIps()
 {
 $ip = $this->server->get('REMOTE_ADDR');
-if (!self::$trustedProxies) {
+if (!$this->isFromTrustedProxy()) {
 return array($ip);
 }
 if (!self::$trustedHeaders[self::HEADER_CLIENT_IP] || !$this->headers->has(self::$trustedHeaders[self::HEADER_CLIENT_IP])) {
@@ -703,6 +724,9 @@ $clientIps = array_map('trim', explode(',', $this->headers->get(self::$trustedHe
 $clientIps[] = $ip;
 $ip = $clientIps[0];
 foreach ($clientIps as $key => $clientIp) {
+if (preg_match('{((?:\d+\.){3}\d+)\:\d+}', $clientIp, $match)) {
+$clientIps[$key] = $clientIp = $match[1];
+}
 if (IpUtils::checkIp($clientIp, self::$trustedProxies)) {
 unset($clientIps[$key]);
 }
@@ -745,7 +769,7 @@ return $this->isSecure() ?'https':'http';
 }
 public function getPort()
 {
-if (self::$trustedProxies) {
+if ($this->isFromTrustedProxy()) {
 if (self::$trustedHeaders[self::HEADER_CLIENT_PORT] && $port = $this->headers->get(self::$trustedHeaders[self::HEADER_CLIENT_PORT])) {
 return $port;
 }
@@ -760,7 +784,7 @@ $pos = strpos($host,':', strrpos($host,']'));
 $pos = strrpos($host,':');
 }
 if (false !== $pos) {
-return intval(substr($host, $pos + 1));
+return (int) substr($host, $pos + 1);
 }
 return'https'=== $this->getScheme() ? 443 : 80;
 }
@@ -821,7 +845,7 @@ return''=== $qs ? null : $qs;
 }
 public function isSecure()
 {
-if (self::$trustedProxies && self::$trustedHeaders[self::HEADER_CLIENT_PROTO] && $proto = $this->headers->get(self::$trustedHeaders[self::HEADER_CLIENT_PROTO])) {
+if ($this->isFromTrustedProxy() && self::$trustedHeaders[self::HEADER_CLIENT_PROTO] && $proto = $this->headers->get(self::$trustedHeaders[self::HEADER_CLIENT_PROTO])) {
 return in_array(strtolower(current(explode(',', $proto))), array('https','on','ssl','1'));
 }
 $https = $this->server->get('HTTPS');
@@ -829,7 +853,7 @@ return !empty($https) &&'off'!== strtolower($https);
 }
 public function getHost()
 {
-if (self::$trustedProxies && self::$trustedHeaders[self::HEADER_CLIENT_HOST] && $host = $this->headers->get(self::$trustedHeaders[self::HEADER_CLIENT_HOST])) {
+if ($this->isFromTrustedProxy() && self::$trustedHeaders[self::HEADER_CLIENT_HOST] && $host = $this->headers->get(self::$trustedHeaders[self::HEADER_CLIENT_HOST])) {
 $elements = explode(',', $host);
 $host = $elements[count($elements) - 1];
 } elseif (!$host = $this->headers->get('HOST')) {
@@ -1002,13 +1026,13 @@ $this->languages = array();
 foreach (array_keys($languages) as $lang) {
 if (strstr($lang,'-')) {
 $codes = explode('-', $lang);
-if ($codes[0] =='i') {
+if ('i'=== $codes[0]) {
 if (count($codes) > 1) {
 $lang = $codes[1];
 }
 } else {
 for ($i = 0, $max = count($codes); $i < $max; $i++) {
-if ($i == 0) {
+if ($i === 0) {
 $lang = strtolower($codes[0]);
 } else {
 $lang .='_'.strtoupper($codes[$i]);
@@ -1096,7 +1120,7 @@ $requestUri = $this->getRequestUri();
 if ($baseUrl && false !== $prefix = $this->getUrlencodedPrefix($requestUri, $baseUrl)) {
 return $prefix;
 }
-if ($baseUrl && false !== $prefix = $this->getUrlencodedPrefix($requestUri, dirname($baseUrl))) {
+if ($baseUrl && false !== $prefix = $this->getUrlencodedPrefix($requestUri, dirname($baseUrl).'/')) {
 return rtrim($prefix,'/');
 }
 $truncatedRequestUri = $requestUri;
@@ -1166,10 +1190,14 @@ if (0 !== strpos(rawurldecode($string), $prefix)) {
 return false;
 }
 $len = strlen($prefix);
-if (preg_match("#^(%[[:xdigit:]]{2}|.){{$len}}#", $string, $match)) {
+if (preg_match(sprintf('#^(%%[[:xdigit:]]{2}|.){%d}#', $len), $string, $match)) {
 return $match[0];
 }
 return false;
+}
+private function isFromTrustedProxy()
+{
+return self::$trustedProxies && IpUtils::checkIp($this->server->get('REMOTE_ADDR'), self::$trustedProxies);
 }
 }
 }
@@ -1254,7 +1282,7 @@ $this->headers = clone $this->headers;
 public function prepare(Request $request)
 {
 $headers = $this->headers;
-if ($this->isInformational() || in_array($this->statusCode, array(204, 304))) {
+if ($this->isInformational() || $this->isEmpty()) {
 $this->setContent(null);
 $headers->remove('Content-Type');
 $headers->remove('Content-Length');
@@ -1267,9 +1295,9 @@ $headers->set('Content-Type', $mimeType);
 }
 $charset = $this->charset ?:'UTF-8';
 if (!$headers->has('Content-Type')) {
-$headers->set('Content-Type','text/html; charset='. $charset);
+$headers->set('Content-Type','text/html; charset='.$charset);
 } elseif (0 === stripos($headers->get('Content-Type'),'text/') && false === stripos($headers->get('Content-Type'),'charset')) {
-$headers->set('Content-Type', $headers->get('Content-Type') .'; charset='. $charset);
+$headers->set('Content-Type', $headers->get('Content-Type').'; charset='.$charset);
 }
 if ($headers->has('Transfer-Encoding')) {
 $headers->remove('Content-Length');
@@ -1325,7 +1353,7 @@ $obStatus = ob_get_status(1);
 while (($level = ob_get_level()) > 0 && $level !== $previous) {
 $previous = $level;
 if ($obStatus[$level - 1]) {
-if (version_compare(PHP_VERSION,'5.4','>=')) {
+if (PHP_VERSION_ID >= 50400) {
 if (isset($obStatus[$level - 1]['flags']) && ($obStatus[$level - 1]['flags'] & PHP_OUTPUT_HANDLER_REMOVABLE)) {
 ob_end_flush();
 }
@@ -1605,12 +1633,14 @@ public function isNotModified(Request $request)
 if (!$request->isMethodSafe()) {
 return false;
 }
-$lastModified = $request->headers->get('If-Modified-Since');
 $notModified = false;
+$lastModified = $this->headers->get('Last-Modified');
+$modifiedSince = $request->headers->get('If-Modified-Since');
 if ($etags = $request->getEtags()) {
-$notModified = (in_array($this->getEtag(), $etags) || in_array('*', $etags)) && (!$lastModified || $this->headers->get('Last-Modified') == $lastModified);
-} elseif ($lastModified) {
-$notModified = $lastModified == $this->headers->get('Last-Modified');
+$notModified = in_array($this->getEtag(), $etags) || in_array('*', $etags);
+}
+if ($modifiedSince && $lastModified) {
+$notModified = strtotime($modifiedSince) >= strtotime($lastModified) && (!$etags || $notModified);
 }
 if ($notModified) {
 $this->setNotModified();
@@ -1664,7 +1694,7 @@ return in_array($this->statusCode, array(204, 304));
 protected function ensureIEOverSSLCompatibility(Request $request)
 {
 if (false !== stripos($this->headers->get('Content-Disposition'),'attachment') && preg_match('/MSIE (.*?);/i', $request->server->get('HTTP_USER_AGENT'), $match) == 1 && true === $request->isSecure()) {
-if (intval(preg_replace("/(MSIE )(.*?);/","$2", $match[0])) < 9) {
+if ((int) preg_replace('/(MSIE )(.*?);/','$2', $match[0]) < 9) {
 $this->headers->remove('Cache-Control');
 }
 }
@@ -2013,6 +2043,9 @@ $id = strtolower($id);
 if ('service_container'=== $id) {
 return true;
 }
+if (isset($this->aliases[$id])) {
+$id = $this->aliases[$id];
+}
 return isset($this->services[$id]) || array_key_exists($id, $this->services);
 }
 public function getServiceIds()
@@ -2178,6 +2211,7 @@ use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\HttpKernel\Config\EnvParametersResource;
 use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\MergeExtensionConfigurationPass;
 use Symfony\Component\HttpKernel\DependencyInjection\AddClassesToCachePass;
@@ -2197,11 +2231,11 @@ protected $booted;
 protected $name;
 protected $startTime;
 protected $loadClassCache;
-const VERSION ='2.3.19';
-const VERSION_ID ='20319';
+const VERSION ='2.3.27';
+const VERSION_ID ='20327';
 const MAJOR_VERSION ='2';
 const MINOR_VERSION ='3';
-const RELEASE_VERSION ='19';
+const RELEASE_VERSION ='27';
 const EXTRA_VERSION ='';
 public function __construct($environment, $debug)
 {
@@ -2475,7 +2509,7 @@ foreach ($this->bundles as $name => $bundle) {
 $bundles[$name] = get_class($bundle);
 }
 return array_merge(
-array('kernel.root_dir'=> $this->rootDir,'kernel.environment'=> $this->environment,'kernel.debug'=> $this->debug,'kernel.name'=> $this->name,'kernel.cache_dir'=> $this->getCacheDir(),'kernel.logs_dir'=> $this->getLogDir(),'kernel.bundles'=> $bundles,'kernel.charset'=> $this->getCharset(),'kernel.container_class'=> $this->getContainerClass(),
+array('kernel.root_dir'=> realpath($this->rootDir) ?: $this->rootDir,'kernel.environment'=> $this->environment,'kernel.debug'=> $this->debug,'kernel.name'=> $this->name,'kernel.cache_dir'=> realpath($this->getCacheDir()) ?: $this->getCacheDir(),'kernel.logs_dir'=> realpath($this->getLogDir()) ?: $this->getLogDir(),'kernel.bundles'=> $bundles,'kernel.charset'=> $this->getCharset(),'kernel.container_class'=> $this->getContainerClass(),
 ),
 $this->getEnvParameters()
 );
@@ -2494,7 +2528,7 @@ protected function buildContainer()
 {
 foreach (array('cache'=> $this->getCacheDir(),'logs'=> $this->getLogDir()) as $name => $dir) {
 if (!is_dir($dir)) {
-if (false === @mkdir($dir, 0777, true)) {
+if (false === @mkdir($dir, 0777, true) && !is_dir($dir)) {
 throw new \RuntimeException(sprintf("Unable to create the %s directory (%s)\n", $name, $dir));
 }
 } elseif (!is_writable($dir)) {
@@ -2508,6 +2542,7 @@ if (null !== $cont = $this->registerContainerConfiguration($this->getContainerLo
 $container->merge($cont);
 }
 $container->addCompilerPass(new AddClassesToCachePass($this));
+$container->addResource(new EnvParametersResource('SYMFONY__'));
 return $container;
 }
 protected function prepareContainer(ContainerBuilder $container)
@@ -2541,7 +2576,7 @@ $dumper = new PhpDumper($container);
 if (class_exists('ProxyManager\Configuration')) {
 $dumper->setProxyDumper(new ProxyDumper());
 }
-$content = $dumper->dump(array('class'=> $class,'base_class'=> $baseClass));
+$content = $dumper->dump(array('class'=> $class,'base_class'=> $baseClass,'file'=> (string) $cache));
 if (!$this->debug) {
 $content = static::stripComments($content);
 }
@@ -2945,7 +2980,7 @@ $a = array();
 foreach ($var as $k => $v) {
 $a[] = sprintf('%s => %s', $k, $this->varToString($v));
 }
-return sprintf("Array(%s)", implode(', ', $a));
+return sprintf('Array(%s)', implode(', ', $a));
 }
 if (is_resource($var)) {
 return sprintf('Resource(%s)', get_resource_type($var));

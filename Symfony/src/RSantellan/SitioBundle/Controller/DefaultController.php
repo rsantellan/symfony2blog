@@ -27,7 +27,7 @@ class DefaultController extends Controller
       $em = $this->getDoctrine()->getManager();
       $queryCategories = $em->createQuery("select c from RSantellanSitioBundle:Category c order by c.orden");
       $categories = $queryCategories->useResultCache(true, 360)->getResult();
-      $queryProjects = $em->createQuery("select p from RSantellanSitioBundle:Project p order by p.id desc");
+      $queryProjects = $em->createQuery("select p from RSantellanSitioBundle:Project p order by p.orden desc");
       $projects = $queryProjects->useResultCache(true, 360)->getResult();//$em->getRepository('RSantellanSitioBundle:Project')->findAll();
       $response =  $this->render('RSantellanSitioBundle:Default:projectsThreeColumns.html.twig', array('activemenu' => 'projects', 'projects' => $projects, 'categories' => $categories));
       $response->setPublic();
@@ -41,7 +41,7 @@ class DefaultController extends Controller
       $category = $em->getRepository("RSantellanSitioBundle:Category")->findOneBySlug($slug);
       $repository = $em->getRepository("RSantellanSitioBundle:Project");
       $queryProjects = $repository->createQueryBuilder('p');
-      $queryProjects->select('p')->leftJoin('p.category', 'c')->where('c.id = :category')->setParameter('category', $category->getId());
+      $queryProjects->select('p')->leftJoin('p.category', 'c')->where('c.id = :category')->orderBy('p.orden', 'desc')->setParameter('category', $category->getId());
       $projects = $queryProjects->getQuery()->useResultCache(true, 360)->getResult();//$em->getRepository('RSantellanSitioBundle:Project')->findAll();
       $response = $this->render('RSantellanSitioBundle:Default:projectsThreeColumns.html.twig', array('activemenu' => 'projects', 'page_title' => $category->getName(), 'projects' => $projects, 'categories' => array(), 'category' => $category));
       $response->setPublic();
