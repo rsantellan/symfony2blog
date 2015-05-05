@@ -1,0 +1,30 @@
+admin_pump_car:
+    path:     /
+    defaults: { _controller: "MaithPumpMyGasBundle:Car:index" }
+
+admin_pump_car_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaithPumpMyGasBundle:Car:show" }
+
+admin_pump_car_new:
+    path:     /new
+    defaults: { _controller: "MaithPumpMyGasBundle:Car:new" }
+
+admin_pump_car_create:
+    path:     /create
+    defaults: { _controller: "MaithPumpMyGasBundle:Car:create" }
+    requirements: { _method: post }
+
+admin_pump_car_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaithPumpMyGasBundle:Car:edit" }
+
+admin_pump_car_update:
+    path:     /{id}/update
+    defaults: { _controller: "MaithPumpMyGasBundle:Car:update" }
+    requirements: { _method: post|put }
+
+admin_pump_car_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaithPumpMyGasBundle:Car:delete" }
+    requirements: { _method: post|delete }

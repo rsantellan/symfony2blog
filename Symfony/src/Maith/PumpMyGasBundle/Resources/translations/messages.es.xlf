@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="es" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="f1a4a18b08387327ebc21dfef99c39a5" resname="pumpdata_title">
+        <source>pumpdata_title</source>
+        <target>__pumpdata_title</target>
+      </trans-unit>
+      <trans-unit id="a02088b5462a0269ecf59d5c0c79688d" resname="pumpdata_date">
+        <source>pumpdata_date</source>
+        <target>__pumpdata_date</target>
+      </trans-unit>
+      <trans-unit id="2461ede7b60310d0b40d6c72d89dbf49" resname="pumpdata_price">
+        <source>pumpdata_price</source>
+        <target>__pumpdata_price</target>
+      </trans-unit>
+      <trans-unit id="c06c6f8b79014f645601d2cab03a123d" resname="pumpdata_fuelquantity">
+        <source>pumpdata_fuelquantity</source>
+        <target>__pumpdata_fuelquantity</target>
+      </trans-unit>
+      <trans-unit id="2c06fe1c5ddbba57abaacfdf79679cda" resname="pumpdata_kilometers">
+        <source>pumpdata_kilometers</source>
+        <target>__pumpdata_kilometers</target>
+      </trans-unit>
+      <trans-unit id="9b75242455ea11a26d513872cedc4d2b" resname="pumpdata_kilometerperliter">
+        <source>pumpdata_kilometerperliter</source>
+        <target>__pumpdata_kilometerperliter</target>
+      </trans-unit>
+      <trans-unit id="c8c5c54c8e1fe5c526555e627b6c179f" resname="pumpdata_priceperliter">
+        <source>pumpdata_priceperliter</source>
+        <target>__pumpdata_priceperliter</target>
+      </trans-unit>
+      <trans-unit id="ea33e8ab8aed0afe222ff0e846087d66" resname="pumpdata_notes">
+        <source>pumpdata_notes</source>
+        <target>__pumpdata_notes</target>
+      </trans-unit>
+      <trans-unit id="30bad8e4cce60d507c5b62a41ed5b9cb" resname="pumpdata_model">
+        <source>pumpdata_model</source>
+        <target>__pumpdata_model</target>
+      </trans-unit>
+      <trans-unit id="4b1d63c9b30857b516b1e9b45aec071e" resname="pumpdata_actions">
+        <source>pumpdata_actions</source>
+        <target>__pumpdata_actions</target>
+      </trans-unit>
+      <trans-unit id="ff6e36e66c0e53abc67f3eae457a4c83" resname="pumpdata_create">
+        <source>pumpdata_create</source>
+        <target>__pumpdata_create</target>
+      </trans-unit>
+      <trans-unit id="d7f8868d1915aa683f9a52526ecfc665" resname="pumpdata_update_entry">
+        <source>pumpdata_update_entry</source>
+        <target>__pumpdata_update_entry</target>
+      </trans-unit>
+      <trans-unit id="47a93ddc8e05e6086d757c5bc874ff95" resname="pumpdata_fueldate">
+        <source>pumpdata_fueldate</source>
+        <target>__pumpdata_fueldate</target>
+      </trans-unit>
+      <trans-unit id="c7b74f8afae7062347bfb5394b7c89e7" resname="pumpdata_car">
+        <source>pumpdata_car</source>
+        <target>__pumpdata_car</target>
+      </trans-unit>
+      <trans-unit id="0ce2756d5db19c255362b8bad6444bb7" resname="pumpdata_save">
+        <source>pumpdata_save</source>
+        <target>__pumpdata_save</target>
+      </trans-unit>
+      <trans-unit id="86711733e08ecb30d68753934924b7ff" resname="pumpdata_back_to_list">
+        <source>pumpdata_back_to_list</source>
+        <target>__pumpdata_back_to_list</target>
+      </trans-unit>
+      <trans-unit id="683cbede13d9068c380e54187ca657b6" resname="pumpdata_delete">
+        <source>pumpdata_delete</source>
+        <target>__pumpdata_delete</target>
+      </trans-unit>
+      <trans-unit id="b8d2792f6544f8bec6182913cb2fff10" resname="pumpdata_create_entry">
+        <source>pumpdata_create_entry</source>
+        <target>__pumpdata_create_entry</target>
+      </trans-unit>
+      <trans-unit id="6621f4990ff2c80f93edb152cd79b6d4" resname="pump_menu_fueldata">
+        <source>pump_menu_fueldata</source>
+        <target>__pump_menu_fueldata</target>
+      </trans-unit>
+      <trans-unit id="028db767ba1cdf27a2294364f38f01a6" resname="pump_menu_brand">
+        <source>pump_menu_brand</source>
+        <target>__pump_menu_brand</target>
+      </trans-unit>
+      <trans-unit id="61d59479452d011aaa91bb4483b3f7c5" resname="pump_menu_car">
+        <source>pump_menu_car</source>
+        <target>__pump_menu_car</target>
+      </trans-unit>
+      <trans-unit id="13f24e938fd73456634b272d9befdb46" resname="brand_show_entry">
+        <source>brand_show_entry</source>
+        <target>__brand_show_entry</target>
+      </trans-unit>
+      <trans-unit id="d5f525d1bbab1b1328cedd3ec25cc99d" resname="brand_name">
+        <source>brand_name</source>
+        <target>__brand_name</target>
+      </trans-unit>
+      <trans-unit id="5ede458e99d0427baa8b0a945f5019af" resname="brands_back_to_list">
+        <source>brands_back_to_list</source>
+        <target>__brands_back_to_list</target>
+      </trans-unit>
+      <trans-unit id="89c3f58c9704c6a6922e6901cd37566a" resname="brand_title">
+        <source>brand_title</source>
+        <target>__brand_title</target>
+      </trans-unit>
+      <trans-unit id="d48427b8d54754dddc6e780548c711ce" resname="brand_actions">
+        <source>brand_actions</source>
+        <target>__brand_actions</target>
+      </trans-unit>
+      <trans-unit id="fa3e3d869fe75ca8e9909b7eb07f16ad" resname="brand_create">
+        <source>brand_create</source>
+        <target>__brand_create</target>
+      </trans-unit>
+      <trans-unit id="0b9be5191730ae8e214f6638f7f94ce3" resname="brands_update_entry">
+        <source>brands_update_entry</source>
+        <target>__brands_update_entry</target>
+      </trans-unit>
+      <trans-unit id="4ce556214c061a76e49ca8f1d353873a" resname="brands_name">
+        <source>brands_name</source>
+        <target>__brands_name</target>
+      </trans-unit>
+      <trans-unit id="b9f4f41e78c2f3c191fa4fb077c6b0fe" resname="brands_save">
+        <source>brands_save</source>
+        <target>__brands_save</target>
+      </trans-unit>
+      <trans-unit id="4721f5abada145a93656efd19affc44d" resname="brands_delete">
+        <source>brands_delete</source>
+        <target>__brands_delete</target>
+      </trans-unit>
+      <trans-unit id="c6bb0794aff937704a83db6842b446d9" resname="brands_create_entry">
+        <source>brands_create_entry</source>
+        <target>__brands_create_entry</target>
+      </trans-unit>
+      <trans-unit id="d6d4e5206d25c5a8fb4ff7cbd1e65146" resname="cars_title">
+        <source>cars_title</source>
+        <target>__cars_title</target>
+      </trans-unit>
+      <trans-unit id="6c6f03976712d78e808c0b0023560dfd" resname="cars_model">
+        <source>cars_model</source>
+        <target>__cars_model</target>
+      </trans-unit>
+      <trans-unit id="5e28fda86b7a7272324bbf9acdaa6479" resname="cars_year">
+        <source>cars_year</source>
+        <target>__cars_year</target>
+      </trans-unit>
+      <trans-unit id="972ebda2db7ce1a9e375214f33b340ff" resname="cars_brand">
+        <source>cars_brand</source>
+        <target>__cars_brand</target>
+      </trans-unit>
+      <trans-unit id="015e40ed8d34ac86923ae50668a59d2f" resname="cars_actions">
+        <source>cars_actions</source>
+        <target>__cars_actions</target>
+      </trans-unit>
+      <trans-unit id="1353315c0d313f45e2fa774db46a0036" resname="cars_create">
+        <source>cars_create</source>
+        <target>__cars_create</target>
+      </trans-unit>
+      <trans-unit id="4af4cc5e15b5836c43bfff8b427c6d06" resname="cars_update_entry">
+        <source>cars_update_entry</source>
+        <target>__cars_update_entry</target>
+      </trans-unit>
+      <trans-unit id="654537a8a191ed1bf5791b6872df69ca" resname="cars_save">
+        <source>cars_save</source>
+        <target>__cars_save</target>
+      </trans-unit>
+      <trans-unit id="9c557f130b6feb9634792fbbf789da77" resname="cars_back_to_list">
+        <source>cars_back_to_list</source>
+        <target>__cars_back_to_list</target>
+      </trans-unit>
+      <trans-unit id="113577015e2367aa96d4ab1fbb9d0a02" resname="cars_delete">
+        <source>cars_delete</source>
+        <target>__cars_delete</target>
+      </trans-unit>
+      <trans-unit id="789456e372d0d0d732cc9b6dfe13a6e4" resname="cars_create_entry">
+        <source>cars_create_entry</source>
+        <target>__cars_create_entry</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

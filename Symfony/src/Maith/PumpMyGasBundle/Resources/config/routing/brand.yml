@@ -1,0 +1,30 @@
+admin_pump_brand:
+    path:     /
+    defaults: { _controller: "MaithPumpMyGasBundle:Brand:index" }
+
+admin_pump_brand_show:
+    path:     /{id}/show
+    defaults: { _controller: "MaithPumpMyGasBundle:Brand:show" }
+
+admin_pump_brand_new:
+    path:     /new
+    defaults: { _controller: "MaithPumpMyGasBundle:Brand:new" }
+
+admin_pump_brand_create:
+    path:     /create
+    defaults: { _controller: "MaithPumpMyGasBundle:Brand:create" }
+    requirements: { _method: post }
+
+admin_pump_brand_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MaithPumpMyGasBundle:Brand:edit" }
+
+admin_pump_brand_update:
+    path:     /{id}/update
+    defaults: { _controller: "MaithPumpMyGasBundle:Brand:update" }
+    requirements: { _method: post|put }
+
+admin_pump_brand_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MaithPumpMyGasBundle:Brand:delete" }
+    requirements: { _method: post|delete }

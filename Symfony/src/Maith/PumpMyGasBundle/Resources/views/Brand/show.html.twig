@@ -1,0 +1,27 @@
+{% extends 'MaithPumpMyGasBundle::layout.html.twig' %}
+
+{% block body -%}
+<div class="row">
+<div class="col-lg-8">
+  <section class="panel">
+    <header class="panel-heading">{% trans %}brand_show_entry{% endtrans %}</header>
+    <div class="panel-body">
+      <table class="table table-striped no-margin">
+        <tbody>
+            <tr>
+                <th>{% trans %}brand_name{% endtrans %}</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>  
+  </section>
+
+    <div class="col-lg-12 text-center">
+    <a href="{{ path('admin_pump_brand') }}" class="btn btn-info">
+        {% trans %}brands_back_to_list{% endtrans %}
+    </a>
+  </div>
+</div>
+{% endblock %}

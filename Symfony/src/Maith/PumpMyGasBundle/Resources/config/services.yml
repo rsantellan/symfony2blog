@@ -1,0 +1,7 @@
+parameters:
+#    maith_pump_my_gas.example.class: Maith\PumpMyGasBundle\Example
+
+services:
+#    maith_pump_my_gas.example:
+#        class: %maith_pump_my_gas.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

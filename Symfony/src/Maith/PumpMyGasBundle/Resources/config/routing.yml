@@ -1,0 +1,12 @@
+MaithPumpMyGasBundle_admin_pump_brand:
+    resource: "@MaithPumpMyGasBundle/Resources/config/routing/brand.yml"
+    prefix:   /admin/pump/brand
+
+MaithPumpMyGasBundle_admin_pump_car:
+    resource: "@MaithPumpMyGasBundle/Resources/config/routing/car.yml"
+    prefix:   /admin/pump/car
+
+MaithPumpMyGasBundle_admin_pump_fueldata:
+    resource: "@MaithPumpMyGasBundle/Resources/config/routing/fueldata.yml"
+    prefix:   /admin/pump/fueldata
+

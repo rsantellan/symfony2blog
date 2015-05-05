@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+  <head>
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="description" content="Flat, Clean, Responsive, admin template built with bootstrap 3">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <!-- /meta -->
+
+    <title>Pump My Gas</title>
+
+    <!-- page level plugin styles -->
+    {% block pagestylesheets %}{% endblock %}
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/vendor/offline/theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/vendor/pace/theme.css') }}">
+    <!-- /page level plugin styles -->
+
+    <!-- core styles -->
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/css/animate.min.css') }}">
+    <!-- /core styles -->
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/css/skins/palette.4.css') }}" id="skin">
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/css/fonts/style.1.css') }}" id="font">
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/css/main.css') }}">
+    
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/vendor/jquery-ui-1.11.2.custom/jquery-ui.min.css') }}">
+    
+    <!-- template styles -->
+	{% block stylesheets %}{% endblock %}
+  </head>
+
+  <!-- body -->
+
+  <body>
+    <div class="app {% if (smallnavigation is defined) and smallnavigation %} small-sidebar{% endif %}" {% if (smallnavigation is defined) and smallnavigation %}data-sidebar="locked"{% endif %}>
+	  <!-- top header -->
+	  <header class="header header-fixed navbar">
+
+		<div class="brand">
+		  <a href="javascript:;" class="fa fa-bars off-left visible-xs" data-toggle="off-canvas" data-move="ltr"></a>
+
+		  <a href="{{ path('r_santellan_sitio_admin_locale')}}" class="navbar-brand text-white">
+			<i class="fa fa-stop mg-r-sm"></i>
+			<span class="heading-font">
+			  <b>Pump My</b> Gas
+			</span>
+		  </a>
+		</div>
+
+		{#{ include('MaithTekoaBundle:Admin:userheader.html.twig') }#}
+	  </header>
+	  <!-- /top header -->
+
+	  <section class="layout">
+		<!-- sidebar menu -->
+		<aside class="sidebar collapsible canvas-left">
+		  <div class="scroll-menu">
+			<!-- main navigation -->
+			{% if (smallnavigation is defined) and smallnavigation %}
+			<nav class="main-navigation">
+			{% else %}
+			<nav class="main-navigation slimscroll" data-height="auto" data-size="4px" data-color="#ddd" data-distance="0">
+			{% endif %}
+			    <ul>
+			        <li class="{% if (activemenu is defined) and activemenu == 'brands' %}active{%endif%}">
+				    <a href="{{ path('admin_pump_fueldata')}}">
+					<i class="fa fa-newspaper-o"></i>
+					<span>{% trans %}pump_menu_fueldata{% endtrans %}</span>
+				    </a>
+				</li>
+			        <li class="{% if (activemenu is defined) and activemenu == 'brands' %}active{%endif%}">
+				    <a href="{{ path('admin_pump_brand')}}">
+					<i class="fa fa-newspaper-o"></i>
+					<span>{% trans %}pump_menu_brand{% endtrans %}</span>
+				    </a>
+				</li>
+			        <li class="{% if (activemenu is defined) and activemenu == 'cars' %}active{%endif%}">
+				    <a href="{{ path('admin_pump_car')}}">
+					<i class="fa fa-newspaper-o"></i>
+					<span>{% trans %}pump_menu_car{% endtrans %}</span>
+				    </a>
+				</li>
+			    </ul>
+			</nav>
+			<!-- /main navigation -->
+		  </div>
+
+		  <!-- footer -->
+		  <footer>
+			<div class="about-app pd-md animated pulse">
+			  <span>
+				<b>Contable3</b>
+				<a href="javascript:;">
+				  <b>Mas informacion</b>
+				</a>
+			  </span>
+			</div>
+
+			<div class="footer-toolbar pull-left">
+			  <a href="javascript:;" class="pull-left help">
+				<i class="fa fa-question-circle"></i>
+			  </a>
+
+			  <a href="javascript:;" class="toggle-sidebar pull-right hidden-xs">
+				<i class="fa fa-angle-left"></i>
+			  </a>
+			</div>
+		  </footer>
+		  <!-- /footer -->
+		</aside>
+		<!-- /sidebar menu -->
+
+		{% block profileinfo %}
+
+		{% endblock %}
+		
+		<!-- Emails like Sidebars datas -->
+		
+		{% block emailssidebars %}
+
+		{% endblock %}
+		
+		<!-- main content -->
+		<section class="main-content">
+
+		  <!-- content wrapper -->
+		  <div class="content-wrap">
+            {% if app.session.flashbag.has('notif-success') or app.session.flashbag.has('notif-info') or app.session.flashbag.has('notif-warning')  or app.session.flashbag.has('notif-error') %}
+            <div class="row">
+              <div class="col-md-12">
+                <section class="panel">
+                <header class="panel-heading">Notificaciones</header>
+
+                <div class="panel-body">
+                    {% if app.session.flashbag.has('notif-success') %}
+                    <div class="alert alert-success alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        {% for flashmessage in app.session.flashbag.get('notif-success') %}
+                          {{ flashmessage}}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if app.session.flashbag.has('notif-info') %}
+                    <div class="alert alert-info alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        {% for flashmessage in app.session.flashbag.get('notif-info') %}
+                          {{ flashmessage}}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if app.session.flashbag.has('notif-warning') %}
+                    <div class="alert alert-warning alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        {% for flashmessage in app.session.flashbag.get('notif-warning') %}
+                          {{ flashmessage}}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if app.session.flashbag.has('notif-error') %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        {% for flashmessage in app.session.flashbag.get('notif-error') %}
+                          {{ flashmessage}}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+              </div>
+            </div>
+            {% endif %}
+				{% block body %}
+
+				{% endblock %}
+		  </div>
+		  <!-- /content wrapper -->
+		</section>
+		<!-- /main content -->
+	  </section>
+
+    </div>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- load modernizer -->
+    <script src="{{ asset('bundles/maithpumpmygas/vendor/modernizr.js') }}"></script>
+	
+    <!-- core scripts -->
+    <script src="{{ asset('bundles/maithpumpmygas/vendor/jquery-1.11.1.min.js') }}"></script>
+    <script src="{{ asset('bundles/maithpumpmygas/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('bundles/maithpumpmygas/vendor/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('bundles/maithpumpmygas/vendor/jquery.placeholder.js') }}"></script>
+    <!-- /core scripts -->
+
+    <!-- page level scripts -->
+	<script src="{{ asset('bundles/maithpumpmygas/vendor/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('bundles/maithpumpmygas/vendor/offline/offline.min.js') }}"></script>
+    <script src="{{ asset('bundles/maithpumpmygas/vendor/pace/pace.min.js') }}"></script>
+    <!-- /page level scripts -->
+
+    <!-- template scripts -->
+    <script src="{{ asset('bundles/maithpumpmygas/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('bundles/maithpumpmygas/js/main.js') }}"></script>
+    
+    <!-- Search plugin -->
+    <script src="{{ asset('bundles/maithpumpmygas/vendor/jquery-ui-1.11.2.custom/jquery-ui.min.js') }}"></script>
+    
+    <!-- /template scripts -->
+	{% block javascripts %}{% endblock %}
+  </body>
+  <!-- /body -->
+
+</html>

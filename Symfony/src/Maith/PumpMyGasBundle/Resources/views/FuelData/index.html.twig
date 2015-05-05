@@ -1,0 +1,77 @@
+{% extends 'MaithPumpMyGasBundle::layout.html.twig' %}
+
+{% block pagestylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/vendor/chosen/chosen.min.css') }}">
+<link rel="stylesheet" href="{{ asset('bundles/maithpumpmygas/vendor/datatables/jquery.dataTables.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('bundles/maithpumpmygas/vendor/chosen/chosen.jquery.min.js') }}"></script>
+<script src="{{ asset('bundles/maithpumpmygas/vendor/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('bundles/maithpumpmygas/js/datatables.js') }}"></script>
+{% endblock %}
+
+
+{% block body -%}
+<section class="panel">
+  <header class="panel-heading">{% trans %}pumpdata_title{% endtrans %}</header>
+  <div class="panel-body">
+	<div class="table-responsive no-border">
+	  <table class="table table-bordered table-striped mg-t datatable">
+		<thead>
+		  <tr>
+			<th>{% trans %}pumpdata_date{% endtrans %}</th>
+			<th>{% trans %}pumpdata_price{% endtrans %}</th>
+			<th>{% trans %}pumpdata_fuelquantity{% endtrans %}</th>
+			<th>{% trans %}pumpdata_kilometers{% endtrans %}</th>
+			<th>{% trans %}pumpdata_kilometerperliter{% endtrans %}</th>
+			<th>{% trans %}pumpdata_priceperliter{% endtrans %}</th>
+			<th>{% trans %}pumpdata_notes{% endtrans %}</th>
+			<th>{% trans %}pumpdata_model{% endtrans %}</th>
+			<th>{% trans %}pumpdata_actions{% endtrans %}</th>
+		  </tr>
+		</thead>
+		<tfoot>
+		  <tr>
+			<th>{% trans %}pumpdata_date{% endtrans %}</th>
+			<th>{% trans %}pumpdata_price{% endtrans %}</th>
+			<th>{% trans %}pumpdata_fuelquantity{% endtrans %}</th>
+			<th>{% trans %}pumpdata_kilometers{% endtrans %}</th>
+			<th>{% trans %}pumpdata_kilometerperliter{% endtrans %}</th>
+			<th>{% trans %}pumpdata_priceperliter{% endtrans %}</th>
+			<th>{% trans %}pumpdata_notes{% endtrans %}</th>
+			<th>{% trans %}pumpdata_model{% endtrans %}</th>
+			<th>{% trans %}pumpdata_actions{% endtrans %}</th>
+		  </tr>
+		</tfoot>
+		<tbody>
+		{% for entity in entities %}
+			<tr>
+			  <td>{% if entity.fueldate %}{{ entity.fueldate|date('Y-m-d') }}{% endif %}</td>
+              <td>{{ entity.price }}</td>
+              <td>{{ entity.fuelquantity }}</td>
+              <td>{{ entity.kilometers }}</td>
+              <td>{{ entity.kilometerperliter }}</td>
+              <td>{{ entity.priceperliter }}</td>
+              <td>{{ entity.notes }}</td>
+              <td>{{ entity.car.model }}</td>
+			  <td>
+				  <a href="{{ path('admin_pump_fueldata_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                  <a href="{{ path('admin_pump_fueldata_show', { 'id': entity.id }) }}"><i class="fa fa-institution fa-2x"></i></a>
+			  </td>
+			</tr>
+        {% endfor %}		  
+		  </tbody>
+		</table>
+	  </div>
+	</div>
+  </section>
+  
+<div class="row">
+  <div class="col-lg-12 text-center">
+	  <a href="{{ path('admin_pump_fueldata_new') }}" class="btn btn-info">
+		  {% trans %}pumpdata_create{% endtrans %}
+	  </a>
+  </div>
+</div>
+{% endblock %}
