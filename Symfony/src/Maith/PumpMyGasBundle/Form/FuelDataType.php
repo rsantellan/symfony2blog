@@ -19,9 +19,18 @@ class FuelDataType extends AbstractType
                 'widget'=> 'single_text',
                 'format' => 'dd-MM-yyyy',
             ))
-            ->add('price')
-            ->add('fuelquantity')
-            ->add('kilometers')
+            ->add('price', 'number', array(
+                'precision' => 5,
+                'required' => true
+            ))
+            ->add('fuelquantity', 'number', array(
+                'precision' => 5,
+                'required' => true
+            ))
+            ->add('kilometers', 'number', array(
+                'precision' => 5,
+                'required' => true
+            ))
             //->add('kilometerperliter')
             //->add('priceperliter')
             ->add('notes')

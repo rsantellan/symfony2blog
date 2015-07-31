@@ -66,7 +66,7 @@ class FuelData
     /**
      * @var string
      *
-     * @ORM\Column(name="notes", type="text")
+     * @ORM\Column(name="notes", type="text", nullable=true)
      */
     private $notes;
 

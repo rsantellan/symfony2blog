@@ -72,8 +72,12 @@
     </div>
     <div class="col-lg-8">
         <a href="{{ path('admin_pump_fueldata') }}" class="btn btn-info">
-		  {% trans %}pumpdata_back_to_list{% endtrans %}
-	  </a>
+	    {% trans %}pumpdata_back_to_list{% endtrans %}
+	</a>
+	<a href="{{ path('admin_pump_fueldata_new') }}" class="btn btn-info">
+	  {% trans %}pumpdata_create{% endtrans %}
+	</a>
+
 		<form action="{{ path('admin_pump_fueldata_delete', { 'id': entity.id }) }}" method="post" onsubmit="return confirmDeleteDialog();" style="float: right;">
 		  <input type="hidden" name="_method" value="DELETE" />
 			{{ form_widget(delete_form) }}
